@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12CD483C-E70D-45F6-8FA8-9A246E5F9429}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Simple.Owin</RootNamespace>
+    <AssemblyName>Simple.Owin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Full-4.0\Extensions\DictionaryExtensions.cs">
+      <Link>Extensions\DictionaryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Extensions\StreamExtensions.cs">
+      <Link>Extensions\StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\IOwinHost.cs">
+      <Link>Hosting\IOwinHost.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\IOwinHostService.cs">
+      <Link>Hosting\IOwinHostService.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\IOwinServer.cs">
+      <Link>Hosting\IOwinServer.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\OwinHost.cs">
+      <Link>Hosting\OwinHost.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\OwinHostState.cs">
+      <Link>Hosting\OwinHostState.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Http\HttpHeaderKeys.cs">
+      <Link>Http\HttpHeaderKeys.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Http\UrlHelper.cs">
+      <Link>Http\UrlHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\IContext.cs">
+      <Link>IContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\IPostedFile.cs">
+      <Link>IPostedFile.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\IRequest.cs">
+      <Link>IRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\IRequestHeaders.cs">
+      <Link>IRequestHeaders.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\IResponse.cs">
+      <Link>IResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\IUser.cs">
+      <Link>IUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\OwinContext.cs">
+      <Link>OwinContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Status.cs">
+      <Link>Status.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Support\Disposable.cs">
+      <Link>Support\Disposable.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Support\OwinContextBuilder.cs">
+      <Link>Support\OwinContextBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Support\OwinKeys.cs">
+      <Link>Support\OwinKeys.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Support\OwinRequest.cs">
+      <Link>Support\OwinRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Support\OwinRequestHeaders.cs">
+      <Link>Support\OwinRequestHeaders.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Support\OwinResponse.cs">
+      <Link>Support\OwinResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Support\QueryStringParser.cs">
+      <Link>Support\QueryStringParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\TaskHelper.cs">
+      <Link>TaskHelper.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
