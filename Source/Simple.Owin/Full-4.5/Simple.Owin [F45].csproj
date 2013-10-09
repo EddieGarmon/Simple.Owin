@@ -44,6 +44,15 @@
     <Compile Include="..\Full-4.0\Extensions\StreamExtensions.cs">
       <Link>Extensions\StreamExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\Helpers\Disposable.cs">
+      <Link>Helpers\Disposable.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Helpers\TaskHelper.cs">
+      <Link>Helpers\TaskHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Helpers\UrlHelper.cs">
+      <Link>Helpers\UrlHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Hosting\IOwinHost.cs">
       <Link>Hosting\IOwinHost.cs</Link>
     </Compile>
@@ -62,9 +71,6 @@
     <Compile Include="..\Full-4.0\Http\HttpHeaderKeys.cs">
       <Link>Http\HttpHeaderKeys.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\Http\UrlHelper.cs">
-      <Link>Http\UrlHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Full-4.0\IContext.cs">
       <Link>IContext.cs</Link>
     </Compile>
@@ -80,38 +86,38 @@
     <Compile Include="..\Full-4.0\IResponse.cs">
       <Link>IResponse.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\IResponseHeaders.cs">
+      <Link>IResponseHeaders.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\IUser.cs">
       <Link>IUser.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\OwinContext.cs">
       <Link>OwinContext.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\OwinHeaders.cs">
+      <Link>OwinHeaders.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\OwinKeys.cs">
+      <Link>OwinKeys.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\OwinRequest.cs">
+      <Link>OwinRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\OwinRequestHeaders.cs">
+      <Link>OwinRequestHeaders.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\OwinResponse.cs">
+      <Link>OwinResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\OwinResponseHeaders.cs">
+      <Link>OwinResponseHeaders.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\QueryString.cs">
+      <Link>QueryString.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Status.cs">
       <Link>Status.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\Support\Disposable.cs">
-      <Link>Support\Disposable.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\Support\OwinContextBuilder.cs">
-      <Link>Support\OwinContextBuilder.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\Support\OwinKeys.cs">
-      <Link>Support\OwinKeys.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\Support\OwinRequest.cs">
-      <Link>Support\OwinRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\Support\OwinRequestHeaders.cs">
-      <Link>Support\OwinRequestHeaders.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\Support\OwinResponse.cs">
-      <Link>Support\OwinResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\Support\QueryStringParser.cs">
-      <Link>Support\QueryStringParser.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\TaskHelper.cs">
-      <Link>TaskHelper.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup />

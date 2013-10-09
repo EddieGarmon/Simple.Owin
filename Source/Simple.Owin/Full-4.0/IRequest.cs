@@ -15,6 +15,11 @@ namespace Simple.Owin
         IEnumerable<IPostedFile> Files { get; }
 
         /// <summary>
+        /// Gets the URL.
+        /// </summary>
+        Uri FullUri { get; }
+
+        /// <summary>
         /// Gets the request headers.
         /// </summary>
         IRequestHeaders Headers { get; }
@@ -22,21 +27,16 @@ namespace Simple.Owin
         /// <summary>
         /// Gets the HTTP method.
         /// </summary>
-        string HttpMethod { get; }
+        string Method { get; }
 
         /// <summary>
         /// Gets the input stream.
         /// </summary>
-        Stream InputStream { get; }
+        Stream Input { get; }
 
         /// <summary>
         /// Gets the query string.
         /// </summary>
-        IDictionary<string, string[]> QueryString { get; }
-
-        /// <summary>
-        /// Gets the URL.
-        /// </summary>
-        Uri Url { get; }
+        QueryString QueryString { get; }
     }
 }

@@ -6,8 +6,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
+using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
-using Simple.Owin.Support;
 
 namespace Simple.Owin.Servers.TcpServer
 {

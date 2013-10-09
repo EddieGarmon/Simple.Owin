@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Simple.Owin.Extensions;
+using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
 
 namespace Simple.Owin.Servers.TcpServer
@@ -27,13 +28,13 @@ namespace Simple.Owin.Servers.TcpServer
         }
     }
 
-    public static class SelfHostDemo
+    internal static class SelfHostDemo
     {
         public static void Main() {
             Func<IDictionary<string, object>, Task> appFunc = env => {
                                                                   IContext context = new OwinContext(env);
                                                                   context.Response.Output.Write("OWIN");
-                                                                  context.Response.Status = Status.Success.OK;
+                                                                  context.Response.Status = Status.Is.OK;
                                                                   return TaskHelper.Completed();
                                                               };
             using (SelfHost.App(appFunc)) {

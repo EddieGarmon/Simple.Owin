@@ -8,6 +8,14 @@ namespace Simple.Owin
     public interface IContext
     {
         /// <summary>
+        /// Gets a general-purpose store for variables that can be used for storing stuff for the lifetime of the request.
+        /// </summary>
+        /// <value>
+        /// The variables.
+        /// </value>
+        IDictionary<string, object> Environment { get; }
+
+        /// <summary>
         /// Gets the request.
         /// </summary>
         IRequest Request { get; }
@@ -16,13 +24,5 @@ namespace Simple.Owin
         /// Gets the response.
         /// </summary>
         IResponse Response { get; }
-
-        /// <summary>
-        /// Gets a general-purpose store for variables that can be used for storing stuff for the lifetime of the request.
-        /// </summary>
-        /// <value>
-        /// The variables.
-        /// </value>
-        IDictionary<string, object> Environment { get; }
     }
 }

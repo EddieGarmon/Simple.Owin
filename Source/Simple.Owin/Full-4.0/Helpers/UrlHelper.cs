@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Simple.Owin.Http
+namespace Simple.Owin.Helpers
 {
     public class UrlHelper
     {

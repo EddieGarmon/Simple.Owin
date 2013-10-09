@@ -10,8 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Simple.Owin.Extensions;
+using Simple.Owin.Helpers;
 using Simple.Owin.Http;
-using Simple.Owin.Support;
 
 namespace Simple.Owin.Servers.TcpServer
 {
@@ -23,11 +23,11 @@ namespace Simple.Owin.Servers.TcpServer
         private readonly TaskCompletionSource<int> _sessionCompleted = new TaskCompletionSource<int>();
         private readonly IDictionary<string, object> _sessionEnvironment;
         private Timer _autoCloseSession;
+        private OwinContext _context;
         private string _httpVer;
         private bool _keepAlive;
         private NetworkStream _networkStream;
         private MemoryStream _output;
-        private IDictionary<string, object> _requestEnvironment;
         private Socket _socket;
 
         public Session(IDictionary<string, object> owinEnvironment, Func<IDictionary<string, object>, Task> appFunc, Socket socket) {
@@ -67,77 +67,77 @@ namespace Simple.Owin.Servers.TcpServer
         public Task ProcessRequest() {
             try {
                 //build out request environment
-                _requestEnvironment = new Dictionary<string, object>(_sessionEnvironment, StringComparer.Ordinal);
-                var context = new OwinContextBuilder(_requestEnvironment);
+                var requestEnvironment = new Dictionary<string, object>(_sessionEnvironment, StringComparer.Ordinal);
+                _context = new OwinContext(requestEnvironment);
                 // parse request line
                 string headerLine = _networkStream.ReadHttpHeaderLine();
                 // todo gracefully handle empty first line 
                 if (headerLine == null) {
-                    ProcessError(Status.Error.BadRequest);
+                    ProcessError(Status.Is.BadRequest);
                     return _sessionCompleted.Task;
                 }
                 string[] requestParts = headerLine.Split(' ');
                 if (requestParts.Length != 3) {
-                    ProcessError(Status.Error.BadRequest);
+                    ProcessError(Status.Is.BadRequest);
                     return _sessionCompleted.Task;
                 }
                 if (!ValidVerbs.Contains(requestParts[0])) {
-                    ProcessError(Status.Error.NotImplemented);
+                    ProcessError(Status.Is.NotImplemented);
                     return _sessionCompleted.Task;
                 }
-                context.SetHttpMethod(requestParts[0]);
-                context.SetPathBase(string.Empty);
+                _context.Request.Method = requestParts[0];
+                _context.Request.PathBase = string.Empty;
                 if (requestParts[1].StartsWith("http", StringComparison.OrdinalIgnoreCase)) {
                     Uri requestUri;
                     if (!Uri.TryCreate(requestParts[1], UriKind.Absolute, out requestUri)) {
-                        ProcessError(Status.Error.BadRequest);
+                        ProcessError(Status.Is.BadRequest);
                         return _sessionCompleted.Task;
                     }
-                    context.SetFullUri(requestUri);
+                    _context.Request.FullUri = requestUri;
                 }
                 else {
-                    context.SetScheme("http");
+                    _context.Request.Scheme = "http";
                     var splitUri = requestParts[1].Split('?');
-                    context.SetPath(splitUri[0]);
-                    context.SetQueryString(splitUri.Length == 2 ? splitUri[1] : string.Empty);
+                    _context.Request.Path = splitUri[0];
+                    _context.Request.QueryString = splitUri.Length == 2 ? splitUri[1] : string.Empty;
                 }
-                context.SetProtocol(requestParts[2]);
+                _context.Request.Protocol = requestParts[2];
                 _httpVer = requestParts[2].Substring(requestParts[2].IndexOf('/') + 1);
                 // parse http headers
                 while (true) {
                     headerLine = _networkStream.ReadHttpHeaderLine();
                     if (headerLine == null) {
-                        ProcessError(Status.Error.BadRequest);
+                        ProcessError(Status.Is.BadRequest);
                         return _sessionCompleted.Task;
                     }
                     if (headerLine == string.Empty) {
                         break;
                     }
                     int colon = headerLine.IndexOf(':');
-                    context.AddRequestHeader(headerLine.Substring(0, colon), headerLine.Substring(colon + 1));
+                    _context.Request.Headers.Add(headerLine.Substring(0, colon), headerLine.Substring(colon + 1));
                     // todo: handle multi line
                 }
 
-                _keepAlive = (_httpVer == "1.0" && context.HasRequestHeader("Connection", "Keep-Alive", true)) ||
-                             !context.HasRequestHeader("Connection", "Close", true);
-                context.SetRequestStream(_networkStream);
-                context.PrepareResponseHeaders();
-                context.SetResponseStream(_output);
+                _keepAlive = (_httpVer == "1.0" && _context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Keep-Alive", false)) ||
+                             !_context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Close", false);
+                _context.Request.Input = _networkStream;
+                _context.Response.Output = _output;
 
                 // handle 100-continue
-                if (context.HasRequestHeader(HttpHeaderKeys.Expect, "100-Continue", true)) {
+                _context.Request.Headers.GetValue(HttpHeaderKeys.Expect);
+                if (_context.Request.Headers.ValueIs(HttpHeaderKeys.Expect, "100-Continue", false)) {
                     _networkStream.WriteAsync("HTTP/1.1 100 Continue\r\n", Encoding.UTF8)
                                   .ContinueWith(task => {
                                                     if (task.IsFaulted) {
                                                         SessionFaulted(task.Exception);
                                                         return;
                                                     }
-                                                    _appFunc(_requestEnvironment)
+                                                    _appFunc(_context.Environment)
                                                         .ContinueWith(ProcessResult);
                                                 });
                 }
                 else {
-                    _appFunc(_requestEnvironment)
+                    _appFunc(_context.Environment)
                         .ContinueWith(ProcessResult);
                 }
             }
@@ -215,31 +215,31 @@ namespace Simple.Owin.Servers.TcpServer
         private void ProcessResult(Task previous) {
             if (previous.IsFaulted) {
                 _keepAlive = false;
-                ProcessError(Status.Error.InternalServerError);
+                ProcessError(Status.Is.InternalServerError);
                 return;
             }
 
-            int statusCode = _requestEnvironment.GetValueOrDefault(OwinKeys.Response.StatusCode, 200);
-            if (statusCode == 404) {
-                ProcessError(Status.Error.NotFound);
+            var status = _context.Response.Status;
+            if (status.IsError) {
+                ProcessError(status);
                 return;
             }
 
             var headerBuilder = new StringBuilder();
-            headerBuilder.AppendFormat("HTTP/1.1 {0} {1}\r\n",
-                                       _requestEnvironment.GetValueOrDefault(OwinKeys.Response.StatusCode, 200),
-                                       _requestEnvironment.GetValueOrDefault(OwinKeys.Response.ReasonPhrase, string.Empty));
+            headerBuilder.Append(status.ToHttp11StatusLine());
 
-            var headers = _requestEnvironment.GetValueOrDefault<IDictionary<string, string[]>>(OwinKeys.Response.Headers);
-            if (!headers.ContainsKey(HttpHeaderKeys.ContentLength)) {
-                headers[HttpHeaderKeys.ContentLength] = new[] { _output.Length.ToString(CultureInfo.InvariantCulture) };
+            var headers = _context.Response.Headers;
+            if (headers.ContentLength < 0) {
+                headers.ContentLength = _output.Length;
             }
             if (_httpVer == "1.0" && _keepAlive) {
-                headers[HttpHeaderKeys.Connection] = new[] { "Keep-Alive" };
+                headers.Connection = "Keep-Alive";
             }
-            //todo: support headers[Connection] = close
+            if (!_keepAlive) {
+                headers.Connection = "Close";
+            }
             const string headerLineFormat = "{0}: {1}\r\n";
-            foreach (var header in headers) {
+            foreach (var header in headers.Raw) {
                 switch (header.Value.Length) {
                     case 0:
                         break;
@@ -278,7 +278,7 @@ namespace Simple.Owin.Servers.TcpServer
 
         private void SessionCanceled() {
             _sessionCompleted.SetCanceled();
-            //Dispose();
+            Dispose();
         }
 
         private void SessionFaulted(Exception exception = null) {

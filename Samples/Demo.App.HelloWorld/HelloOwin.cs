@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using Simple.Owin;
 using Simple.Owin.Extensions;
-using Simple.Owin.Support;
+using Simple.Owin.Helpers;
 
 namespace Demo.App.HelloWorld
 {

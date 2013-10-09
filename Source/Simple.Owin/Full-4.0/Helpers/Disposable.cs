@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Simple.Owin.Support
+namespace Simple.Owin.Helpers
 {
     public static class Disposable
     {

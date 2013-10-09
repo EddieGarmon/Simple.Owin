@@ -48,7 +48,10 @@
     <Compile Include="Http\HttpHeaderKeys.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Http\UrlHelper.cs" />
+    <Compile Include="IResponseHeaders.cs" />
+    <Compile Include="OwinHeaders.cs" />
+    <Compile Include="OwinResponseHeaders.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="IPostedFile.cs" />
     <Compile Include="IRequest.cs" />
@@ -56,17 +59,16 @@
     <Compile Include="IResponse.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Status.cs" />
-    <Compile Include="Support\Disposable.cs" />
+    <Compile Include="Helpers\Disposable.cs" />
     <Compile Include="OwinContext.cs" />
-    <Compile Include="Support\OwinKeys.cs" />
-    <Compile Include="Support\OwinRequest.cs">
+    <Compile Include="OwinKeys.cs" />
+    <Compile Include="OwinRequest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Support\OwinContextBuilder.cs" />
-    <Compile Include="Support\OwinRequestHeaders.cs" />
-    <Compile Include="Support\OwinResponse.cs" />
-    <Compile Include="Support\QueryStringParser.cs" />
-    <Compile Include="TaskHelper.cs" />
+    <Compile Include="OwinRequestHeaders.cs" />
+    <Compile Include="OwinResponse.cs" />
+    <Compile Include="QueryString.cs" />
+    <Compile Include="Helpers\TaskHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

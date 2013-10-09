@@ -1,24 +1,51 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
-using Simple.Owin.Support;
+using Simple.Owin.Extensions;
 
 namespace Simple.Owin
 {
     public class OwinContext : IContext
     {
+        private readonly IDictionary<string, object> _environment;
+        private readonly OwinRequest _request;
+        private readonly OwinResponse _response;
+
         public OwinContext(IDictionary<string, object> environment) {
-            Environment = environment;
-            Request = new OwinRequest(environment);
-            Response = new OwinResponse(environment);
+            if (environment == null) {
+                throw new ArgumentNullException("environment");
+            }
+            _environment = environment;
+            if (!_environment.ContainsKey(OwinKeys.Owin.CallCancelled)) {
+                _environment.Add(OwinKeys.Owin.CallCancelled, new CancellationToken());
+            }
+            _request = new OwinRequest(environment);
+            _response = new OwinResponse(environment);
         }
 
-        public IDictionary<string, object> Environment { get; private set; }
+        public CancellationToken CancellationToken {
+            get { return _environment.GetValue<CancellationToken>(OwinKeys.Owin.CallCancelled); }
+        }
 
-        public IRequest Request { get; private set; }
+        public IDictionary<string, object> Environment {
+            get { return _environment; }
+        }
 
-        public IResponse Response { get; private set; }
+        public string OwinVersion {
+            get { return _environment.GetValue<string>(OwinKeys.Owin.Version); }
+            set { _environment.SetValue(OwinKeys.Owin.Version, value); }
+        }
+
+        public OwinRequest Request {
+            get { return _request; }
+        }
+
+        public OwinResponse Response {
+            get { return _response; }
+        }
 
         public string DumpEnvironmentAsHtmlTable() {
             var builder = new StringBuilder();
@@ -30,6 +57,14 @@ namespace Simple.Owin
             }
             builder.Append("</table>");
             return builder.ToString();
+        }
+
+        IRequest IContext.Request {
+            get { return _request; }
+        }
+
+        IResponse IContext.Response {
+            get { return _response; }
         }
     }
 }

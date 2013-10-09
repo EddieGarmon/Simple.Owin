@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 
 namespace Simple.Owin
@@ -11,7 +10,7 @@ namespace Simple.Owin
         /// <summary>
         /// The response headers.
         /// </summary>
-        IDictionary<string, string[]> Headers { get; }
+        IResponseHeaders Headers { get; }
 
         Stream Output { get; }
 

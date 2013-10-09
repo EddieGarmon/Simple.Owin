@@ -47,6 +47,10 @@
       <Project>{73186FFF-FE44-4F5E-890E-932BF7C88EA0}</Project>
       <Name>Simple.Owin.Servers.TcpServer [F40]</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
+      <Project>{7daa1ed5-1e87-4110-b3ed-795bee0bb0e8}</Project>
+      <Name>Simple.Owin [F40]</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Demo.App.HelloWorld\Demo.App.HelloWorld [F40].csproj">
       <Project>{AC77255E-0264-4353-8C96-0FFB45023DB4}</Project>
       <Name>Demo.App.HelloWorld [F40]</Name>

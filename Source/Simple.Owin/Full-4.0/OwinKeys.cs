@@ -1,4 +1,4 @@
-﻿namespace Simple.Owin.Support
+﻿namespace Simple.Owin
 {
     public static class OwinKeys
     {
@@ -148,6 +148,7 @@
         public static class Simple
         {
             public const string FullUri = "simple.FullUri";
+            public const string Status = "simple.Status";
         }
 
         public static class Ssl

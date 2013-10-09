@@ -7,9 +7,9 @@ namespace Simple.Owin
     /// Represents the HTTP Status Code returned by a Handler.
     /// </summary>
     /// <remarks>Has an implicit cast from <see cref="int"/>.</remarks>
-    public struct Status : IEquatable<Status>
+    public class Status : IEquatable<Status>
     {
-        private static readonly StatusLookupCollection StatusLookup = new StatusLookupCollection();
+        private static readonly StatusLookup Lookup = new StatusLookup();
 
         private readonly int _httpStatusCode;
         private readonly string _httpStatusDescription;
@@ -19,25 +19,9 @@ namespace Simple.Owin
         /// Initializes a new instance of the <see cref="Status"/> struct.
         /// </summary>
         /// <param name="httpStatusCode">The HTTP status code.</param>
-        public Status(int httpStatusCode)
-            : this(httpStatusCode, null) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Status"/> struct.
-        /// </summary>
-        /// <param name="httpStatusCode">The HTTP status code.</param>
-        /// <param name="httpStatusDescription">The HTTP status description.</param>
-        public Status(int httpStatusCode, string httpStatusDescription)
-            : this(httpStatusCode, httpStatusDescription, null) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Status"/> struct.
-        /// </summary>
-        /// <param name="httpStatusCode">The HTTP status code.</param>
         /// <param name="httpStatusDescription">The HTTP status description.</param>
         /// <param name="locationHeader">Redirection Url</param>
-        public Status(int httpStatusCode, string httpStatusDescription, string locationHeader)
-            : this() {
+        public Status(int httpStatusCode, string httpStatusDescription = null, string locationHeader = null) {
             _httpStatusCode = httpStatusCode;
             _httpStatusDescription = httpStatusDescription;
             _locationHeader = locationHeader;
@@ -55,6 +39,10 @@ namespace Simple.Owin
         /// </summary>
         public string Description {
             get { return _httpStatusDescription; }
+        }
+
+        public bool IsError {
+            get { return _httpStatusCode >= 400 && _httpStatusCode <= 599; }
         }
 
         /// <summary>
@@ -79,6 +67,9 @@ namespace Simple.Owin
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         public bool Equals(Status other) {
+            if (other == null) {
+                return false;
+            }
             return _httpStatusCode == other._httpStatusCode;
         }
 
@@ -109,6 +100,10 @@ namespace Simple.Owin
             return _httpStatusCode;
         }
 
+        public string ToHttp11StatusLine() {
+            return string.Format("HTTP/1.1 {0} {1}\r\n", _httpStatusCode, _httpStatusDescription);
+        }
+
         /// <summary>
         /// Returns an HTTP formatted representation of the <see cref="Status"/>.
         /// </summary>
@@ -128,7 +123,7 @@ namespace Simple.Owin
         /// The result of the operator.
         /// </returns>
         public static bool operator ==(Status left, Status right) {
-            return left.Equals(right);
+            return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
         }
 
         /// <summary>
@@ -140,7 +135,7 @@ namespace Simple.Owin
         /// The result of the operator.
         /// </returns>
         public static bool operator !=(Status left, Status right) {
-            return !left.Equals(right);
+            return !(left == right);
         }
 
         /// <summary>
@@ -151,7 +146,7 @@ namespace Simple.Owin
         /// The result of the conversion.
         /// </returns>
         public static implicit operator Status(int httpStatus) {
-            return StatusLookup.Contains(httpStatus) ? StatusLookup[httpStatus] : new Status(httpStatus);
+            return Lookup.Contains(httpStatus) ? Lookup[httpStatus] : new Status(httpStatus);
         }
 
         /// <summary>
@@ -175,8 +170,13 @@ namespace Simple.Owin
             }
         }
 
-        public static class Error
+        public static class Is
         {
+            /// <summary>
+            /// Indicated requerst accepted for processing, but the processing has not been completed.
+            /// </summary>
+            public static readonly Status Accepted = new Status(202, "Accepted");
+
             /// <summary>
             /// Indicates that the request cannot be fulfilled due to bad syntax.
             /// </summary>
@@ -186,6 +186,11 @@ namespace Simple.Owin
             /// Indicates that a PUT or POST request conflicted with an existing resource.
             /// </summary>
             public static readonly Status Conflict = new Status(409, "Conflict");
+
+            /// <summary>
+            /// Indicates that a request was processed successfully and a new resource was created.
+            /// </summary>
+            public static readonly Status Created = new Status(201, "Created");
 
             /// <summary>
             /// Indicates that the request was a valid request, but the server is refusing to respond to it.
@@ -203,6 +208,13 @@ namespace Simple.Owin
             public static readonly Status InternalServerError = new Status(500, "Internal Server Error");
 
             /// <summary>
+            /// Nothing to see here.
+            /// </summary>
+            public static readonly Status NoContent = new Status(204, "No Content");
+
+            public static readonly Status NonAuthoritativeInformation = new Status(203, "Non-Authoritative Information");
+
+            /// <summary>
             /// Indicates that the requested resource could not be found.
             /// </summary>
             public static readonly Status NotFound = new Status(404, "Not Found");
@@ -210,19 +222,66 @@ namespace Simple.Owin
             public static readonly Status NotImplemented = new Status(501, "Not Implemented");
 
             /// <summary>
+            /// Not modified since last request. Using headers If-Modified-Since or If-Match
+            /// </summary>
+            public static readonly Status NotModified = new Status(304, "Not Modified");
+
+            /// <summary>
+            /// The basic "everything's OK" status.
+            /// </summary>
+            public static readonly Status OK = new Status(200, "OK");
+
+            public static readonly Status PartialContent = new Status(206, "Partial Content");
+
+            public static readonly Status ResetContent = new Status(205, "Reset Content");
+
+            /// <summary>
             /// Indicates that the request entity has a media type which the server or resource does not support.
             /// </summary>
             public static readonly Status UnsupportedMediaType = new Status(415, "Unsupported Media Type");
 
-            static Error() {
-                StatusLookup.Add(NotFound);
-                StatusLookup.Add(InternalServerError);
-            }
-        }
+            static Is() {
+                //200s
+                Lookup.Add(OK);
+                Lookup.Add(Created);
+                Lookup.Add(Accepted);
+                Lookup.Add(NonAuthoritativeInformation);
+                Lookup.Add(NoContent);
+                Lookup.Add(ResetContent);
+                Lookup.Add(PartialContent);
 
-        public static class Redirect
-        {
-            public static readonly Status NotModified = new Status(304, "Not Modified");
+                //300s
+                Lookup.Add(NotModified);
+
+                //400s
+                Lookup.Add(BadRequest);
+                Lookup.Add(Conflict);
+                Lookup.Add(Forbidden);
+                Lookup.Add(NotFound);
+                Lookup.Add(Gone);
+                Lookup.Add(UnsupportedMediaType);
+
+                //500s
+                Lookup.Add(InternalServerError);
+                Lookup.Add(NotImplemented);
+            }
+
+            /// <summary>
+            /// Indicated requerst accepted for processing, but the processing has not been completed. The
+            /// location is the URL used to check it's status.
+            /// </summary>
+            public static Status AcceptedRedirect(string location) {
+                return new Status(202, "Accepted", location);
+            }
+
+            /// <summary>
+            /// Indicates that a request was processed successfully and a new resource was created.
+            /// </summary>
+            /// <param name="location">The redirect location.</param>
+            /// <returns></returns>
+            public static Status CreatedRedirect(string location) {
+                return new Status(201, "Created", location);
+            }
 
             /// <summary>
             /// A redirect to another resource, but telling the client to continue to use this URI for future requests.
@@ -257,71 +316,10 @@ namespace Simple.Owin
             }
         }
 
-        private class StatusLookupCollection : KeyedCollection<int, Status>
+        private class StatusLookup : KeyedCollection<int, Status>
         {
             protected override int GetKeyForItem(Status item) {
                 return item.Code;
-            }
-        }
-
-        public static class Success
-        {
-            /// <summary>
-            /// Indicated requerst accepted for processing, but the processing has not been completed.
-            /// </summary>
-            public static readonly Status Accepted = new Status(202, "Accepted");
-
-            /// <summary>
-            /// Indicates that a request was processed successfully and a new resource was created.
-            /// </summary>
-            public static readonly Status Created = new Status(201, "Created");
-
-            /// <summary>
-            /// Nothing to see here.
-            /// </summary>
-            public static readonly Status NoContent = new Status(204, "No Content");
-
-            public static readonly Status NonAuthoritativeInformation = new Status(203, "Non-Authoritative Information");
-
-            /// <summary>
-            /// Not modified since last request. Using headers If-Modified-Since or If-Match
-            /// </summary>
-            public static readonly Status NotModified = new Status(304, "Not Modified");
-
-            /// <summary>
-            /// The basic "everything's OK" status.
-            /// </summary>
-            public static readonly Status OK = new Status(200, "OK");
-
-            public static readonly Status PartialContent = new Status(206, "Partial Content");
-
-            public static readonly Status ResetContent = new Status(205, "Reset Content");
-
-            static Success() {
-                StatusLookup.Add(OK);
-                StatusLookup.Add(Created);
-                StatusLookup.Add(Accepted);
-                StatusLookup.Add(NonAuthoritativeInformation);
-                StatusLookup.Add(NoContent);
-                StatusLookup.Add(ResetContent);
-                StatusLookup.Add(PartialContent);
-            }
-
-            /// <summary>
-            /// Indicated requerst accepted for processing, but the processing has not been completed. The
-            /// location is the URL used to check it's status.
-            /// </summary>
-            public static Status AcceptedRedirect(string location) {
-                return new Status(202, "Accepted", location);
-            }
-
-            /// <summary>
-            /// Indicates that a request was processed successfully and a new resource was created.
-            /// </summary>
-            /// <param name="location">The redirect location.</param>
-            /// <returns></returns>
-            public static Status CreatedRedirect(string location) {
-                return new Status(201, "Created", location);
             }
         }
     }
