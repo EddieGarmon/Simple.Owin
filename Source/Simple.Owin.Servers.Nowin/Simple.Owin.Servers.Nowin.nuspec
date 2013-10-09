@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Simple.Owin.Servers.Nowin</id>
+        <version>0.0.0</version>
+        <authors>Eddie Garmon</authors>
+        <owners>Eddie Garmon</owners>
+        <copyright>Eddie Garmon</copyright>
+        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+        <projectUrl>http://github.com/eddiegarmon/Simple.Owin</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A Nowin server wrapper for Simple.Owin</description>
+        <summary>A Nowin server wrapper for Simple.Owin</summary>
+        <tags>simple owin nowin server</tags>
+        <dependencies>
+            <dependency id="Simple.Owin" version="0.0.0" />
+            <dependency id="Nowin" version="0.10.1.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.dll" target="lib\net45" />
+        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.*db" target="lib\net45" />
+        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.xml" target="lib\net45" />
+    </files>
+</package>

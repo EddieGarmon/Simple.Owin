@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Simple.Owin.Servers.TcpServer</id>
+        <version>0.0.0</version>
+        <authors>Eddie Garmon</authors>
+        <owners>Eddie Garmon</owners>
+        <copyright>Eddie Garmon</copyright>
+        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+        <projectUrl>http://github.com/eddiegarmon/Simple.Owin</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A simple tcp socket based server for Simple.Owin</description>
+        <summary>A simple tcp socket based server for Simple.Owin</summary>
+        <tags>simple owin tcp server</tags>
+        <dependencies>
+            <dependency id="Simple.Owin" version="0.0.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Full-4.0\bin\Release\Simple.Owin.Servers.TcpServer.dll" target="lib\net40" />
+        <file src="Full-4.0\bin\Release\Simple.Owin.Servers.TcpServer.*db" target="lib\net40" />
+        <file src="Full-4.0\bin\Release\Simple.Owin.Servers.TcpServer.xml" target="lib\net40" />
+        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.TcpServer.dll" target="lib\net45" />
+        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.TcpServer.*db" target="lib\net45" />
+        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.TcpServer.xml" target="lib\net45" />
+    </files>
+</package>

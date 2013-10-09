@@ -37,11 +37,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -55,10 +50,6 @@
     <ProjectReference Include="..\Demo.App.HelloWorld\Demo.App.HelloWorld [F40].csproj">
       <Project>{AC77255E-0264-4353-8C96-0FFB45023DB4}</Project>
       <Name>Demo.App.HelloWorld [F40]</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
-      <Project>{7DAA1ED5-1E87-4110-B3ED-795BEE0BB0E8}</Project>
-      <Name>Simple.Owin [F40]</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

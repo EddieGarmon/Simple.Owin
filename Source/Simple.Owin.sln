@@ -27,6 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.Owin.Servers.TcpServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.Owin.Servers.TcpServer [F45]", "Simple.Owin.Servers.TcpServer\Full-4.5\Simple.Owin.Servers.TcpServer [F45].csproj", "{D906E2CC-07B0-45D0-95F0-8ABF7999B787}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspec", "Nuspec", "{A59245A6-3193-4767-B833-445B0062FC92}"
+	ProjectSection(SolutionItems) = preProject
+		Simple.Owin\Simple.Owin.nuspec = Simple.Owin\Simple.Owin.nuspec
+		Simple.Owin.Servers.Nowin\Simple.Owin.Servers.Nowin.nuspec = Simple.Owin.Servers.Nowin\Simple.Owin.Servers.Nowin.nuspec
+		Simple.Owin.Servers.TcpServer\Simple.Owin.Servers.TcpServer.nuspec = Simple.Owin.Servers.TcpServer\Simple.Owin.Servers.TcpServer.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
