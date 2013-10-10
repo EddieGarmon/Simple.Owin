@@ -149,6 +149,7 @@
         {
             public const string FullUri = "simple.FullUri";
             public const string Status = "simple.Status";
+            public const string Context = "simple.Context";
         }
 
         public static class Ssl

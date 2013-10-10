@@ -19,6 +19,7 @@ namespace Simple.Owin
                 throw new ArgumentNullException("environment");
             }
             _environment = environment;
+            _environment.Add(OwinKeys.Simple.Context, this);
             if (!_environment.ContainsKey(OwinKeys.Owin.CallCancelled)) {
                 _environment.Add(OwinKeys.Owin.CallCancelled, new CancellationToken());
             }
@@ -65,6 +66,10 @@ namespace Simple.Owin
 
         IResponse IContext.Response {
             get { return _response; }
+        }
+
+        public static OwinContext Get(IDictionary<string, object> environment) {
+            return environment.GetValueOrCreate(OwinKeys.Simple.Context, () => new OwinContext(environment));
         }
     }
 }
