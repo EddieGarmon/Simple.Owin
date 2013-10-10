@@ -14,12 +14,11 @@ namespace Simple.Owin
         private readonly OwinRequest _request;
         private readonly OwinResponse _response;
 
-        public OwinContext(IDictionary<string, object> environment) {
+        private OwinContext(IDictionary<string, object> environment) {
             if (environment == null) {
                 throw new ArgumentNullException("environment");
             }
             _environment = environment;
-            _environment.Add(OwinKeys.Simple.Context, this);
             if (!_environment.ContainsKey(OwinKeys.Owin.CallCancelled)) {
                 _environment.Add(OwinKeys.Owin.CallCancelled, new CancellationToken());
             }

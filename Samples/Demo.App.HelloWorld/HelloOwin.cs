@@ -39,7 +39,7 @@ namespace Demo.App.HelloWorld
                 return (environment, next) => {
                            next()
                                .Wait();
-                           var context = new OwinContext(environment);
+                           var context = OwinContext.Get(environment);
                            context.Response.Output.Write("<br/>" + context.DumpEnvironmentAsHtmlTable());
                            return TaskHelper.Completed();
                        };

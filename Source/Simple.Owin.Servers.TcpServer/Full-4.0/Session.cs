@@ -68,7 +68,7 @@ namespace Simple.Owin.Servers.TcpServer
             try {
                 //build out request environment
                 var requestEnvironment = new Dictionary<string, object>(_sessionEnvironment, StringComparer.Ordinal);
-                _context = new OwinContext(requestEnvironment);
+                _context = OwinContext.Get(requestEnvironment);
                 // parse request line
                 string headerLine = _networkStream.ReadHttpHeaderLine();
                 // todo gracefully handle empty first line 

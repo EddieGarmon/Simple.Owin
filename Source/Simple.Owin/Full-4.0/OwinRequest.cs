@@ -49,14 +49,14 @@ namespace Simple.Owin
             get { return _headers; }
         }
 
-        public string Method {
-            get { return _environment.GetValue<string>(OwinKeys.Request.Method); }
-            set { _environment.SetValue(OwinKeys.Request.Method, value); }
-        }
-
         public Stream Input {
             get { return _environment.GetValue<Stream>(OwinKeys.Request.Body); }
             set { _environment.SetValue(OwinKeys.Request.Body, value); }
+        }
+
+        public string Method {
+            get { return _environment.GetValue<string>(OwinKeys.Request.Method); }
+            set { _environment.SetValue(OwinKeys.Request.Method, value); }
         }
 
         public string Path {

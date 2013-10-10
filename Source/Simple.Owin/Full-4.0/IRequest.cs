@@ -25,14 +25,14 @@ namespace Simple.Owin
         IRequestHeaders Headers { get; }
 
         /// <summary>
-        /// Gets the HTTP method.
-        /// </summary>
-        string Method { get; }
-
-        /// <summary>
         /// Gets the input stream.
         /// </summary>
         Stream Input { get; }
+
+        /// <summary>
+        /// Gets the HTTP method.
+        /// </summary>
+        string Method { get; }
 
         /// <summary>
         /// Gets the query string.

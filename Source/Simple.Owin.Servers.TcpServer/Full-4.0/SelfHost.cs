@@ -32,7 +32,7 @@ namespace Simple.Owin.Servers.TcpServer
     {
         public static void Main() {
             Func<IDictionary<string, object>, Task> appFunc = env => {
-                                                                  IContext context = new OwinContext(env);
+                                                                  var context = OwinContext.Get(env);
                                                                   context.Response.Output.Write("OWIN");
                                                                   context.Response.Status = Status.Is.OK;
                                                                   return TaskHelper.Completed();
