@@ -27,6 +27,11 @@ namespace Simple.Owin
             set { SetValue(HttpHeaderKeys.ContentLength, value < 0 ? null : value.ToString(CultureInfo.InvariantCulture)); }
         }
 
+        public string ContentType {
+            get { return GetValue(HttpHeaderKeys.ContentType); }
+            set { SetValue(HttpHeaderKeys.ContentType, value); }
+        }
+
         public string Location {
             get { return GetValue(HttpHeaderKeys.Location); }
             set { SetValue(HttpHeaderKeys.Location, value); }

@@ -12,57 +12,6 @@
     /// </summary>
     public static class RequestExtensions
     {
-        private static readonly string[] MediaTypeWildcard = { "*/*" };
-
-        /// <summary>
-        /// Gets the Accept header entry.
-        /// </summary>
-        /// <param name="request">The <see cref="IRequest"/> instance.</param>
-        /// <returns>The Accept header value(s), or a wildcard if not in the Headers collection.</returns>
-        public static IList<string> GetAccept(this IRequest request)
-        {
-            string[] accept;
-            if (request.Headers == null || (!request.Headers.TryGetValue(HeaderKeys.Accept, out accept)) || accept[0].StartsWith("*/*"))
-            {
-                accept = MediaTypeWildcard;
-            }
-            else
-            {
-                accept = accept.SelectMany(line => line.Split(',').Select(s => s.Trim())).ToArray();
-            }
-            return accept;
-        }
-
-        /// <summary>
-        /// Gets the Content-Type header entry.
-        /// </summary>
-        /// <param name="request">The <see cref="IRequest"/> instance.</param>
-        /// <returns>The Content-Type header value, or a wildcard if not in the Headers collection.</returns>
-        public static string GetContentType(this IRequest request)
-        {
-            string[] contentType;
-            if (request.Headers == null || !request.Headers.TryGetValue(HeaderKeys.ContentType, out contentType))
-            {
-                return null;
-            }
-            return contentType.FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Gets the Origin header entry.
-        /// </summary>
-        /// <param name="request">The <see cref="IRequest"/> instance.</param>
-        /// <returns>The Origin header value, or <c>null</c> if not in the Headers collection.</returns>
-        public static string GetOrigin(this IRequest request)
-        {
-            string[] origins;
-            if (request.Headers == null || !request.Headers.TryGetValue(HeaderKeys.ContentType, out origins))
-            {
-                return null;
-            }
-            return origins.FirstOrDefault();
-        }
-
         /// <summary>
         /// Tries to get the value of a Cookie.
         /// </summary>

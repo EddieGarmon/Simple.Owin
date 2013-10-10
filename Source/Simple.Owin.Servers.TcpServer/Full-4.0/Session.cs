@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -65,6 +66,7 @@ namespace Simple.Owin.Servers.TcpServer
         }
 
         public Task ProcessRequest() {
+            Trace.TraceInformation("Session - Process Request");
             try {
                 //build out request environment
                 var requestEnvironment = new Dictionary<string, object>(_sessionEnvironment, StringComparer.Ordinal);

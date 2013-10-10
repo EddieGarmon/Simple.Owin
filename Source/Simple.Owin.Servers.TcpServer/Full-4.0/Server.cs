@@ -47,12 +47,14 @@ namespace Simple.Owin.Servers.TcpServer
         }
 
         public IDisposable Start() {
+            Trace.TraceInformation("Server - Start");
             _listener.Start();
             _listener.BeginAcceptSocket(AcceptCallback, null);
             return Disposable.Create(() => _listener.Stop());
         }
 
         private void AcceptCallback(IAsyncResult ar) {
+            Trace.TraceInformation("Server - Connection Recieved");
             Socket socket;
             try {
                 socket = _listener.EndAcceptSocket(ar);
@@ -67,7 +69,7 @@ namespace Simple.Owin.Servers.TcpServer
                                      if (task.IsFaulted) {
                                          Trace.TraceError(task.Exception != null ? task.Exception.Message : "A bad thing happened.");
                                      }
-                                     Trace.TraceInformation("Session Closed");
+                                     Trace.TraceInformation("Server - Session Closed");
                                      session.Dispose();
                                  });
         }

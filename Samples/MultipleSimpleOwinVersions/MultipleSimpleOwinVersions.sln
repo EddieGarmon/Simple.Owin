@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp", "DemoApp\DemoApp.csproj", "{29AE3A9F-D15F-4314-8B53-54FDACF8740F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareA", "MiddlewareA\MiddlewareA.csproj", "{3EFD419C-5D8B-4240-8CB0-146FC2680D1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareB", "MiddlewareB\MiddlewareB.csproj", "{BAD12FCB-8515-4C45-830F-16A0A3A6FDC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29AE3A9F-D15F-4314-8B53-54FDACF8740F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AE3A9F-D15F-4314-8B53-54FDACF8740F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AE3A9F-D15F-4314-8B53-54FDACF8740F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AE3A9F-D15F-4314-8B53-54FDACF8740F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EFD419C-5D8B-4240-8CB0-146FC2680D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EFD419C-5D8B-4240-8CB0-146FC2680D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EFD419C-5D8B-4240-8CB0-146FC2680D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EFD419C-5D8B-4240-8CB0-146FC2680D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD12FCB-8515-4C45-830F-16A0A3A6FDC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD12FCB-8515-4C45-830F-16A0A3A6FDC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD12FCB-8515-4C45-830F-16A0A3A6FDC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD12FCB-8515-4C45-830F-16A0A3A6FDC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

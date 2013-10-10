@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 using Simple.Owin.Extensions;
+using Simple.Owin.Http;
 
 namespace Simple.Owin
 {
@@ -64,7 +64,9 @@ namespace Simple.Owin
             }
         }
 
-        public Func<Stream, Task> WriteFunction { get; set; }
+        public void DisableCaching() {
+            _headers.SetValue(HttpHeaderKeys.CacheControl, "no-cache; no-store");
+        }
 
         IResponseHeaders IResponse.Headers {
             get { return _headers; }

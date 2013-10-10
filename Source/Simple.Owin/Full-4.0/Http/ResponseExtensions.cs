@@ -17,37 +17,7 @@ namespace Simple.Web.Http
         private static readonly Regex CharsetCheck = new Regex(@";\s*charset=");
         private static readonly string[] MediaTypeWildcard = { "*/*" };
 
-        /// <summary>
-        /// Adds a response header. Current values for the specified header field are retained.
-        /// </summary>
-        /// <param name="response">The <see cref="IResponse"/> instance.</param>
-        /// <param name="header">The header key.</param>
-        /// <param name="value">The header value.</param>
-        public static void AddHeader(this IResponse response, string header, string value)
-        {
-            EnsureHeaders(response);
-            string[] currentValues;
-            if (response.Headers.TryGetValue(header, out currentValues))
-            {
-                Array.Resize(ref currentValues, currentValues.Length + 1);
-                currentValues[currentValues.Length - 1] = value;
-            }
-            else
-            {
-                currentValues = new[] { value };
-            }
-            response.Headers[header] = currentValues;
-        }
 
-        /// <summary>
-        /// Disables response caching by setting the Cache-Control header to &quot;no-cache&amp; no-store&quot;.
-        /// </summary>
-        /// <param name="response">The <see cref="IResponse"/> instance.</param>
-        public static void DisableCache(this IResponse response)
-        {
-            EnsureHeaders(response);
-            response.SetHeader(HeaderKeys.CacheControl, "no-cache; no-store");
-        }
 
         public static void EnsureContentTypeCharset(this IResponse response, string charset = "utf-8")
         {
@@ -128,26 +98,6 @@ namespace Simple.Web.Http
             {
                 response.SetHeader(HeaderKeys.Vary, string.Join(", ", cacheOptions.VaryByHeaders));
             }
-        }
-
-        /// <summary>
-        /// Sets the response Content-Length header.
-        /// </summary>
-        /// <param name="response">The <see cref="IResponse"/> instance.</param>
-        /// <param name="contentLength">The content length.</param>
-        public static void SetContentLength(this IResponse response, long contentLength)
-        {
-            response.SetHeader(HeaderKeys.ContentLength, contentLength.ToString(CultureInfo.InvariantCulture));
-        }
-
-        /// <summary>
-        /// Sets the response Content-Type header.
-        /// </summary>
-        /// <param name="response">The <see cref="IResponse"/> instance.</param>
-        /// <param name="contentType">The content type. This should be a valid media type.</param>
-        public static void SetContentType(this IResponse response, string contentType)
-        {
-            response.SetHeader(HeaderKeys.ContentType, contentType);
         }
 
         /// <summary>
