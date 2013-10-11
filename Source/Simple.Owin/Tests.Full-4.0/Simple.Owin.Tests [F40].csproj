@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78E93931-DBC9-4591-836C-71D0FB8965ED}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{779C6B00-64F7-4E7B-BFC0-32C56E46D7FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.OnNowin</RootNamespace>
-    <AssemblyName>Demo.OnNowin</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Simple.Owin.Tests</RootNamespace>
+    <AssemblyName>Simple.Owin.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,32 +30,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fix">
-      <HintPath>..\..\Build\PackageDependencies\Fix.0.4.2.51412\lib\net40\Fix.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="xunit">
+      <HintPath>..\..\..\Build\PackageDependencies\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xUnit.Should">
+      <HintPath>..\..\..\Build\PackageDependencies\xUnit.Should.2.1.2\lib\net40\xUnit.Should.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Demo.App.HelloWorld\Demo.App.HelloWorld [F40].csproj">
-      <Project>{AC77255E-0264-4353-8C96-0FFB45023DB4}</Project>
-      <Name>Demo.App.HelloWorld [F40]</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Simple.Owin.Servers.Nowin\Full-4.5\Simple.Owin.Servers.Nowin [F45].csproj">
-      <Project>{4344DE58-E4FA-413B-B0B9-D2A339824A1E}</Project>
-      <Name>Simple.Owin.Servers.Nowin [F45]</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Simple.Owin\Full-4.5\Simple.Owin [F45].csproj">
-      <Project>{12CD483C-E70D-45F6-8FA8-9A246E5F9429}</Project>
-      <Name>Simple.Owin [F45]</Name>
+    <Compile Include="..\..\Simple.Owin\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="QueryStringTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
+      <Project>{7DAA1ED5-1E87-4110-B3ED-795BEE0BB0E8}</Project>
+      <Name>Simple.Owin [F40]</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

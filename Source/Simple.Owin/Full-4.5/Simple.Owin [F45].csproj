@@ -40,6 +40,12 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\CacheLevel.cs">
+      <Link>CacheLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\CacheOptions.cs">
+      <Link>CacheOptions.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Extensions\DictionaryExtensions.cs">
       <Link>Extensions\DictionaryExtensions.cs</Link>
     </Compile>
@@ -70,11 +76,23 @@
     <Compile Include="..\Full-4.0\Hosting\OwinHostState.cs">
       <Link>Hosting\OwinHostState.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\Http\HttpHeaderKeys.cs">
-      <Link>Http\HttpHeaderKeys.cs</Link>
+    <Compile Include="..\Full-4.0\HttpCookie.cs">
+      <Link>HttpCookie.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\HttpHeaderKeys.cs">
+      <Link>HttpHeaderKeys.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\HttpHeaders.cs">
+      <Link>HttpHeaders.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\HttpRequestLine.cs">
+      <Link>HttpRequestLine.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\IContext.cs">
       <Link>IContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\IHttpHeaders.cs">
+      <Link>IHttpHeaders.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\IPostedFile.cs">
       <Link>IPostedFile.cs</Link>
@@ -91,14 +109,11 @@
     <Compile Include="..\Full-4.0\IResponseHeaders.cs">
       <Link>IResponseHeaders.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\IUser.cs">
-      <Link>IUser.cs</Link>
+    <Compile Include="..\Full-4.0\Make.cs">
+      <Link>Make.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\OwinContext.cs">
       <Link>OwinContext.cs</Link>
-    </Compile>
-    <Compile Include="..\Full-4.0\OwinHeaders.cs">
-      <Link>OwinHeaders.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\OwinKeys.cs">
       <Link>OwinKeys.cs</Link>

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{77757E48-F22E-4435-ACCC-35C938F5EF74}</ProjectGuid>
+    <ProjectGuid>{49A856F3-9E3D-4823-9151-2EAE1D381A5A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Demo.OnTcpServer</RootNamespace>
@@ -43,16 +43,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Simple.Owin.Servers.TcpServer\Full-4.0\Simple.Owin.Servers.TcpServer [F40].csproj">
+    <ProjectReference Include="..\..\..\Source\Simple.Owin.Servers.TcpServer\Full-4.0\Simple.Owin.Servers.TcpServer [F40].csproj">
       <Project>{73186FFF-FE44-4F5E-890E-932BF7C88EA0}</Project>
       <Name>Simple.Owin.Servers.TcpServer [F40]</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
+    <ProjectReference Include="..\..\..\Source\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
       <Project>{7daa1ed5-1e87-4110-b3ed-795bee0bb0e8}</Project>
       <Name>Simple.Owin [F40]</Name>
     </ProjectReference>
     <ProjectReference Include="..\Demo.App.HelloWorld\Demo.App.HelloWorld [F40].csproj">
-      <Project>{AC77255E-0264-4353-8C96-0FFB45023DB4}</Project>
+      <Project>{1A5ABC29-F8B0-4769-AFC3-F0CA76EE5CDD}</Project>
       <Name>Demo.App.HelloWorld [F40]</Name>
     </ProjectReference>
   </ItemGroup>

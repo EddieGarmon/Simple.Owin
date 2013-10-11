@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Simple.Owin.Servers.TcpServer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Simple.Owin.Testing")]
+[assembly: AssemblyDescription("An OWIN testing framework.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Simple.Owin")]

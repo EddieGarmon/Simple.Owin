@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Principal;
 
 namespace Simple.Owin
 {
@@ -34,9 +35,21 @@ namespace Simple.Owin
         /// </summary>
         string Method { get; }
 
+        string Path { get; }
+
+        string PathBase { get; }
+
+        string Protocol { get; }
+
         /// <summary>
         /// Gets the query string.
         /// </summary>
         QueryString QueryString { get; }
+
+        string Scheme { get; }
+
+        IPrincipal User { get; set; }
+
+        IEnumerable<HttpCookie> GetCookies();
     }
 }

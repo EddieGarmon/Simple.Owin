@@ -12,14 +12,11 @@ using System.Threading.Tasks;
 
 using Simple.Owin.Extensions;
 using Simple.Owin.Helpers;
-using Simple.Owin.Http;
 
 namespace Simple.Owin.Servers.TcpServer
 {
     internal class Session : IDisposable
     {
-        private static readonly string[] ValidVerbs = { "OPTIONS", "GET", "HEAD", "POST", "PUT", "DELETE", "TRACE", "CONNECT" };
-
         private readonly Func<IDictionary<string, object>, Task> _appFunc;
         private readonly TaskCompletionSource<int> _sessionCompleted = new TaskCompletionSource<int>();
         private readonly IDictionary<string, object> _sessionEnvironment;
@@ -32,7 +29,7 @@ namespace Simple.Owin.Servers.TcpServer
         private Socket _socket;
 
         public Session(IDictionary<string, object> owinEnvironment, Func<IDictionary<string, object>, Task> appFunc, Socket socket) {
-            _sessionEnvironment = new Dictionary<string, object>(owinEnvironment, StringComparer.OrdinalIgnoreCase);
+            _sessionEnvironment = Make.Environment(owinEnvironment);
             _appFunc = appFunc;
             _socket = socket;
 
@@ -69,29 +66,24 @@ namespace Simple.Owin.Servers.TcpServer
             Trace.TraceInformation("Session - Process Request");
             try {
                 //build out request environment
-                var requestEnvironment = new Dictionary<string, object>(_sessionEnvironment, StringComparer.Ordinal);
+                var requestEnvironment = Make.Environment(_sessionEnvironment);
                 _context = OwinContext.Get(requestEnvironment);
+
                 // parse request line
-                string headerLine = _networkStream.ReadHttpHeaderLine();
-                // todo gracefully handle empty first line 
-                if (headerLine == null) {
+                HttpRequestLine requestLine = HttpRequestLine.Parse(_networkStream.ReadLine());
+                if (!requestLine.IsValid) {
                     ProcessError(Status.Is.BadRequest);
                     return _sessionCompleted.Task;
                 }
-                string[] requestParts = headerLine.Split(' ');
-                if (requestParts.Length != 3) {
-                    ProcessError(Status.Is.BadRequest);
-                    return _sessionCompleted.Task;
-                }
-                if (!ValidVerbs.Contains(requestParts[0])) {
+                if (!ValidVerbs.Contains(requestLine.Method)) {
                     ProcessError(Status.Is.NotImplemented);
                     return _sessionCompleted.Task;
                 }
-                _context.Request.Method = requestParts[0];
                 _context.Request.PathBase = string.Empty;
-                if (requestParts[1].StartsWith("http", StringComparison.OrdinalIgnoreCase)) {
+                _context.Request.Method = requestLine.Method;
+                if (requestLine.Uri.StartsWith("http", StringComparison.OrdinalIgnoreCase)) {
                     Uri requestUri;
-                    if (!Uri.TryCreate(requestParts[1], UriKind.Absolute, out requestUri)) {
+                    if (!Uri.TryCreate(requestLine.Uri, UriKind.Absolute, out requestUri)) {
                         ProcessError(Status.Is.BadRequest);
                         return _sessionCompleted.Task;
                     }
@@ -99,31 +91,28 @@ namespace Simple.Owin.Servers.TcpServer
                 }
                 else {
                     _context.Request.Scheme = "http";
-                    var splitUri = requestParts[1].Split('?');
+                    var splitUri = requestLine.Uri.Split('?');
                     _context.Request.Path = splitUri[0];
                     _context.Request.QueryString = splitUri.Length == 2 ? splitUri[1] : string.Empty;
                 }
-                _context.Request.Protocol = requestParts[2];
-                _httpVer = requestParts[2].Substring(requestParts[2].IndexOf('/') + 1);
+                _context.Request.Protocol = requestLine.HttpVersion;
+                _httpVer = requestLine.HttpVersion.Substring(requestLine.HttpVersion.IndexOf('/') + 1);
+
                 // parse http headers
+                var headers = new List<string>();
                 while (true) {
-                    headerLine = _networkStream.ReadHttpHeaderLine();
-                    if (headerLine == null) {
-                        ProcessError(Status.Is.BadRequest);
-                        return _sessionCompleted.Task;
-                    }
+                    string headerLine = _networkStream.ReadLine();
                     if (headerLine == string.Empty) {
                         break;
                     }
-                    int colon = headerLine.IndexOf(':');
-                    _context.Request.Headers.Add(headerLine.Substring(0, colon), headerLine.Substring(colon + 1));
-                    // todo: handle multi line
+                    headers.Add(headerLine);
                 }
+                _context.Request.Headers.AddRaw(headers);
 
                 _keepAlive = (_httpVer == "1.0" && _context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Keep-Alive", false)) ||
                              !_context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Close", false);
                 _context.Request.Input = _networkStream;
-                _context.Response.Output = _output;
+                _context.Response.Body = _output;
 
                 // handle 100-continue
                 _context.Request.Headers.GetValue(HttpHeaderKeys.Expect);
@@ -287,5 +276,7 @@ namespace Simple.Owin.Servers.TcpServer
             _sessionCompleted.SetException(exception ?? new Exception("Unknown error."));
             Dispose();
         }
+
+        private static readonly string[] ValidVerbs = { "OPTIONS", "GET", "HEAD", "POST", "PUT", "DELETE", "TRACE", "CONNECT" };
     }
 }

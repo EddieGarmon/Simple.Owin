@@ -1,19 +1,45 @@
-﻿using System.Collections.Generic;
-
-namespace Simple.Owin
+﻿namespace Simple.Owin
 {
-    public interface IRequestHeaders
+    public interface IRequestHeaders : IHttpHeaders
     {
-        string Host { get; }
+        string Accept { get; set; }
 
-        IDictionary<string, string[]> Raw { get; }
+        string AcceptCharset { get; set; }
 
-        void Add(string key, string value);
+        string AcceptEncoding { get; set; }
 
-        void Add(string key, IEnumerable<string> values);
+        string AcceptLanguage { get; set; }
 
-        IEnumerable<string> Enumerate(string key);
+        string Authorization { get; set; }
 
-        string GetValue(string key);
+        string ContentType { get; set; }
+
+        string Expect { get; set; }
+
+        string From { get; set; }
+
+        string Host { get; set; }
+
+        string IfMatch { get; set; }
+
+        string IfModifiedSince { get; set; }
+
+        string IfNoneMatch { get; set; }
+
+        string IfRange { get; set; }
+
+        string IfUnmodifiedSince { get; set; }
+
+        string MaxForwards { get; set; }
+
+        string ProxyAuthorization { get; set; }
+
+        string Range { get; set; }
+
+        string Referer { get; set; }
+
+        string TE { get; set; }
+
+        string UserAgent { get; set; }
     }
 }

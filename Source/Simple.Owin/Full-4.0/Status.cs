@@ -9,8 +9,6 @@ namespace Simple.Owin
     /// <remarks>Has an implicit cast from <see cref="int"/>.</remarks>
     public class Status : IEquatable<Status>
     {
-        private static readonly StatusLookup Lookup = new StatusLookup();
-
         private readonly int _httpStatusCode;
         private readonly string _httpStatusDescription;
         private readonly string _locationHeader;
@@ -114,64 +112,36 @@ namespace Simple.Owin
             return string.Format("{0} {1}", Code, Description);
         }
 
-        /// <summary>
-        /// Implements the operator ==.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
-        public static bool operator ==(Status left, Status right) {
-            return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
-        }
-
-        /// <summary>
-        /// Implements the operator !=.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
-        public static bool operator !=(Status left, Status right) {
-            return !(left == right);
-        }
-
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="System.Int32"/> to <see cref="Status"/>.
-        /// </summary>
-        /// <param name="httpStatus">The HTTP status code.</param>
-        /// <returns>
-        /// The result of the conversion.
-        /// </returns>
-        public static implicit operator Status(int httpStatus) {
-            return Lookup.Contains(httpStatus) ? Lookup[httpStatus] : new Status(httpStatus);
-        }
-
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="System.Int32" /> to <see cref="Status" />.
-        /// </summary>
-        /// <param name="source">The string source.</param>
-        /// <returns>A <see cref="Status"/> object for the specified status.</returns>
-        /// <example>
-        /// Status status = 404 + "Not Found";
-        /// </example>
-        /// <exception cref="System.InvalidCastException"></exception>
-        public static implicit operator Status(string source) {
-            try {
-                return new Status(int.Parse(source.Substring(0, 3)),
-                                  source.Substring(3)
-                                        .Trim());
-            }
-            catch (Exception) {
-                throw new InvalidCastException(
-                    "Status can only be implicitly cast from an integer, or a string of the format 'nnnSss...s', e.g. '404Not Found'.");
-            }
-        }
+        private static readonly StatusLookup Lookup = new StatusLookup();
 
         public static class Is
         {
+            static Is() {
+                //200s
+                Lookup.Add(OK);
+                Lookup.Add(Created);
+                Lookup.Add(Accepted);
+                Lookup.Add(NonAuthoritativeInformation);
+                Lookup.Add(NoContent);
+                Lookup.Add(ResetContent);
+                Lookup.Add(PartialContent);
+
+                //300s
+                Lookup.Add(NotModified);
+
+                //400s
+                Lookup.Add(BadRequest);
+                Lookup.Add(Conflict);
+                Lookup.Add(Forbidden);
+                Lookup.Add(NotFound);
+                Lookup.Add(Gone);
+                Lookup.Add(UnsupportedMediaType);
+
+                //500s
+                Lookup.Add(InternalServerError);
+                Lookup.Add(NotImplemented);
+            }
+
             /// <summary>
             /// Indicated requerst accepted for processing, but the processing has not been completed.
             /// </summary>
@@ -240,32 +210,6 @@ namespace Simple.Owin
             /// </summary>
             public static readonly Status UnsupportedMediaType = new Status(415, "Unsupported Media Type");
 
-            static Is() {
-                //200s
-                Lookup.Add(OK);
-                Lookup.Add(Created);
-                Lookup.Add(Accepted);
-                Lookup.Add(NonAuthoritativeInformation);
-                Lookup.Add(NoContent);
-                Lookup.Add(ResetContent);
-                Lookup.Add(PartialContent);
-
-                //300s
-                Lookup.Add(NotModified);
-
-                //400s
-                Lookup.Add(BadRequest);
-                Lookup.Add(Conflict);
-                Lookup.Add(Forbidden);
-                Lookup.Add(NotFound);
-                Lookup.Add(Gone);
-                Lookup.Add(UnsupportedMediaType);
-
-                //500s
-                Lookup.Add(InternalServerError);
-                Lookup.Add(NotImplemented);
-            }
-
             /// <summary>
             /// Indicated requerst accepted for processing, but the processing has not been completed. The
             /// location is the URL used to check it's status.
@@ -313,6 +257,62 @@ namespace Simple.Owin
 
             public static Status UseProxy(string location) {
                 return new Status(305, "Use Proxy", location);
+            }
+        }
+
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator ==(Status left, Status right) {
+            return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
+        }
+
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator !=(Status left, Status right) {
+            return !(left == right);
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="System.Int32"/> to <see cref="Status"/>.
+        /// </summary>
+        /// <param name="httpStatus">The HTTP status code.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        public static implicit operator Status(int httpStatus) {
+            return Lookup.Contains(httpStatus) ? Lookup[httpStatus] : new Status(httpStatus);
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="System.Int32" /> to <see cref="Status" />.
+        /// </summary>
+        /// <param name="source">The string source.</param>
+        /// <returns>A <see cref="Status"/> object for the specified status.</returns>
+        /// <example>
+        /// Status status = 404 + "Not Found";
+        /// </example>
+        /// <exception cref="System.InvalidCastException"></exception>
+        public static implicit operator Status(string source) {
+            try {
+                return new Status(int.Parse(source.Substring(0, 3)),
+                                  source.Substring(3)
+                                        .Trim());
+            }
+            catch (Exception) {
+                throw new InvalidCastException(
+                    "Status can only be implicitly cast from an integer, or a string of the format 'nnnSss...s', e.g. '404Not Found'.");
             }
         }
 

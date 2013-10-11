@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Simple.Owin
 {
@@ -7,6 +8,8 @@ namespace Simple.Owin
     /// </summary>
     public interface IContext
     {
+        CancellationToken CancellationToken { get; }
+
         /// <summary>
         /// Gets a general-purpose store for variables that can be used for storing stuff for the lifetime of the request.
         /// </summary>
@@ -14,6 +17,8 @@ namespace Simple.Owin
         /// The variables.
         /// </value>
         IDictionary<string, object> Environment { get; }
+
+        string OwinVersion { get; }
 
         /// <summary>
         /// Gets the request.

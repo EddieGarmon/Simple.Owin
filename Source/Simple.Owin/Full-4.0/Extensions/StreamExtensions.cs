@@ -66,22 +66,24 @@ namespace Simple.Owin.Extensions
             return Task<int>.Factory.FromAsync(stream.BeginRead, stream.EndRead, buffer, offset, count, null);
         }
 
-        public static string ReadHttpHeaderLine(this Stream stream) {
-            var buffer = new List<byte>();
-            while (true) {
-                int next = stream.ReadByte();
-                if (next == CR) {
-                    if (stream.ReadByte() == LF) {
-                        return Encoding.UTF8.GetString(buffer.ToArray());
-                    }
-                    return null;
-                }
-                if (next == -1) {
-                    //end of stream, not a valid header line.
-                    return null;
-                }
-                buffer.Add((byte)next);
+        public static string ReadLine(this Stream stream, Encoding encoding = null) {
+            if (encoding == null) {
+                encoding = Encoding.UTF8;
             }
+            var buffer = new List<byte>();
+            int current = 0;
+            while (true) {
+                int previous = current;
+                current = stream.ReadByte();
+                if (current == LF) {
+                    if (previous == CR) {
+                        buffer.RemoveAt(buffer.Count - 1);
+                    }
+                    break;
+                }
+                buffer.Add((byte)current);
+            }
+            return encoding.GetString(buffer.ToArray());
         }
 
         /// <summary>

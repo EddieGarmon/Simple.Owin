@@ -1,13 +1,10 @@
 [Oo]bj
 [Bb]in
 
-Build/*
-!Build/Psake/
-!Build/PackageDependencies/
+Build/Artifacts/*
 Build/PackageDependencies/*
 !Build/PackageDependencies/repositories.config
 
-Source/VersionInfo.cs
 Simple.Owin.snk
 
 *.csproj.user

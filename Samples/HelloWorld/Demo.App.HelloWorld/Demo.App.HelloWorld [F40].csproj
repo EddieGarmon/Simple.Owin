@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC77255E-0264-4353-8C96-0FFB45023DB4}</ProjectGuid>
+    <ProjectGuid>{1A5ABC29-F8B0-4769-AFC3-F0CA76EE5CDD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Demo.App.HelloWorld</RootNamespace>
@@ -38,7 +38,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
+    <ProjectReference Include="..\..\..\Source\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
       <Project>{7daa1ed5-1e87-4110-b3ed-795bee0bb0e8}</Project>
       <Name>Simple.Owin [F40]</Name>
     </ProjectReference>

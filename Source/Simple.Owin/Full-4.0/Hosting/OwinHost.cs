@@ -11,7 +11,7 @@ namespace Simple.Owin.Hosting
         private OwinHostState _state;
 
         public OwinHost() {
-            _environment = new Dictionary<string, object>(StringComparer.Ordinal);
+            _environment = Make.Environment();
             _state = OwinHostState.ConfigureHost;
         }
 

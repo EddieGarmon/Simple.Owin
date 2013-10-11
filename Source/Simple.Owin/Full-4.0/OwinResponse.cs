@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 
 using Simple.Owin.Extensions;
-using Simple.Owin.Http;
 
 namespace Simple.Owin
 {
@@ -17,21 +16,22 @@ namespace Simple.Owin
                 throw new ArgumentNullException("environment");
             }
             _environment = environment;
-            var headers = _environment.GetValueOrDefault<IDictionary<string, string[]>>(OwinKeys.Response.Headers);
-            if (headers == null) {
-                headers = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
-                _environment.Add(OwinKeys.Response.Headers, headers);
-            }
+            var headers = _environment.GetValueOrCreate(OwinKeys.Response.Headers, Make.Headers);
             _headers = new OwinResponseHeaders(headers);
+        }
+
+        public Stream Body {
+            get { return _environment.GetValue<Stream>(OwinKeys.Response.Body); }
+            set { _environment.SetValue(OwinKeys.Response.Body, value); }
         }
 
         public OwinResponseHeaders Headers {
             get { return _headers; }
         }
 
-        public Stream Output {
-            get { return _environment.GetValue<Stream>(OwinKeys.Response.Body); }
-            set { _environment.SetValue(OwinKeys.Response.Body, value); }
+        public string Protocol {
+            get { return _environment.GetValueOrDefault<string>(OwinKeys.Response.Protocol); }
+            set { _environment.SetValue(OwinKeys.Response.Protocol, value); }
         }
 
         public Status Status {
@@ -64,8 +64,43 @@ namespace Simple.Owin
             }
         }
 
-        public void DisableCaching() {
-            _headers.SetValue(HttpHeaderKeys.CacheControl, "no-cache; no-store");
+        public void RemoveCookie(string cookieName) {
+            _headers.Add(HttpHeaderKeys.SetCookie, string.Format("{0}=; Expires=Thu, 01 Jan 1970 00:00:00 GMT", cookieName));
+        }
+
+        /// <summary>
+        /// Sets the Cache-Control header and optionally the Expires and Vary headers.
+        /// </summary>
+        /// <param name="cacheOptions">A <see cref="CacheOptions"/> object to specify the cache settings.</param>
+        public void SetCacheOptions(CacheOptions cacheOptions) {
+            if (cacheOptions == null) {
+                return;
+            }
+            if (cacheOptions.Disable) {
+                _headers.CacheControl = "no-cache; no-store";
+                return;
+            }
+            _headers.CacheControl = cacheOptions.ToHeaderString();
+            if (cacheOptions.AbsoluteExpiry.HasValue) {
+                _headers.Expires = cacheOptions.AbsoluteExpiry.Value.ToString("R");
+            }
+
+            if (cacheOptions.VaryByHeaders != null && cacheOptions.VaryByHeaders.Count > 0) {
+                _headers.Vary = string.Join(", ", cacheOptions.VaryByHeaders);
+            }
+        }
+
+        public void SetCookie(HttpCookie cookie) {
+            _headers.Add(HttpHeaderKeys.SetCookie, cookie.ToResponseHeaderString());
+        }
+
+        public void SetLastModified(DateTime when) {
+            _headers.LastModified = when.ToUniversalTime()
+                                        .ToString("R");
+        }
+
+        public void SetLastModified(DateTimeOffset when) {
+            _headers.LastModified = when.ToString("r");
         }
 
         IResponseHeaders IResponse.Headers {

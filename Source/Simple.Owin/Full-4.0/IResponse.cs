@@ -7,12 +7,12 @@ namespace Simple.Owin
     /// </summary>
     public interface IResponse
     {
+        Stream Body { get; }
+
         /// <summary>
         /// The response headers.
         /// </summary>
         IResponseHeaders Headers { get; }
-
-        Stream Output { get; }
 
         /// <summary>
         /// Gets or sets the status code and description.
@@ -21,5 +21,11 @@ namespace Simple.Owin
         /// The status code.
         /// </value>
         Status Status { get; set; }
+
+        /// <summary>
+        /// Sets the Cache-Control header and optionally the Expires and Vary headers.
+        /// </summary>
+        /// <param name="cacheOptions">A <see cref="CacheOptions"/> object to specify the cache settings.</param>
+        void SetCacheOptions(CacheOptions cacheOptions);
     }
 }

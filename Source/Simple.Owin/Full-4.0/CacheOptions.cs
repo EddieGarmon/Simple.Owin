@@ -1,19 +1,14 @@
-namespace Simple.Web.Http
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
+namespace Simple.Owin
+{
     /// <summary>
     /// Carries information on how to cache a resource.
     /// </summary>
     public class CacheOptions
     {
-        /// <summary>
-        /// Use this single instance to disable caching.
-        /// </summary>
-        public static readonly CacheOptions DisableCaching = new CacheOptions();
-
         private readonly DateTime? _absoluteExpiry;
         private readonly TimeSpan? _slidingExpiry;
 
@@ -22,8 +17,7 @@ namespace Simple.Web.Http
         /// </summary>
         /// <param name="absoluteExpiry">The absolute expiry time.</param>
         /// <remarks>Use this constructor when you want to specify absolute expiry.</remarks>
-        public CacheOptions(DateTime absoluteExpiry)
-        {
+        public CacheOptions(DateTime absoluteExpiry) {
             _absoluteExpiry = absoluteExpiry;
         }
 
@@ -32,20 +26,16 @@ namespace Simple.Web.Http
         /// </summary>
         /// <param name="slidingExpiry">The sliding expiry time.</param>
         /// <remarks>Use this constructor when you want to specify sliding expiry.</remarks>
-        public CacheOptions(TimeSpan slidingExpiry)
-        {
+        public CacheOptions(TimeSpan slidingExpiry) {
             _slidingExpiry = slidingExpiry;
         }
 
-        private CacheOptions()
-        {
-        }
+        private CacheOptions() { }
 
         /// <summary>
         /// Gets the absolute expiry time.
         /// </summary>
-        public DateTime? AbsoluteExpiry
-        {
+        public DateTime? AbsoluteExpiry {
             get { return _absoluteExpiry; }
         }
 
@@ -55,8 +45,7 @@ namespace Simple.Web.Http
         /// <value>
         ///   <c>true</c> if caching should be disabled; otherwise, <c>false</c>.
         /// </value>
-        public bool Disable
-        {
+        public bool Disable {
             get { return !(_slidingExpiry.HasValue || _absoluteExpiry.HasValue); }
         }
 
@@ -69,8 +58,7 @@ namespace Simple.Web.Http
         /// <summary>
         /// Gets the sliding expiry time.
         /// </summary>
-        public TimeSpan? SlidingExpiry
-        {
+        public TimeSpan? SlidingExpiry {
             get { return _slidingExpiry; }
         }
 
@@ -86,20 +74,21 @@ namespace Simple.Web.Http
         /// Formats the options as a Cache-Control header value.
         /// </summary>
         /// <returns>The Cache-Control header string.</returns>
-        public string ToHeaderString()
-        {
+        public string ToHeaderString() {
             var builder = new StringBuilder(CacheLevelToString(Level));
-            if (SlidingExpiry.HasValue)
-            {
+            if (SlidingExpiry.HasValue) {
                 builder.AppendFormat(", max-age={0}", SlidingExpiry.Value.TotalSeconds);
             }
             return builder.ToString();
         }
 
-        private static string CacheLevelToString(CacheLevel cacheLevel)
-        {
-            switch (cacheLevel)
-            {
+        /// <summary>
+        /// Use this single instance to disable caching.
+        /// </summary>
+        public static readonly CacheOptions DisableCaching = new CacheOptions();
+
+        private static string CacheLevelToString(CacheLevel cacheLevel) {
+            switch (cacheLevel) {
                 case CacheLevel.Public:
                     return "public";
                 case CacheLevel.Private:

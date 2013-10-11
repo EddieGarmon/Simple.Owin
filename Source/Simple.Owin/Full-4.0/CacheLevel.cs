@@ -1,4 +1,4 @@
-namespace Simple.Web.Http
+namespace Simple.Owin
 {
     /// <summary>
     /// Represents the HTTP cacheability levels.

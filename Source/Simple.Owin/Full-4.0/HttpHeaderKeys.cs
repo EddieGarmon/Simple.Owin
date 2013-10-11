@@ -1,4 +1,4 @@
-﻿namespace Simple.Owin.Http
+﻿namespace Simple.Owin
 {
     /// <summary>
     /// Provides string constants for HTTP Header keys

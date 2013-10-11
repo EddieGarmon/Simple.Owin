@@ -13,8 +13,6 @@ namespace Simple.Owin.Servers.TcpServer
 {
     public sealed class Server : IOwinServer
     {
-        private static readonly IPAddress Localhost = new IPAddress(new byte[] { 0, 0, 0, 0 });
-
         private readonly IPAddress _listenAddress;
         private readonly int _listenPort;
         private readonly TcpListener _listener;
@@ -73,5 +71,7 @@ namespace Simple.Owin.Servers.TcpServer
                                      session.Dispose();
                                  });
         }
+
+        private static readonly IPAddress Localhost = new IPAddress(new byte[] { 0, 0, 0, 0 });
     }
 }

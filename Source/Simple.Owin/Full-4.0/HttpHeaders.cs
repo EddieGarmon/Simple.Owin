@@ -6,12 +6,12 @@ using Simple.Owin.Extensions;
 
 namespace Simple.Owin
 {
-    public class OwinHeaders
+    public class HttpHeaders
     {
         private readonly IDictionary<string, string[]> _raw;
 
-        public OwinHeaders(IDictionary<string, string[]> raw) {
-            _raw = raw;
+        public HttpHeaders(IDictionary<string, string[]> raw = null) {
+            _raw = raw ?? Make.Headers();
         }
 
         public IDictionary<string, string[]> Raw {
@@ -24,6 +24,33 @@ namespace Simple.Owin
 
         public void Add(string key, IEnumerable<string> values) {
             _raw.AddValues(key, values);
+        }
+
+        public void AddRaw(string keyAndValue) {
+            string[] split = keyAndValue.Split(':');
+            if (split.Length > 2) {
+                throw new Exception("invalid header format.");
+            }
+            _raw.AddValue(split[0], split.Length == 1 ? string.Empty : split[1].Trim());
+        }
+
+        /// <summary>
+        /// Parses and adds headers, includes multiline support
+        /// </summary>
+        /// <param name="rawheaders"></param>
+        public void AddRaw(IList<string> rawheaders) {
+            for (int i = 0; i < rawheaders.Count; i++) {
+                string headerLine = rawheaders[i];
+                int colon = headerLine.IndexOf(':');
+                string headerName = headerLine.Substring(0, colon);
+                headerLine = headerLine.Substring(colon + 1)
+                                       .Trim();
+                while (i < rawheaders.Count - 1 && char.IsWhiteSpace(rawheaders[i + 1][0])) {
+                    headerLine = string.Format("{0} {1}", headerLine, rawheaders[i + 1].Trim());
+                    i++;
+                }
+                _raw.AddValue(headerName, headerLine);
+            }
         }
 
         public IEnumerable<string> Enumerate(string key) {
@@ -50,8 +77,16 @@ namespace Simple.Owin
             }
         }
 
-        public bool HasValue(string key) {
+        public bool Has(string key) {
             return _raw.ContainsKey(key);
+        }
+
+        public void MergeIn(HttpHeaders other) {
+            foreach (var pair in other.Raw) {
+                foreach (var value in pair.Value) {
+                    _raw.AddValue(pair.Key, value);
+                }
+            }
         }
 
         public void SetValue(string key, string value) {

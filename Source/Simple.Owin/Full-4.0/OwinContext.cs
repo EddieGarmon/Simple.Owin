@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -9,14 +11,8 @@ using Simple.Owin.Extensions;
 
 namespace Simple.Owin
 {
-    public class OwinContext : IContext
+    public class OwinContext : IContext, IDictionary<string, object>
     {
-        private static readonly string ContextKey = string.Format("{0}.{1}",
-                                                                  OwinKeys.Simple.Context,
-                                                                  Assembly.GetExecutingAssembly()
-                                                                          .GetName()
-                                                                          .Version.ToString(3));
-
         private readonly IDictionary<string, object> _environment;
         private readonly OwinRequest _request;
         private readonly OwinResponse _response;
@@ -66,12 +62,89 @@ namespace Simple.Owin
             return builder.ToString();
         }
 
+        int ICollection<KeyValuePair<string, object>>.Count {
+            get { return _environment.Count; }
+        }
+
+        bool ICollection<KeyValuePair<string, object>>.IsReadOnly {
+            get { return _environment.IsReadOnly; }
+        }
+
+        void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> item) {
+            _environment.Add(item);
+        }
+
+        void ICollection<KeyValuePair<string, object>>.Clear() {
+            _environment.Clear();
+        }
+
+        bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> item) {
+            return _environment.Contains(item);
+        }
+
+        void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] array, int arrayIndex) {
+            _environment.CopyTo(array, arrayIndex);
+        }
+
+        bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> item) {
+            return _environment.Remove(item);
+        }
+
         IRequest IContext.Request {
             get { return _request; }
         }
 
         IResponse IContext.Response {
             get { return _response; }
+        }
+
+        object IDictionary<string, object>.this[string key] {
+            get { return _environment[key]; }
+            set { _environment[key] = value; }
+        }
+
+        ICollection<string> IDictionary<string, object>.Keys {
+            get { return _environment.Keys; }
+        }
+
+        ICollection<object> IDictionary<string, object>.Values {
+            get { return _environment.Values; }
+        }
+
+        void IDictionary<string, object>.Add(string key, object value) {
+            _environment.Add(key, value);
+        }
+
+        bool IDictionary<string, object>.ContainsKey(string key) {
+            return _environment.ContainsKey(key);
+        }
+
+        bool IDictionary<string, object>.Remove(string key) {
+            return _environment.Remove(key);
+        }
+
+        bool IDictionary<string, object>.TryGetValue(string key, out object value) {
+            return _environment.TryGetValue(key, out value);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return _environment.GetEnumerator();
+        }
+
+        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator() {
+            return _environment.GetEnumerator();
+        }
+
+        private static readonly string ContextKey = string.Format("{0}.{1}",
+                                                                  OwinKeys.Simple.Context,
+                                                                  Assembly.GetExecutingAssembly()
+                                                                          .GetName()
+                                                                          .Version.ToString(3));
+
+        public static OwinContext Create(Stream responseBody = null) {
+            var context = Get(new Dictionary<string, object>());
+            context.Response.Body = responseBody ?? new MemoryStream();
+            return context;
         }
 
         public static OwinContext Get(IDictionary<string, object> environment) {

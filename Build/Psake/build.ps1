@@ -4,10 +4,9 @@ framework 4.0x86
 
 properties {	
 	$script:sourcePath = $psake.build_script_dir + "\..\..\Source\"
-	$script:toolsPath = $psake.build_script_dir + "\..\..\Tools\"
-	$script:nuget = $toolsPath + "\NuGet\NuGet.exe";
-	$script:xunit = $toolsPath + "\XUnit\xunit.console.clr4.exe";
-	$script:xunit_x86 = $toolsPath + "\XUnit\xunit.console.clr4.x86.exe";
+	$script:nuget = $psake.build_script_dir + "\..\NuGet\NuGet.exe";
+	$script:xunit = $psake.build_script_dir + "\..\XUnit\xunit.console.clr4.exe";
+	$script:xunit_x86 = $psake.build_script_dir + "\..\XUnit\xunit.console.clr4.x86.exe";
 	$script:test_x86 = (!($(gwmi win32_processor | select description) -match "x86"));
 	$script:newPackagesPath = $psake.build_script_dir + '\..\Artifacts\Packages';
 }

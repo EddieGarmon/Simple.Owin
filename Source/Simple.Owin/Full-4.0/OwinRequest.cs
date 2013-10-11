@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Principal;
 
 using Simple.Owin.Extensions;
 
@@ -17,11 +19,7 @@ namespace Simple.Owin
                 throw new ArgumentNullException("environment");
             }
             _environment = environment;
-            var headers = _environment.GetValueOrDefault<IDictionary<string, string[]>>(OwinKeys.Request.Headers);
-            if (headers == null) {
-                headers = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
-                _environment.Add(OwinKeys.Request.Headers, headers);
-            }
+            var headers = _environment.GetValueOrCreate(OwinKeys.Request.Headers, Make.Headers);
             _headers = new OwinRequestHeaders(headers);
         }
 
@@ -65,7 +63,7 @@ namespace Simple.Owin
         }
 
         public string PathBase {
-            get { return _environment.GetValueOrDefault<string>(OwinKeys.Request.PathBase); }
+            get { return _environment.GetValueOrCreate(OwinKeys.Request.PathBase, () => string.Empty); }
             set { _environment.SetValue(OwinKeys.Request.PathBase, value); }
         }
 
@@ -85,6 +83,16 @@ namespace Simple.Owin
         public string Scheme {
             get { return _environment.GetValueOrDefault<string>(OwinKeys.Request.Scheme); }
             set { _environment.SetValue(OwinKeys.Request.Scheme, value); }
+        }
+
+        public IPrincipal User {
+            get { return _environment.GetValueOrDefault<IPrincipal>(OwinKeys.Server.User); }
+            set { _environment.SetValue(OwinKeys.Server.User, value); }
+        }
+
+        public IEnumerable<HttpCookie> GetCookies() {
+            return _headers.Enumerate(HttpHeaderKeys.Cookie)
+                           .Select(HttpCookie.Parse);
         }
 
         private Uri MakeUri() {
