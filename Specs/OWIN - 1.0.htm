@@ -1,0 +1,1178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0036)http://owin.org/spec/owin-1.0.0.html -->
+<HTML><HEAD><META content="IE=5.0000" http-equiv="X-UA-Compatible">
+ 
+<META http-equiv="Content-Type" content="text/html; charset=us-ascii"> 
+<META name="GENERATOR" content="MSHTML 10.00.9200.16688"> <TITLE>OWIN &#8212; Open Web 
+Server Interface for .NET</TITLE> 
+<STYLE>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Helvetica;
+	panose-1:2 11 6 4 2 2 2 2 2 4;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+h1
+	{mso-style-link:"Heading 1 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:24.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h2
+	{mso-style-link:"Heading 2 Char";
+	margin-right:0in;
+	margin-left:.5in;
+	text-indent:-.25in;
+	font-size:18.0pt;
+	font-family:"Helvetica","sans-serif";
+	font-weight:bold;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h4
+	{mso-style-link:"Heading 4 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:5.0pt;
+	margin-left:12.0pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:5.0pt;
+	margin-left:24.0pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+code
+	{font-family:"Courier New";}
+pre
+	{mso-style-link:"HTML Preformatted Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+p.MsoNoSpacing, li.MsoNoSpacing, div.MsoNoSpacing
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoTocHeading, li.MsoTocHeading, div.MsoTocHeading
+	{margin-top:24.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-link:"Heading 1";
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-link:"Heading 2";
+	font-family:"Helvetica","sans-serif";
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+span.Heading4Char
+	{mso-style-name:"Heading 4 Char";
+	mso-style-link:"Heading 4";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;
+	font-style:italic;}
+span.HTMLPreformattedChar
+	{mso-style-name:"HTML Preformatted Char";
+	mso-style-link:"HTML Preformatted";
+	font-family:Consolas;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.normative, li.normative, div.normative
+	{mso-style-name:normative;
+	margin:7.5pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.notes, li.notes, div.notes
+	{mso-style-name:notes;
+	margin:7.5pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</STYLE>
+ </HEAD> 
+<BODY lang="EN-US" link="blue" vlink="purple">
+<DIV class="WordSection1">
+<H1><SPAN style='font-family: "Helvetica","sans-serif";'>OWIN &#8212; Open Web Server 
+Interface for .NET, v1.0.0</SPAN></H1>
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal" style="background: white; color: black;"><SPAN style='color: windowtext; font-family: "Helvetica","sans-serif";'>Author: 
+  OWIN     working group</SPAN></LI>
+  <LI class="MsoNormal" style="background: white; color: black;"><SPAN style='font-family: "Helvetica","sans-serif";'>Copyright: 
+  OWIN contributors</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='color: black; font-family: "Helvetica","sans-serif";'>License: 
+  <A href="http://creativecommons.org/licenses/by/3.0/deed.en_US" target="_blank"><SPAN 
+  style="color: rgb(0, 102, 204);">Creative Commons Attribution     3.0 Unported 
+  License</SPAN></A></SPAN></LI>
+  <LI class="MsoNormal"><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>Last updated:     10 October 
+  2012</SPAN></LI></UL>
+<H2>Contents</H2>
+<P class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.25in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>1. <A href="http://owin.org/spec/owin-1.0.0.html#Overview">Overview</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.25in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>2. <A href="http://owin.org/spec/owin-1.0.0.html#Definition">Definitions</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.25in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3. <A href="http://owin.org/spec/owin-1.0.0.html#_3._Request_Execution">Request
+ Execution</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3.1. <A href="http://owin.org/spec/owin-1.0.0.html#ApplicationDelegate">Application
+ Delegate</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3.2. <A href="http://owin.org/spec/owin-1.0.0.html#_3.2._Environment">Environment</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3.3. <A href="http://owin.org/spec/owin-1.0.0.html#_Request_body_stream,">Headers</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3.4. <A href="http://owin.org/spec/owin-1.0.0.html#_3.4._Request_body,">Request
+ Body</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3.5. <A href="http://owin.org/spec/owin-1.0.0.html#_3.5._Response_Body">Response
+ Body</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3.6. <A href="http://owin.org/spec/owin-1.0.0.html#_3.6._Request_lifetime">Request 
+Lifetime</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.25in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>4. <A href="http://owin.org/spec/owin-1.0.0.html#_4._Application_Startup">Application 
+Startup</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.25in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5. <A href="http://owin.org/spec/owin-1.0.0.html#_5.__URI">URI
+ Reconstruction</A> </SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.1. <A href="http://owin.org/spec/owin-1.0.0.html#URIScheme">URI
+ Scheme</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.2. <A href="http://owin.org/spec/owin-1.0.0.html#Hostname">Hostname</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.3. <A href="http://owin.org/spec/owin-1.0.0.html#Paths">Paths</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.4. <A href="http://owin.org/spec/owin-1.0.0.html#URIReconstructionAlgorithm">URI 
+Reconstruction Algorithm</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.5. <A href="http://owin.org/spec/owin-1.0.0.html#PercentEncoding">Percent-encoding</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.25in; margin-left: 0.25in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>6. <A href="http://owin.org/spec/owin-1.0.0.html#ErrorHandling">Error
+ Handling</A> </SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>6.1. <A href="http://owin.org/spec/owin-1.0.0.html#ApplicationErrors">Application
+ Errors</A></SPAN></P>
+<P class="MsoNormal" style="text-indent: -0.3in; margin-left: 0.55in;"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>6.2. <A href="http://owin.org/spec/owin-1.0.0.html#HostErrors">Server
+ Errors</A></SPAN></P>
+<P class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>7. <A 
+href="http://owin.org/spec/owin-1.0.0.html#_5._Versioning">Versioning</A></SPAN></P>
+<H2><A name="Overview"></A>1. Overview</H2>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>This document defines
+ OWIN, a standard interface between .NET web servers and web applications. The
+ goal of OWIN is to decouple server and application and, by being an open
+ standard, stimulate the open source ecosystem of .NET web development 
+tools.</SPAN></P>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>OWIN is defined in terms
+ of a delegate structure. There is no assembly called </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>OWIN.dll</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> or similar. Implementing either
+ the host or application side the OWIN spec does not introduce a dependency to a
+ project.</SPAN></P>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>In this document, the C# 
+</SPAN><CODE><SPAN style="font-size: 10pt;">Action</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>/</SPAN><CODE><SPAN 
+style="font-size: 10pt;">Func</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>
+ syntax is used to notate some delegate structures. However, the delegate
+ structure could be equivalently represented with F# native functions, CLR
+ interfaces, or named delegates. This is by design; when implementing OWIN,
+ choose a delegate representation that works for you and your stack.</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>The key words "MUST", 
+"MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", 
+"RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as 
+described in <A href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</A>. 
+</SPAN></P></DIV>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(238, 204, 0);">
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>Normative sections are
+ highlighted with a red outline, important notes are highlighted with 
+yellow.</SPAN></P></DIV>
+<H2><A name="Definition"></A><A name="_2._Definitions"></A>2. Definitions</H2>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>This document refers to
+ the following software actors:</SPAN></P>
+<P class="MsoNoSpacing" 
+style="text-indent: -21.75pt; margin-left: 39.75pt;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Server &#8211; The HTTP 
+server that directly communicates with the client and then uses OWIN semantics 
+to process requests.&nbsp; Servers may require an adapter layer that converts to 
+OWIN semantics.</SPAN></P>
+<P class="MsoNoSpacing" 
+style="text-indent: -21.75pt; margin-left: 39.75pt;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Web Framework &#8211; A 
+self-contained component on top of OWIN exposing its own object model or API
+ that applications may use to facilitate request processing.&nbsp; Web
+ Frameworks may require an adapter layer that converts from OWIN 
+semantics.</SPAN></P>
+<P class="MsoNoSpacing" 
+style="text-indent: -21.75pt; margin-left: 39.75pt;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Web Application &#8211; A 
+specific application, possibly built on top of a Web Framework, which is run 
+using OWIN compatible Servers.</SPAN></P>
+<P class="MsoNoSpacing" 
+style="text-indent: -21.75pt; margin-left: 39.75pt;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Middleware &#8211; Pass 
+through components that form a pipeline between a server and application to 
+inspect, route, or modify request and response messages for a specific
+ purpose.</SPAN></P>
+<P class="MsoNoSpacing" 
+style="text-indent: -21.75pt; margin-left: 39.75pt;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Host &#8211; The process 
+an application and server execute inside of, primarily responsible for
+ application startup. Some Servers are also Hosts.</SPAN></P>
+<H2><A name="_3._Request_Execution"></A>3. Request Execution</H2>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>Broadly speaking, a
+ server invokes an application (providing as arguments an environment dictionary
+ with request and response headers and bodies); an application either populates
+ a response or indicates an error.</SPAN></P>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A name="_2.1._IAppBuilder"></A><A 
+name="ApplicationDelegate"></A><SPAN style='font-family: "Helvetica","sans-serif";'>3.1.
+ Application Delegate</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>The primary interface in
+ OWIN is called the <EM><SPAN 
+style='font-family: "Helvetica","sans-serif";'>application delegate</SPAN></EM> 
+or <I>AppFunc</I>. An application delegate takes the </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>IDictionary&lt;string,
+ object&gt;</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>
+ environment and returns a </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>Task</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> when it has finished 
+processing.</SPAN></P>
+<PRE>&nbsp;&nbsp;&nbsp; using AppFunc = Func&lt;</PRE>
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IDictionary&lt;string, object&gt;, // Environment</PRE>
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Task&gt;; // Done</PRE>
+<PRE>&nbsp;</PRE>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      application MUST eventually complete the returned Task, or throw an     
+  exception.</SPAN></LI></UL></DIV>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A 
+name="_CallParameter"></A><A name="_3.2._Environment"></A><SPAN style='font-family: "Helvetica","sans-serif";'>3.2.
+ Environment</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>The Environment 
+dictionary stores information about the request, the response, and any relevant 
+server state.&nbsp; The server is responsible for providing body streams and 
+header collections for both the request and response in the initial call.&nbsp; 
+The application then populates the appropriate fields with response data, writes
+ the response body, and returns when done.</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<P class="MsoNoSpacing" style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN 
+style="font-family: Symbol; font-size: 10pt;">&middot;</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The environment 
+dictionary MUST be non-null, mutable and MUST contain the keys listed as 
+required in the tables below.</SPAN> </P>
+<P class="MsoNoSpacing" style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN 
+style="font-family: Symbol; font-size: 10pt;">&middot;</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Keys MUST be 
+compared using</SPAN> <SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>StringComparer.Ordinal</SPAN>. 
+</P>
+<P class="MsoNoSpacing" style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN 
+style="font-family: Symbol; font-size: 10pt;">&middot;</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The values 
+associated with the keys MUST be non-null, unless otherwise 
+specified.</SPAN></P></DIV>
+<H3 style="text-indent: 26.25pt;">3.2.1 Request Data</H3>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<TABLE class="MsoNormalTable" style="margin-left: 19.5pt;" border="1" 
+cellpadding="0">
+  <TBODY>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Required</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Key 
+       Name</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>Value  
+      Description</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestBody"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>Stream</SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> with the request body, if 
+      any. </SPAN><SPAN 
+      style='font-family: "Courier New"; font-size: 10pt;'>Stream.Null</SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> MAY be used as a 
+      placeholder if  there is no request body. See <A href="http://owin.org/spec/owin-1.0.0.html#_3.4._Request_body,">Request 
+      Body</A>.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestHeaders"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>An </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>IDictionary&lt;string, 
+       string[]&gt;</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      of  request headers.&nbsp; See <A href="http://owin.org/spec/owin-1.0.0.html#_Request_body_stream,">Headers</A>.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestMethod"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>  containing the HTTP 
+      request method of the request (e.g., </SPAN><CODE><SPAN style="font-size: 10pt;">"GET"</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>, </SPAN><CODE><SPAN style="font-size: 10pt;">"POST"</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>).</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestPath"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>  containing the request 
+      path. The path MUST be relative to the  "root" of the application 
+      delegate; see <A 
+      href="http://owin.org/spec/owin-1.0.0.html#Paths">Paths</A>.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestPathBase"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      </SPAN></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>  containing the portion of 
+      the request path corresponding to the  "root" of the application delegate; 
+      see <A 
+      href="http://owin.org/spec/owin-1.0.0.html#Paths">Paths</A>.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestProtocol"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      </SPAN></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>  containing the protocol 
+      name and version (e.g. </SPAN><CODE><SPAN 
+      style="font-size: 10pt;">"</SPAN></CODE><SPAN style='font-family: "Courier New"; font-size: 10pt;'>HTTP/1.0<CODE>"</CODE></SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> or </SPAN><CODE><SPAN 
+      style="font-size: 10pt;">"</SPAN></CODE><SPAN style='font-family: "Courier New"; font-size: 10pt;'>HTTP/1.1<CODE>"</CODE></SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>). </SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestQueryString"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>  containing the query 
+      string component of the HTTP request URI, without the  leading &#8220;?&#8221; (e.g., 
+      </SPAN><CODE><SPAN 
+      style="font-size: 10pt;">"foo=bar&amp;baz=quux"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>). 
+      The value may be an empty string.   </SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.RequestScheme"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      </SPAN></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>  containing the URI scheme 
+      used for the request (e.g., </SPAN><CODE><SPAN 
+      style="font-size: 10pt;">"http"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>, 
+      </SPAN><CODE><SPAN style="font-size: 10pt;">"https"</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>); see <A href="http://owin.org/spec/owin-1.0.0.html#URIScheme">URI 
+       Scheme</A>. </SPAN></P></TD></TR></TBODY></TABLE></DIV>
+<H3 style="text-indent: 26.25pt;">3.2.2 Response Data</H3>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<TABLE class="MsoNormalTable" style="margin-left: 22.5pt;" border="1" 
+cellpadding="0">
+  <TBODY>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Required</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Key 
+       Name</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>Value  
+      Description</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.ResponseBody"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>Stream</SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> used to write out the 
+      response  body, if any. See <A href="http://owin.org/spec/owin-1.0.0.html#_ResultParameters">Response 
+      Body</A>.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.ResponseHeaders"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>An  IDictionary&lt;string, 
+      string[]&gt; of response headers.&nbsp; See <A href="http://owin.org/spec/owin-1.0.0.html#_Request_body_stream,">Headers</A>.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">No</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.ResponseStatusCode"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>An  optional 
+      </SPAN><CODE><SPAN style="font-size: 10pt;">int</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      containing the HTTP response  status code as defined in <A href="http://www.ietf.org/rfc/rfc2616.txt">RFC 
+       2616</A> section 6.1.1. The default is 200.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">No</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.ResponseReasonPhrase"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>An  optional 
+      </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> containing the reason 
+      phrase  associated the given status code. If none is provided then the 
+      server SHOULD  provide a default as described in <A href="http://www.ietf.org/rfc/rfc2616.txt">RFC 
+      2616</A> section 6.1.1</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">No</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.ResponseProtocol"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>An  optional 
+      </SPAN><CODE><SPAN style="font-size: 10pt;">string</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> containing the protocol 
+      name  and version (e.g. </SPAN><CODE><SPAN 
+      style="font-size: 10pt;">"</SPAN></CODE><SPAN style='font-family: "Courier New"; font-size: 10pt;'>HTTP/1.0<CODE>"</CODE></SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> or </SPAN><CODE><SPAN 
+      style="font-size: 10pt;">"</SPAN></CODE><SPAN style='font-family: "Courier New"; font-size: 10pt;'>HTTP/1.1<CODE>"</CODE></SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>). If none is provided then 
+      the </SPAN><SPAN 
+      style='font-family: "Courier New"; font-size: 10pt;'>&#8220;owin.RequestProtocol&#8221;</SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> key&#8217;s value is the  
+      default. &nbsp;&nbsp;</SPAN></P></TD></TR></TBODY></TABLE></DIV>
+<H3 style="text-indent: 26.25pt;">3.2.3 Other Data</H3>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<TABLE class="MsoNormalTable" style="margin-left: 0.25in;" border="1" 
+cellpadding="0">
+  <TBODY>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Required</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Key 
+       Name</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>Value  
+      Description</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.CallCancelled"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>A </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>CancellationToken</SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> indicating if the request 
+      has  been cancelled/aborted. See <A href="http://owin.org/spec/owin-1.0.0.html#URIReconstruction">Request 
+      Lifetime</A>.</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.Version"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      </SPAN></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>The </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>string</SPAN><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> </SPAN><CODE><SPAN style="font-size: 10pt;">"1.0"</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> indicating OWIN version. 
+      See <A 
+      href="http://owin.org/spec/owin-1.0.0.html#_5._Versioning">Versioning</A>.</SPAN></P></TD></TR></TBODY></TABLE></DIV>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(238, 204, 0);">
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>In addition to these 
+keys the host, server, middleware, application, etc. may add arbitrary data
+ associated with the request or response to the environment dictionary.&nbsp;
+ Guidelines for additional keys and a list of commonly defined keys can be found
+ in <A 
+href="http://owin.org/spec/CommonKeys.html">CommonKeys.html</A>.</SPAN>&nbsp;</P></DIV>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A name="_Request_body_stream,"></A><A 
+name="_2.4._Request_body"></A><A name="_3.3._Headers"></A><SPAN style='font-family: "Helvetica","sans-serif";'>3.3. 
+Headers</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>The headers of HTTP
+ request and response messages are represented by objects of type 
+</SPAN><CODE><SPAN style="font-size: 10pt;">IDictionary&lt;string, 
+string[]&gt;</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>. 
+The requirements below are predicated on <A href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2">RFC 
+2616 section 4.2</A>.</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      dictionary MUST be mutable.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>Keys     MUST be HTTP 
+  field-names without </SPAN><CODE><SPAN 
+  style="font-size: 10pt;">':'</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+  or whitespace.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>Keys     MUST be compared using 
+  </SPAN><SPAN 
+  style='font-family: "Courier New"; font-size: 10pt;'>StringComparer.OrdinalIgnoreCase</SPAN><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>All 
+  characters     in key and value strings SHOULD be within the ASCII 
+  codepage.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      value array returned is assumed to be a copy of the data.&nbsp; Any     
+  intended changes to the value array MUST be persisted back to the headers     
+  dictionary manually by via </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>headers[headerName] 
+  = modifiedArray;</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'> 
+  or </SPAN><SPAN 
+  style='font-family: "Courier New"; font-size: 10pt;'>headers.Remove(header).</SPAN></LI></UL>
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>Header     values are assumed 
+  to be in a mixed format, meaning that a normally comma     separated header 
+  may appear as a single entry in the values array, one     entry per value, or 
+  a mixture of the two. </SPAN></LI></UL>
+<UL type="disc" style="margin-top: 0in;">
+  <UL type="disc" style="margin-top: 0in;">
+    <LI class="MsoNormal"><SPAN 
+    style='font-family: "Helvetica","sans-serif";'>(e.g.      new string[1] 
+    {&#8220;value, value, value&#8221;}, new string[3]      {&#8220;value&#8221;, &#8220;value&#8221;, &#8220;value&#8221;} or 
+    new      string[2] {&#8220;value, value&#8221;, &#8220;value&#8221;}).</SPAN></LI></UL></UL>
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>Servers,     applications, and 
+  intermediaries SHOULD NOT split or merge header values     
+  unnecessarily.&nbsp; While the three formats are supposed to be     
+  interchangeable, in practice many existing implementations only support     
+  one specific format.&nbsp; Developers should have the flexibility to     
+  support existing implementations by producing or consuming a selected     
+  format without interference.</SPAN></LI></UL></DIV>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A name="_3.4._Request_body,"></A><SPAN 
+style='font-family: "Helvetica","sans-serif";'>3.4. Request body, 100 Continue,
+ and Completed Semantics </SPAN></H3>
+<P class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>If the
+ request indicates there is an associated body the server SHOULD provide a 
+</SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>Stream</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'> 
+in the &#8220;</SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>owin.RequestBody&#8221;</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> key to access the body
+ data.&nbsp; </SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>Stream.Null</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> MAY be used as a placeholder if
+ there is no request body data expected.&nbsp; If the request Expect header
+ indicates the client requests a 100 Continue, it is up to the server to provide
+ this.&nbsp; The application MUST NOT set &#8220;</SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>owin.ResponseStatusCode&#8221;</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> to 100. 100 Continue is only an
+ intermediate response and using it would prevent the application from providing
+ a final response (e.g. 200 OK).&nbsp; The server SHOULD send the 100 Continue
+ on behalf of the application if the application starts reading from the stream
+ before data starts arriving.</SPAN></P>
+<P class="MsoNormal">&nbsp;</P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol; font-size: 10pt;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+application delegate SHOULD NOT complete its returned Task and return control to 
+the server until it is finished with the request body.&nbsp; Once the AppFunc 
+Task is complete the application SHOULD NOT continue to read from the request 
+stream.</SPAN></P>
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      application MUST signal completion or failure of the response body by     
+  completing its returned Task or throwing an exception. After completing     
+  the Task, the application SHOULD NOT write any further data to the 
+  stream.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>If 
+  the     server signals the </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>&#8220;owin.CallCancelled&#8221; 
+       CancellationToken</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      during the execution of the application delegate, the application SHOULD   
+    NOT attempt further reads from the stream, and SHOULD promptly complete     
+  the application delegate Task.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      application SHOULD NOT close or dispose the given stream unless it has     
+  completely consumed the request body.&nbsp; The stream owner (e.g. the     
+  server or middleware) MUST do any necessary cleanup once the application     
+  delegate&#8217;s Task completes.</SPAN></LI></UL>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol; font-size: 10pt;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Any 
+exceptions thrown from the request body stream are fatal and SHOULD be returned 
+to the server by being thrown synchronously from the AppFunc or by failing the 
+asynchronous Task with the given exception(s).</SPAN></P></DIV>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A name="_ResultParameters"></A><A 
+name="Headers"></A><A name="BodyDelegate"></A><A 
+name="_2.8._Body_Delegate"></A><A name="_3.5._Response_Body"></A><SPAN style='font-family: "Helvetica","sans-serif";'>3.5.
+ Response Body</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>The server provides a
+ response body </SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>Stream</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'> 
+with the &#8220;</SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>owin.ResponseBody&#8221; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>key in the initial 
+environment dictionary.&nbsp; The headers, status code, reason phrase, etc., can 
+be modified up until the first write to the response body stream.&nbsp; Upon 
+first write, the server validates and sends the headers.&nbsp;Applications MAY 
+choose to buffer response data to delay the header finalization.</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      application MUST signal completion or failure of the body by completing    
+   its returned Task or throwing an exception. After completing the Task, the    
+   application SHOULD NOT write any further data to the stream.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>If 
+  the     server signals the </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>&#8220;owin.CallCancelled&#8221; 
+       CancellationToken</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'> 
+      during the execution of the application delegate, the application SHOULD   
+    NOT attempt further writes to the stream, and SHOULD promptly complete the   
+    application delegate Task.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      application SHOULD NOT close or dispose the given stream as middleware may 
+      append additional data.&nbsp; The stream owner (e.g. the server or     
+  middleware) MUST perform any necessary cleanup once the application     
+  delegate&#8217;s Task completes.</SPAN></LI></UL></DIV>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(238, 204, 0);">
+<P style="margin: 5pt 8.25pt;"><SPAN style='font-family: "Helvetica","sans-serif";'>An 
+application SHOULD NOT assume the given stream supports multiple outstanding 
+asynchronous writes. The application developer SHOULD verify that the server and 
+all middleware in use support this pattern before attempting to use it.&nbsp; <A 
+name="URIReconstruction"></A><A 
+name="_2.9._Request_lifetime"></A>&nbsp;&nbsp;&nbsp;</SPAN></P></DIV>
+<H3><A name="_3.6._Request_lifetime"></A><SPAN style='font-family: "Helvetica","sans-serif";'>3.6.
+ Request lifetime</SPAN></H3>
+<P class="MsoNoSpacing"><SPAN style='font-family: "Helvetica","sans-serif";'>The
+ full scope or lifetime of a request is limited by the several factors,
+ including the client, server, and application delegate.&nbsp; In the simplest
+ scenario a request&#8217;s lifetime ends when the application delegate has completed 
+and the server gracefully ends the request.&nbsp; Failures at any level may 
+cause the request to terminate prematurely, or may be handled internally and 
+allow the request to continue.&nbsp;</SPAN></P>
+<P class="MsoNoSpacing"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>&nbsp;</SPAN></P>
+<P class="MsoNoSpacing"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+</SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>&#8220;owin.CallCancelled&#8221;</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> key is associated with a 
+</SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>CancellationToken</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> that the server uses to signal 
+if the request has be aborted.&nbsp; This SHOULD be triggered if the request
+ becomes faulted before the AppFunc Task is completed.&nbsp; It MAY be triggered
+ at any point at the providers discretion.&nbsp; Middleware MAY replace this
+ token with their own to provide added granularity or functionality, but they
+ SHOULD chain their new token with the one originally provided to 
+them.</SPAN></P>
+<H2><A name="_4._Application_Startup"></A>4. Application Startup</H2>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>When the host process
+ starts there are a number of steps it goes through to set up the
+ application.&nbsp; </SPAN></P>
+<P style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN style='font-family: "Helvetica","sans-serif";'>1.</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; </SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+host creates a Properties IDictionary&lt;string, object&gt; and populates any 
+startup data or capabilities provided by the host.</SPAN></P>
+<P style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN style='font-family: "Helvetica","sans-serif";'>2.</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; </SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+host selects which server will be used and provides it with the Properties 
+collection so it can similarly announce any capabilities.</SPAN></P>
+<P style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN style='font-family: "Helvetica","sans-serif";'>3.</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; </SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+host locates the application setup code and invokes it with the Properties 
+collection.</SPAN></P>
+<P style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN style='font-family: "Helvetica","sans-serif";'>4.</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; </SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+application reads and/or sets configuration in the Properties collection, 
+constructs the desired request processing pipeline, and returns the resulting 
+application delegate.</SPAN></P>
+<P style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN style='font-family: "Helvetica","sans-serif";'>5.</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; </SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+host invokes the server startup code with the given application delegate and the 
+Properties dictionary.&nbsp; The server finishes configuring itself, starts 
+accepting requests, and invokes the application delegate to process those 
+requests.</SPAN></P>
+<P class="MsoNoSpacing"><SPAN style='font-family: "Helvetica","sans-serif";'>The
+ Properties dictionary may be used to read or set any configuration parameters
+ supported by the host, server, middleware, or application.&nbsp;</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<P class="MsoNoSpacing" style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN 
+style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The startup
+ properties dictionary MUST be non-null, mutable and MUST contain the keys
+ listed as required in the table below. </SPAN></P>
+<P class="MsoNoSpacing" style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN 
+style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Keys MUST be 
+compared using</SPAN> <SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>StringComparer.Ordinal</SPAN>.</P>
+<P class="MsoNoSpacing" style="text-indent: -0.25in; margin-left: 0.5in;"><SPAN 
+style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The values 
+associated with the keys MUST be non-null, unless otherwise 
+specified.</SPAN></P>
+<TABLE class="MsoNormalTable" style="margin-left: 15pt;" border="1" cellpadding="0">
+  <TBODY>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Required</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN style='font-family: "Helvetica","sans-serif"; font-size: 10pt;'>Key 
+       Name</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>Value  
+      Description</SPAN></P></TD></TR>
+  <TR>
+    <TD valign="top" style="padding: 0in;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">Yes</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><CODE><SPAN 
+      style="font-size: 10pt;">"owin.Version"</SPAN></CODE></P></TD>
+    <TD style="padding: 0.75pt;">
+      <P class="MsoNormal"><SPAN 
+      style='font-family: "Helvetica","sans-serif";'>The  string 
+      </SPAN><CODE><SPAN style="font-size: 10pt;">"1.0"</SPAN></CODE><SPAN 
+      style='font-family: "Helvetica","sans-serif";'> indicating OWIN version. 
+      Added  by the server in step 2 above.&nbsp; See <A href="http://owin.org/spec/owin-1.0.0.html#_5._Versioning">Versioning</A>. 
+        </SPAN></P></TD></TR></TBODY></TABLE></DIV>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(238, 204, 0);">
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>In addition to these 
+keys the host, server, middleware, application, etc. may add arbitrary data
+ associated with the application configuration to the properties dictionary.
+ Guidelines for additional keys and a list of commonly defined keys can be found
+ in <A 
+href="http://owin.org/spec/CommonKeys.html">CommonKeys.html</A>.</SPAN></P></DIV>
+<H2><A name="_5.__URI"></A>5.<SPAN style="font-size: 7pt;">&nbsp; </SPAN>URI
+ Reconstruction</H2>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>Applications often
+ require the ability to reconstruct the complete URI of a request. This process
+ cannot be perfect since HTTP clients do not usually transmit the complete URI
+ which they are requesting, but OWIN makes provisions for the purpose of 
+reconstructing the approximate URI of a request.</SPAN></P>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A 
+name="URIScheme"></A><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.1.</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>URI
+ Scheme</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>This information is
+ usually not transmitted by an HTTP client and depending on network
+ configuration it may not be possible for an OWIN server to determine a correct
+ value. In these cases, the server may have to manually configure or compute a
+ value.</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(238, 204, 0);">
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>Servers MUST provide a
+ best-guess value for </SPAN><CODE><SPAN 
+style="font-size: 10pt;">"owin.RequestScheme"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>.</SPAN></P></DIV>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A 
+name="Hostname"></A><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.2.</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Hostname</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>In the context of an
+ HTTP/1.1 request, the name of the server to which the client is making a
+ request is usually indicated in the Host header field-value of the request,
+ although it might be specified using an absolute Request-URI (see RFC 2616,
+ sections <A href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.2">5.1.2</A>, 
+<A 
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.6.1.1">19.6.1.1</A>). 
+</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>A server MUST provide a
+ value for the </SPAN><CODE><SPAN 
+style="font-size: 10pt;">"Host"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+key in the request header dictionary. The format of the value MUST be
+ "&lt;hostname&gt;[:&lt;port&gt;]". The value SHOULD be deduced by the host 
+using the following steps:</SPAN></P>
+<OL type="1" style="margin-top: 0in;" start="1">
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>If 
+  the     Request-URI of the incoming request is an absolute URI, the value of 
+  the </SPAN><CODE><SPAN style="font-size: 10pt;">"Host"</SPAN></CODE><SPAN 
+  style='font-family: "Helvetica","sans-serif";'> key MUST be taken from the     
+  host part of the absolute URI.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>If 
+  the     Request-URI of the incoming request is not an absolute URI, the value 
+  of     the </SPAN><CODE><SPAN 
+  style="font-size: 10pt;">"Host"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+  key MUST be taken from the     Host header field-value of the incoming 
+  request.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>If 
+  the     Host header is not present in the incoming request (as in an HTTP/1.0  
+     request), or if its value consists entirely of linear whitespace, the 
+  server     MUST provide a sensible best-guess value for the </SPAN><CODE><SPAN 
+  style="font-size: 10pt;">"Host"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+  key. </SPAN></LI></OL></DIV>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A name="Paths"></A><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.3.</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Paths</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>Servers may have the
+ ability to map application delegates to some base path. For example, a server
+ might have an application delegate configured to respond to requests beginning
+ with </SPAN><CODE><SPAN style="font-size: 10pt;">"/my-app"</SPAN></CODE><SPAN 
+style='font-family: "Helvetica","sans-serif";'>, in which case it should set the
+ value of </SPAN><CODE><SPAN 
+style="font-size: 10pt;">"owin.RequestPathBase"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+in the environment dictionary to </SPAN><CODE><SPAN 
+style="font-size: 10pt;">"/my-app"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>. 
+If this server receives a request for </SPAN><CODE><SPAN style="font-size: 10pt;">"/my-app/foo"</SPAN></CODE><SPAN 
+style='font-family: "Helvetica","sans-serif";'>, the &#8220;</SPAN><CODE><SPAN style="font-size: 10pt;">owin.RequestPath&#8221;</SPAN></CODE><SPAN 
+style='font-family: "Helvetica","sans-serif";'> value of the environment
+ dictionary provided to the application configured to respond at 
+</SPAN><CODE><SPAN style="font-size: 10pt;">"/my-app"</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+should be </SPAN><CODE><SPAN style="font-size: 10pt;">"/foo"</SPAN></CODE><SPAN 
+style='font-family: "Helvetica","sans-serif";'>.</SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      value associated with the environment key</SPAN><SPAN style='font-family: "Segoe UI","sans-serif";'>&nbsp;</SPAN><SPAN 
+  style='font-family: "Courier New"; font-size: 10pt;'>"owin.RequestPathBase"</SPAN><SPAN 
+  style='font-family: "Segoe UI","sans-serif";'>&nbsp;</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>MUST 
+  NOT end with a     slash&nbsp;and</SPAN><SPAN style='font-family: "Segoe UI","sans-serif";'>&nbsp;</SPAN><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>MUST either&nbsp;start with a   
+    slash or&nbsp;be</SPAN><SPAN 
+  style='font-family: "Segoe UI","sans-serif";'>&nbsp;</SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>string.Empty</SPAN><SPAN 
+  style='font-family: "Courier New";'><!--EndFragment -->.</SPAN></LI></UL>
+<P class="MsoListParagraph" 
+style="text-indent: -0.25in; margin-right: 7.5pt;"><SPAN style="font-family: Symbol; font-size: 10pt;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp; </SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+value associated with the&nbsp;environment key</SPAN><SPAN style='font-family: "Segoe UI","sans-serif";'> 
+</SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>"owin.RequestPath"</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'>&nbsp;MUST start with a slash,
+ or&nbsp;MAY be </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>string.empty</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'>&nbsp;if the value associated 
+with</SPAN> <SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>"owin.RequestPathBase"</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> is not </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>string.empty</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'>.</SPAN></P></DIV>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A name="URIReconstructionAlgorithm"></A><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.4.</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>URI Reconstruction 
+Algorithm</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>The following algorithm
+ can be used to approximate the complete URI of the current request:</SPAN></P>
+<PRE><CODE>var uri =</CODE></PRE>
+<PRE><CODE>&nbsp; (string)Environment["owin.RequestScheme"] + </CODE></PRE>
+<PRE><CODE>&nbsp;&nbsp;"://" +</CODE></PRE>
+<PRE><CODE>&nbsp; &nbsp;Headers["Host"].First() +</CODE></PRE>
+<PRE><CODE>&nbsp; (string)Environment["owin.RequestPathBase"] +</CODE></PRE>
+<PRE><CODE>&nbsp; (string)Environment["owin.RequestPath"];</CODE></PRE>
+<PRE><CODE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></PRE>
+<PRE><CODE>if (Environment["owin.RequestQueryString"] != "")</CODE></PRE>
+<PRE><CODE>&nbsp; uri += "?" + (string)Environment["owin.RequestQueryString"];</CODE></PRE>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>The result of this
+ algorithm may not be identical to the URI the client used to make the request;
+ for example, the server may have done some rewriting to canonicalize the
+ request. Further, it is subject to the caveats described in the <A href="http://owin.org/spec/owin-1.0.0.html#URIScheme">URI 
+Scheme</A> and <A 
+href="http://owin.org/spec/owin-1.0.0.html#Hostname">Hostname</A> sections
+ above.</SPAN></P>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A 
+name="PercentEncoding"></A><SPAN 
+style='font-family: "Helvetica","sans-serif";'>5.5.</SPAN><SPAN style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'>Percent-encoding</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>A URI uses percent
+ encoding to transport characters outside its normally allowed character rules 
+(<A href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</A> section 2).
+ Percent-encoding is used to express the underlying octets present in a URI
+ component, whose octets are interpreted via UTF-8 encoding. Most web server
+ implementations will perform percent-decoding on paths in order to perform
+ request routing (as they rightly may, see: RFC 2616 section <A href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.2">5.1.2</A>,
+ also <A 
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.2.3">3.2.3</A>),
+ and OWIN follows this precedent. The request query string in OWIN is presented
+ in its percent-encoded form; a percent-decoded query string could contain 
+</SPAN><CODE><SPAN style="font-size: 10pt;">'?'</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'>
+ or </SPAN><CODE><SPAN style="font-size: 10pt;">'='</SPAN></CODE><SPAN style='font-family: "Helvetica","sans-serif";'> 
+characters, which would render the string unparseable. </SPAN></P>
+<DIV style="margin: 7.5pt; padding: 0in; border: 1pt solid rgb(255, 153, 153);">
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      server MUST provide percent-decoded values for </SPAN><CODE><SPAN style="font-size: 10pt;">"owin.RequestPath"</SPAN></CODE><SPAN 
+  style='font-family: "Helvetica","sans-serif";'> and </SPAN><CODE><SPAN style="font-size: 10pt;">"owin.RequestPathBase"</SPAN></CODE><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>The 
+      server MUST provide a percent-encoded value for </SPAN><CODE><SPAN style="font-size: 10pt;">"owin.RequestQueryString"</SPAN></CODE></LI></UL></DIV>
+<H2><A name="ErrorHandling"></A>6.&nbsp; Error Handling</H2>
+<P class="MsoNoSpacing"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>While there are standard 
+exceptions such as ArgumentException and IOException that may be expected in 
+normal request processing scenarios, handling only such exceptions is 
+insufficient when building a robust server or application.&nbsp; If a server 
+wishes to be robust it SHOULD consistently address all exception types thrown or 
+returned from the application delegate or body delegate.&nbsp; The handling 
+mechanism (e.g. logging, crashing and restarting, swallowing, etc.) is up to the 
+server and host process.</SPAN></P>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A name="ApplicationErrors"></A><SPAN 
+style='font-family: "Helvetica","sans-serif";'>6.1. Application 
+Errors</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>An application may
+ generate an exception in the following places:</SPAN></P>
+<UL type="disc" style="margin-top: 0in;">
+  <LI class="MsoNormal"><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>Thrown     from an invocation 
+  of the application delegate.</SPAN></LI>
+  <LI class="MsoNormal"><SPAN 
+  style='font-family: "Helvetica","sans-serif";'>Provided     as the result of 
+  the application delegate Task.</SPAN></LI></UL>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>An application SHOULD
+ attempt to trap its own internal errors and generate an appropriate (possibly
+ 500-level) response rather than propagating an exception up to the 
+server.</SPAN></P>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>After an application
+ provides a response, the server SHOULD wait to receive at least one write from
+ the response </SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>Stream </SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>before 
+writing the response headers to the underlying transport. In this way, if 
+instead of a write to the </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>Stream</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'> the server gets an exception 
+from the application delegate Task, the server will still be able to generate a
+ 500-level response. If the server gets a write to the Stream first, it can
+ safely assume that the application has caught as many of its internal errors as
+ possible; the server can begin sending the response. If an exception is
+ subsequently received, the server MAY handle it as it sees fit (e.g. logging,
+ write a textual description of the error to the underlying transport, and/or
+ close the connection).</SPAN></P>
+<H3 style="text-indent: -0.5in; margin-left: 0.75in;"><A 
+name="HostErrors"></A><SPAN style='font-family: "Helvetica","sans-serif";'>6.2. 
+Server Errors</SPAN></H3>
+<P><SPAN style='font-family: "Helvetica","sans-serif";'>When a server encounters
+ errors during a request&#8217;s lifetime it SHOULD signal the </SPAN><SPAN style='font-family: "Courier New"; font-size: 10pt;'>CancellationToken 
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>it provided in 
+&#8220;</SPAN><SPAN 
+style='font-family: "Courier New"; font-size: 10pt;'>owin.CallCancelled</SPAN><SPAN 
+style='font-family: "Helvetica","sans-serif";'>&#8221;.&nbsp; The server MAY then take 
+any necessary actions to terminate the request, but it SHOULD be tolerant of 
+completion delays of the application delegate.</SPAN></P>
+<H2><A name="_5._Versioning"></A>7. Versioning</H2>
+<P class="MsoNormal"><SPAN style='font-family: "Helvetica","sans-serif";'>Future
+ updates to this standard may contain breaking changes (e.g. signature changes,
+ key additions or modifications, etc.) or non-breaking additions.&nbsp; While
+ addressing specific changes is the responsibility of later versions of the
+ standard, here are initial guidelines for expected changes:</SPAN></P>
+<P class="MsoNormal"><SPAN 
+style='font-family: "Helvetica","sans-serif";'>&nbsp;</SPAN></P>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>This standard uses
+ Semantic Versioning as described at <A 
+href="http://semver.org/">http://semver.org/</A> (e.g. 
+Major.Minor.Patch).</SPAN></P>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Breaking changes to
+ the API signatures or existing keys will require incrementing the major version
+ number (e.g. OWIN 2.0)</SPAN></P>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Adding new keys or
+ delegates in a backwards compatible way only requires incrementing the minor
+ version number (e.g. OWIN 1.1).</SPAN></P>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>Making corrections
+ and clarifications to the document alone only requires incrementing the patch
+ version number and last modified date (e.g. OWIN 1.0.1).</SPAN></P>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The &#8220;owin.Version&#8221; 
+key in the startup Properties and request Environment dictionaries indicates the 
+latest version of the standard implemented by the server and may be used to 
+dynamically adjust behaviors of applications.</SPAN></P>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>All implementers
+ SHOULD clearly document the full version number(s) of the OWIN standard they
+ support.</SPAN></P>
+<P class="MsoListParagraph" style="text-indent: -0.25in;"><SPAN style="font-family: Symbol;">&middot;</SPAN><SPAN 
+style="font-size: 7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</SPAN><SPAN style='font-family: "Helvetica","sans-serif";'>The keys listed in 
+<A href="http://owin.org/spec/CommonKeys.html">CommonKeys.html</A> are strictly 
+optional. Additions may be made there without directly affecting the OWIN 
+standard or version number.</SPAN></P></DIV></BODY></HTML>
