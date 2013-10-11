@@ -35,21 +35,16 @@
     <Reference Include="Fix">
       <HintPath>..\..\..\Build\PackageDependencies\Fix.0.5.0.50033\lib\net40\Fix.dll</HintPath>
     </Reference>
-    <Reference Include="Simple.Owin, Version=0.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Build\PackageDependencies\Simple.Owin.0.3.1\lib\net40\Simple.Owin.dll</HintPath>
+    <Reference Include="Simple.Owin">
+      <HintPath>lib\Simple.Owin.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Simple.Owin.Servers.TcpServer, Version=0.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Build\PackageDependencies\Simple.Owin.Servers.TcpServer.0.3.1\lib\net40\Simple.Owin.Servers.TcpServer.dll</HintPath>
+    <Reference Include="Simple.Owin.Servers.TcpServer">
+      <HintPath>lib\Simple.Owin.Servers.TcpServer.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -59,24 +54,31 @@
     <ProjectReference Include="..\MiddlewareA\MiddlewareA.csproj">
       <Project>{3efd419c-5d8b-4240-8cb0-146fc2680d1d}</Project>
       <Name>MiddlewareA</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\MiddlewareB\MiddlewareB.csproj">
       <Project>{bad12fcb-8515-4c45-830f-16a0a3a6fdc8}</Project>
       <Name>MiddlewareB</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="README.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
   <Target Name="AfterBuild">
+    <ItemGroup>
+      <MiddlewareAFiles Include="..\MiddlewareA\bin\$(Configuration)\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(MiddlewareAFiles)" DestinationFolder="bin\$(Configuration)\MiddlewareA\" />
+    <ItemGroup>
+      <MiddlewareBFiles Include="..\MiddlewareB\bin\$(Configuration)\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(MiddlewareBFiles)" DestinationFolder="bin\$(Configuration)\MiddlewareB\" />
+    <ItemGroup>
+      <TcpServerFiles Include="lib\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(TcpServerFiles)" DestinationFolder="bin\$(Configuration)\Simple.Owin.Servers.TcpServer\" />
   </Target>
-  -->
 </Project>

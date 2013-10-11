@@ -29,6 +29,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Simple.Owin.XML</DocumentationFile>
+    <AssemblyOriginatorKeyFile Condition=" Exists('..\..\..\Simple.Owin.snk') ">..\..\..\Simple.Owin.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly Condition=" Exists('..\..\..\Simple.Owin.snk') ">true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

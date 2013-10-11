@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
@@ -10,6 +11,12 @@ namespace Simple.Owin
 {
     public class OwinContext : IContext
     {
+        private static readonly string ContextKey = string.Format("{0}.{1}",
+                                                                  OwinKeys.Simple.Context,
+                                                                  Assembly.GetExecutingAssembly()
+                                                                          .GetName()
+                                                                          .Version.ToString(3));
+
         private readonly IDictionary<string, object> _environment;
         private readonly OwinRequest _request;
         private readonly OwinResponse _response;
@@ -68,7 +75,7 @@ namespace Simple.Owin
         }
 
         public static OwinContext Get(IDictionary<string, object> environment) {
-            return environment.GetValueOrCreate(OwinKeys.Simple.Context, () => new OwinContext(environment));
+            return environment.GetValueOrCreate(ContextKey, () => new OwinContext(environment));
         }
     }
 }

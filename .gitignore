@@ -8,6 +8,7 @@ Build/PackageDependencies/*
 !Build/PackageDependencies/repositories.config
 
 Source/VersionInfo.cs
+Simple.Owin.snk
 
 *.csproj.user
 *.csproj.*.user
@@ -31,3 +32,4 @@ test*ml
 
 NDependOut
 *.ndproj
+

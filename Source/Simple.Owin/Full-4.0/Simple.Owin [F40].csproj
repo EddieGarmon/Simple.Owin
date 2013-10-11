@@ -29,6 +29,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Simple.Owin.XML</DocumentationFile>
+    <AssemblyOriginatorKeyFile Condition=" Exists('..\..\..\Simple.Owin.snk') ">..\..\..\Simple.Owin.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly Condition=" Exists('..\..\..\Simple.Owin.snk') ">true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -40,37 +42,32 @@
     </Compile>
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Helpers\Disposable.cs" />
+    <Compile Include="Helpers\TaskHelper.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Hosting\IOwinHost.cs" />
+    <Compile Include="Hosting\IOwinHostService.cs" />
     <Compile Include="Hosting\IOwinServer.cs" />
     <Compile Include="Hosting\OwinHost.cs" />
-    <Compile Include="Hosting\IOwinHostService.cs" />
     <Compile Include="Hosting\OwinHostState.cs" />
-    <Compile Include="Http\HttpHeaderKeys.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="IResponseHeaders.cs" />
-    <Compile Include="OwinHeaders.cs" />
-    <Compile Include="OwinResponseHeaders.cs" />
-    <Compile Include="Helpers\UrlHelper.cs" />
+    <Compile Include="Http\HttpHeaderKeys.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="IPostedFile.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="IRequestHeaders.cs" />
     <Compile Include="IResponse.cs" />
+    <Compile Include="IResponseHeaders.cs" />
     <Compile Include="IUser.cs" />
-    <Compile Include="Status.cs" />
-    <Compile Include="Helpers\Disposable.cs" />
     <Compile Include="OwinContext.cs" />
+    <Compile Include="OwinHeaders.cs" />
     <Compile Include="OwinKeys.cs" />
-    <Compile Include="OwinRequest.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="OwinRequest.cs" />
     <Compile Include="OwinRequestHeaders.cs" />
     <Compile Include="OwinResponse.cs" />
+    <Compile Include="OwinResponseHeaders.cs" />
     <Compile Include="QueryString.cs" />
-    <Compile Include="Helpers\TaskHelper.cs" />
+    <Compile Include="Status.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

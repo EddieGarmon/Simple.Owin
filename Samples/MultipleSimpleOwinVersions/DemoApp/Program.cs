@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 using Fix;
@@ -9,8 +11,6 @@ using MiddlewareA;
 
 using MiddlewareB;
 
-using Simple.Owin;
-using Simple.Owin.Extensions;
 using Simple.Owin.Servers.TcpServer;
 
 namespace DemoApp
@@ -29,8 +29,14 @@ namespace DemoApp
     {
         public static AppFunc SayHello {
             get {
-                return environment => OwinContext.Get(environment)
-                                                 .Response.Output.WriteAsync("<h1>Hello</h1>");
+                return environment => {
+                           var output = (Stream)environment["owin.ResponseBody"];
+                           byte[] data = Encoding.UTF8.GetBytes("<h1>Hello</h1>");
+                           output.Write(data, 0, data.Length);
+                           var completed = new TaskCompletionSource<int>();
+                           completed.SetResult(0);
+                           return completed.Task;
+                       };
             }
         }
 
