@@ -16,7 +16,7 @@ namespace Simple.Owin
                 throw new ArgumentNullException("environment");
             }
             _environment = environment;
-            var headers = _environment.GetValueOrCreate(OwinKeys.Response.Headers, Make.Headers);
+            var headers = _environment.GetValueOrCreate(OwinKeys.Response.Headers, OwinFactory.CreateHeaders);
             _headers = new OwinResponseHeaders(headers);
         }
 

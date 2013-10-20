@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package>
     <metadata>
         <id>Simple.Owin</id>
-        <version>0.0.0</version>
+        <version>0.0.0-sv</version>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon, Mark Rendle</copyright>
-        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-        <projectUrl>http://github.com/eddiegarmon/Simple.Owin</projectUrl>
+        <licenseUrl>https://github.com/EddieGarmon/Simple.Owin/blob/master/LICENSE.txt</licenseUrl>
+        <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An OWIN middleware and application framework for .NET 4+</description>
         <summary>An OWIN middleware and application framework for .NET 4+</summary>

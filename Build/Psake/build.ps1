@@ -85,7 +85,8 @@ task SetReleaseProperties {
 		ForEach-Object { 
 			Write-Host "> " $_.FullName
 			$content = [System.IO.File]::ReadAllText($_.FullName);
-			$content = $content.Replace("0.0.0.0", $assmVer).Replace("0.0.0", $semVer);
+			$content = $content.Replace("0.0.0.0", $assmVer);
+			$content = $content.Replace("0.0.0-sv", $semVer);
 			[System.IO.File]::WriteAllText($_.FullName, $content);
 		}
 		
@@ -95,7 +96,7 @@ task SetReleaseProperties {
 		ForEach-Object { 
 			Write-Host "> " $_.FullName
 			$content = [System.IO.File]::ReadAllText($_.FullName);
-			$content = $content.Replace("0.0.0", $semVer);
+			$content = $content.Replace("0.0.0-sv", $semVer);
 			[System.IO.File]::WriteAllText($_.FullName, $content);
 		}
 }

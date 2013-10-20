@@ -63,8 +63,8 @@
     <Compile Include="IResponse.cs" />
     <Compile Include="IResponseHeaders.cs" />
     <Compile Include="OwinContext.cs" />
-    <Compile Include="Make.cs" />
     <Compile Include="HttpHeaders.cs" />
+    <Compile Include="OwinFactory.cs" />
     <Compile Include="OwinKeys.cs" />
     <Compile Include="OwinRequest.cs" />
     <Compile Include="OwinRequestHeaders.cs" />

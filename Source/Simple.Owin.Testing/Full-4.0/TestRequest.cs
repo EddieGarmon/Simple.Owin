@@ -4,7 +4,7 @@ namespace Simple.Owin.Testing
 {
     public class TestRequest
     {
-        private readonly HttpHeaders _headers = new HttpHeaders(Make.Headers());
+        private readonly HttpHeaders _headers = new HttpHeaders();
         private readonly HttpRequestLine _requestLine;
         private Uri _url;
         //todo body

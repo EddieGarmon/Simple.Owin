@@ -11,7 +11,7 @@ namespace Simple.Owin.Hosting
         private OwinHostState _state;
 
         public OwinHost() {
-            _environment = Make.Environment();
+            _environment = OwinFactory.CreateEnvironment();
             _state = OwinHostState.ConfigureHost;
         }
 

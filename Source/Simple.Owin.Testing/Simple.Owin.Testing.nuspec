@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>Simple.Owin.Servers.Nowin</id>
+        <id>Simple.Owin.Testing</id>
         <version>0.0.0-sv</version>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
@@ -9,17 +9,17 @@
         <licenseUrl>https://github.com/EddieGarmon/Simple.Owin/blob/master/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A Nowin server wrapper for Simple.Owin</description>
-        <summary>A Nowin server wrapper for Simple.Owin</summary>
-        <tags>simple owin nowin server</tags>
+        <description>An OWIN testing framework for .NET 4+</description>
+        <summary>An OWIN testing framework for .NET 4+</summary>
+        <tags>simple owin framework middleware testing</tags>
         <dependencies>
             <dependency id="Simple.Owin" version="0.0.0-sv" />
-            <dependency id="Nowin" version="0.10.1.0" />
         </dependencies>
     </metadata>
     <files>
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.dll" target="lib\net45" />
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.*db" target="lib\net45" />
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.xml" target="lib\net45" />
+        <file src="Full-4.0\bin\Release\Simple.Owin.Testing.dll" target="lib\net40" />
+        <file src="Full-4.0\bin\Release\Simple.Owin.Testing.*db" target="lib\net40" />
+        <file src="Full-4.5\bin\Release\Simple.Owin.Testing.dll" target="lib\net45" />
+        <file src="Full-4.5\bin\Release\Simple.Owin.Testing.*db" target="lib\net45" />
     </files>
 </package>

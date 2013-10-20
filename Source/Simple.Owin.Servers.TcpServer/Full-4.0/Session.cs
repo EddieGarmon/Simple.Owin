@@ -29,7 +29,7 @@ namespace Simple.Owin.Servers.TcpServer
         private Socket _socket;
 
         public Session(IDictionary<string, object> owinEnvironment, Func<IDictionary<string, object>, Task> appFunc, Socket socket) {
-            _sessionEnvironment = Make.Environment(owinEnvironment);
+            _sessionEnvironment = OwinFactory.CreateScopedEnvironment(owinEnvironment);
             _appFunc = appFunc;
             _socket = socket;
 
@@ -66,7 +66,7 @@ namespace Simple.Owin.Servers.TcpServer
             Trace.TraceInformation("Session - Process Request");
             try {
                 //build out request environment
-                var requestEnvironment = Make.Environment(_sessionEnvironment);
+                var requestEnvironment = OwinFactory.CreateScopedEnvironment(_sessionEnvironment);
                 _context = OwinContext.Get(requestEnvironment);
 
                 // parse request line

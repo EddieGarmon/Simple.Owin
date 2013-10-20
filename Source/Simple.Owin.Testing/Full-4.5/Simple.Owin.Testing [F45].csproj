@@ -42,6 +42,18 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\TestHost.cs">
+      <Link>TestHost.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\TestRequest.cs">
+      <Link>TestRequest.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Simple.Owin\Full-4.5\Simple.Owin [F45].csproj">
+      <Project>{12CD483C-E70D-45F6-8FA8-9A246E5F9429}</Project>
+      <Name>Simple.Owin [F45]</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

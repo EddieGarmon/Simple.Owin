@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -141,13 +140,8 @@ namespace Simple.Owin
                                                                           .GetName()
                                                                           .Version.ToString(3));
 
-        public static OwinContext Create(Stream responseBody = null) {
-            var context = Get(new Dictionary<string, object>());
-            context.Response.Body = responseBody ?? new MemoryStream();
-            return context;
-        }
-
-        public static OwinContext Get(IDictionary<string, object> environment) {
+        public static OwinContext Get(IDictionary<string, object> environment = null) {
+            environment = environment ?? OwinFactory.CreateEnvironment();
             return environment.GetValueOrCreate(ContextKey, () => new OwinContext(environment));
         }
     }

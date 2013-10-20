@@ -19,7 +19,7 @@ namespace Simple.Owin
                 throw new ArgumentNullException("environment");
             }
             _environment = environment;
-            var headers = _environment.GetValueOrCreate(OwinKeys.Request.Headers, Make.Headers);
+            var headers = _environment.GetValueOrCreate(OwinKeys.Request.Headers, OwinFactory.CreateHeaders);
             _headers = new OwinRequestHeaders(headers);
         }
 

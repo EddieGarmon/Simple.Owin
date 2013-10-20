@@ -11,7 +11,7 @@ namespace Simple.Owin
         private readonly IDictionary<string, string[]> _raw;
 
         public HttpHeaders(IDictionary<string, string[]> raw = null) {
-            _raw = raw ?? Make.Headers();
+            _raw = raw ?? OwinFactory.CreateHeaders();
         }
 
         public IDictionary<string, string[]> Raw {

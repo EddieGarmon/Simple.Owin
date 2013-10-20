@@ -26,6 +26,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.Owin.Tests [F40]", "Simple.Owin\Tests.Full-4.0\Simple.Owin.Tests [F40].csproj", "{779C6B00-64F7-4E7B-BFC0-32C56E46D7FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{8ACB5092-4A19-49AF-8CF9-052DCE55452F}"
+	ProjectSection(SolutionItems) = preProject
+		Simple.Owin.Testing\Simple.Owin.Testing.nuspec = Simple.Owin.Testing\Simple.Owin.Testing.nuspec
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A50A5E75-80DF-49E5-B153-E963EB8377B4}"
 	ProjectSection(SolutionItems) = preProject
