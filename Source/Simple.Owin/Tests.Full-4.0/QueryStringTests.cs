@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 
 using Xunit;
-using Xunit.Should;
+
+using XunitShould;
 
 namespace Simple.Owin.Tests
 {

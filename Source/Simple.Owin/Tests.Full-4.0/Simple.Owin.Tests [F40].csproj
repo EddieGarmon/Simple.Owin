@@ -33,14 +33,13 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="xunit">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Build\PackageDependencies\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xUnit.Should">
-      <HintPath>..\..\..\Build\PackageDependencies\xUnit.Should.2.1.2\lib\net40\xUnit.Should.dll</HintPath>
+    <Reference Include="XunitShould">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Build\PackageDependencies\XunitShould.3.0.0\lib\net35\XunitShould.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Simple.Owin\AssemblyInfo.cs">
@@ -53,6 +52,9 @@
       <Project>{7DAA1ED5-1E87-4110-B3ED-795BEE0BB0E8}</Project>
       <Name>Simple.Owin [F40]</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
