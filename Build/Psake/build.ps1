@@ -3,12 +3,13 @@
 framework 4.0x86
 
 properties {	
-	$script:sourcePath = $psake.build_script_dir + "\..\..\Source\"
+	$script:sourcePath = $psake.build_script_dir + "\..\..\Source\";
 	$script:nuget = $psake.build_script_dir + "\..\NuGet\NuGet.exe";
 	$script:xunit = $psake.build_script_dir + "\..\XUnit\xunit.console.clr4.exe";
 	$script:xunit_x86 = $psake.build_script_dir + "\..\XUnit\xunit.console.clr4.x86.exe";
 	$script:test_x86 = (!($(gwmi win32_processor | select description) -match "x86"));
 	$script:newPackagesPath = $psake.build_script_dir + '\..\Artifacts\Packages';
+	$script:rollbackItems = @{};
 }
 
 task default -depends ?
@@ -84,10 +85,13 @@ task SetReleaseProperties {
 		Where-Object { ($_.Name -like "AssemblyInfo.cs") } | 
 		ForEach-Object { 
 			Write-Host "> " $_.FullName
-			$content = [System.IO.File]::ReadAllText($_.FullName);
-			$content = $content.Replace("0.0.0.0", $assmVer);
+			$originalcontent = [System.IO.File]::ReadAllText($_.FullName);
+			$content = $originalcontent.Replace("0.0.0.0", $assmVer);
 			$content = $content.Replace("0.0.0-sv", $semVer);
-			[System.IO.File]::WriteAllText($_.FullName, $content);
+			if ($content -ne $originalcontent) {
+				$rollbackItems.Add($_.FullName, $originalcontent);
+				[System.IO.File]::WriteAllText($_.FullName, $content);
+			}
 		}
 		
 	Get-ChildItem ($sourcePath) -Recurse | 
@@ -95,9 +99,12 @@ task SetReleaseProperties {
 		Where-Object { ($_.Name -like "*.nuspec") } | 
 		ForEach-Object { 
 			Write-Host "> " $_.FullName
-			$content = [System.IO.File]::ReadAllText($_.FullName);
-			$content = $content.Replace("0.0.0-sv", $semVer);
-			[System.IO.File]::WriteAllText($_.FullName, $content);
+			$originalcontent = [System.IO.File]::ReadAllText($_.FullName);
+			$content = $originalcontent.Replace("0.0.0-sv", $semVer);
+			if ($content -ne $originalcontent) {
+				$rollbackItems.Add($_.FullName, $originalcontent);
+				[System.IO.File]::WriteAllText($_.FullName, $content);
+			}
 		}
 }
 
@@ -115,4 +122,14 @@ task Package -depends Build {
 		}
 }
 
-task Release -depends Clean, SetReleaseProperties, Test, Package
+task RollbackReleaseProperties {
+	Write-Host '>>> Rolling back assembly and nuspec properties for release.';
+	
+	foreach	($file in $rollbackItems.Keys) {
+		$content = $rollbackItems[$file];
+		[System.IO.File]::WriteAllText($file, $content);
+	}
+	$rollbackItems = @{};
+}
+
+task Release -depends Clean, SetReleaseProperties, Test, Package, RollbackReleaseProperties
