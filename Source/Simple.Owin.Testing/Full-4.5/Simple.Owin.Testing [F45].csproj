@@ -42,8 +42,8 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\TestHost.cs">
-      <Link>TestHost.cs</Link>
+    <Compile Include="..\Full-4.0\TestHostAndServer.cs">
+      <Link>TestHostAndServer.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\TestRequest.cs">
       <Link>TestRequest.cs</Link>

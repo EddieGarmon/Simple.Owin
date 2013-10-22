@@ -4,22 +4,25 @@ using System.IO;
 using System.Threading.Tasks;
 
 using Simple.Owin.Hosting;
+using Simple.Owin.Hosting.TraceOutput;
 
 namespace Simple.Owin.Testing
 {
     using AppFunc = Func<IDictionary<string, object>, Task>;
     using MiddlewareFunc = Func<IDictionary<string, object>, Func<IDictionary<string, object>, Task>, Task>;
 
-    public class TestHost : IOwinServer
+    public class TestHostAndServer : IOwinServer
     {
         private readonly OwinHost _host;
+        private readonly StringOutput _traceOutput = new StringOutput();
         private Func<IDictionary<string, object>, Task> _appFunc;
 
-        public TestHost(MiddlewareFunc middlewareFunc, IEnumerable<IOwinHostService> hostServices = null)
+        public TestHostAndServer(MiddlewareFunc middlewareFunc, IEnumerable<IOwinHostService> hostServices = null)
             : this(environment => middlewareFunc(environment, null), hostServices) { }
 
-        public TestHost(AppFunc appFunc, IEnumerable<IOwinHostService> hostServices = null) {
+        public TestHostAndServer(AppFunc appFunc, IEnumerable<IOwinHostService> hostServices = null) {
             _host = new OwinHost();
+            _host.AddHostService(_traceOutput);
             if (hostServices != null) {
                 foreach (var hostService in hostServices) {
                     _host.AddHostService(hostService);
@@ -31,6 +34,10 @@ namespace Simple.Owin.Testing
 
         public IDictionary<string, object> HostEnvironment {
             get { return _host.Environment; }
+        }
+
+        public string TraceOutput {
+            get { return _traceOutput.Value; }
         }
 
         public IContext Process(TestRequest request) {

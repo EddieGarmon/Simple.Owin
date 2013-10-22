@@ -6,24 +6,24 @@ namespace Simple.Owin.Hosting
 {
     public class OwinHost : IOwinHost
     {
-        private readonly IDictionary<string, object> _environment;
+        private readonly OwinHostContext _hostContext;
         private IOwinServer _server;
         private OwinHostState _state;
 
         public OwinHost() {
-            _environment = OwinFactory.CreateEnvironment();
+            _hostContext = new OwinHostContext(OwinFactory.CreateEnvironment());
             _state = OwinHostState.ConfigureHost;
         }
 
         public IDictionary<string, object> Environment {
-            get { return _environment; }
+            get { return _hostContext.Environment; }
         }
 
         public void AddHostService(IOwinHostService service) {
             if (_state != OwinHostState.ConfigureHost) {
                 throw new Exception("Host Services must be specified before setting the server.");
             }
-            service.Configure(_environment);
+            service.Configure(_hostContext);
         }
 
         public IDisposable Run() {
@@ -46,7 +46,7 @@ namespace Simple.Owin.Hosting
                 throw new Exception("The server may only be set once.");
             }
             _server = server;
-            _server.Configure(_environment);
+            _server.Configure(_hostContext.Environment);
             _state = OwinHostState.ConfigureApp;
         }
     }

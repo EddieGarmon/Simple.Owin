@@ -40,8 +40,13 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AppPipeline\IPipelineBuilder.cs" />
+    <Compile Include="AppPipeline\Pipeline.cs" />
     <Compile Include="CacheLevel.cs" />
     <Compile Include="CacheOptions.cs" />
+    <Compile Include="Hosting\MultiTextWriter.cs" />
+    <Compile Include="Hosting\TraceOutput\ConsoleOutput.cs" />
+    <Compile Include="Hosting\TraceOutput\StringOutput.cs" />
     <Compile Include="HttpCookie.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
@@ -65,11 +70,13 @@
     <Compile Include="OwinContext.cs" />
     <Compile Include="HttpHeaders.cs" />
     <Compile Include="OwinFactory.cs" />
+    <Compile Include="Hosting\OwinHostContext.cs" />
     <Compile Include="OwinKeys.cs" />
     <Compile Include="OwinRequest.cs" />
     <Compile Include="OwinRequestHeaders.cs" />
     <Compile Include="OwinResponse.cs" />
     <Compile Include="OwinResponseHeaders.cs" />
+    <Compile Include="AppPipeline\PipelineBuilder.cs" />
     <Compile Include="QueryString.cs" />
     <Compile Include="Status.cs" />
   </ItemGroup>

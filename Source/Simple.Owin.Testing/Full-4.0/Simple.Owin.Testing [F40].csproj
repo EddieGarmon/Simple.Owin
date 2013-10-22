@@ -43,7 +43,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="TestRequest.cs" />
-    <Compile Include="TestHost.cs" />
+    <Compile Include="TestHostAndServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">

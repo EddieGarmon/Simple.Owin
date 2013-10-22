@@ -40,6 +40,15 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\AppPipeline\IPipelineBuilder.cs">
+      <Link>AppPipeline\IPipelineBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\AppPipeline\Pipeline.cs">
+      <Link>AppPipeline\Pipeline.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\AppPipeline\PipelineBuilder.cs">
+      <Link>AppPipeline\PipelineBuilder.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\CacheLevel.cs">
       <Link>CacheLevel.cs</Link>
     </Compile>
@@ -70,11 +79,23 @@
     <Compile Include="..\Full-4.0\Hosting\IOwinServer.cs">
       <Link>Hosting\IOwinServer.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\Hosting\MultiTextWriter.cs">
+      <Link>Hosting\MultiTextWriter.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Hosting\OwinHost.cs">
       <Link>Hosting\OwinHost.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\Hosting\OwinHostContext.cs">
+      <Link>Hosting\OwinHostContext.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Hosting\OwinHostState.cs">
       <Link>Hosting\OwinHostState.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\TraceOutput\ConsoleOutput.cs">
+      <Link>Hosting\TraceOutput\ConsoleOutput.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\TraceOutput\StringOutput.cs">
+      <Link>Hosting\TraceOutput\StringOutput.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\HttpCookie.cs">
       <Link>HttpCookie.cs</Link>
