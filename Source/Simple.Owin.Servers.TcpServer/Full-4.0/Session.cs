@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -63,11 +62,11 @@ namespace Simple.Owin.Servers.TcpServer
         }
 
         public Task ProcessRequest() {
-            Trace.TraceInformation("Session - Process Request");
             try {
                 //build out request environment
                 var requestEnvironment = OwinFactory.CreateScopedEnvironment(_sessionEnvironment);
                 _context = OwinContext.Get(requestEnvironment);
+                Trace("Session - Process Request");
 
                 // parse request line
                 HttpRequestLine requestLine = HttpRequestLine.Parse(_networkStream.ReadLine());
@@ -275,6 +274,13 @@ namespace Simple.Owin.Servers.TcpServer
         private void SessionFaulted(Exception exception = null) {
             _sessionCompleted.SetException(exception ?? new Exception("Unknown error."));
             Dispose();
+        }
+
+        private void Trace(string message) {
+            var output = _context.TraceOutput;
+            if (output != null) {
+                output.WriteLine(message);
+            }
         }
 
         private static readonly string[] ValidVerbs = { "OPTIONS", "GET", "HEAD", "POST", "PUT", "DELETE", "TRACE", "CONNECT" };

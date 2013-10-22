@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
+using Simple.Owin.Extensions;
 using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
 
@@ -24,7 +25,7 @@ namespace Simple.Owin.Servers.TcpServer
             _listenPort = port ?? 80;
             _listener = new TcpListener(_listenAddress, _listenPort);
             TaskScheduler.UnobservedTaskException += (sender, args) => {
-                                                         Trace.TraceError("Unobserved exception: " + args.Exception.Message);
+                                                         Trace("Unobserved exception: " + args.Exception.Message);
                                                          args.SetObserved();
                                                      };
         }
@@ -45,14 +46,14 @@ namespace Simple.Owin.Servers.TcpServer
         }
 
         public IDisposable Start() {
-            Trace.TraceInformation("Server - Start");
+            Trace("Server - Start");
             _listener.Start();
             _listener.BeginAcceptSocket(AcceptCallback, null);
             return Disposable.Create(() => _listener.Stop());
         }
 
         private void AcceptCallback(IAsyncResult ar) {
-            Trace.TraceInformation("Server - Connection Recieved");
+            Trace("Server - Connection Recieved");
             Socket socket;
             try {
                 socket = _listener.EndAcceptSocket(ar);
@@ -65,11 +66,18 @@ namespace Simple.Owin.Servers.TcpServer
             session.ProcessRequest()
                    .ContinueWith(task => {
                                      if (task.IsFaulted) {
-                                         Trace.TraceError(task.Exception != null ? task.Exception.Message : "A bad thing happened.");
+                                         Trace(task.Exception != null ? task.Exception.Message : "A bad thing happened.");
                                      }
-                                     Trace.TraceInformation("Server - Session Closed");
+                                     Trace("Server - Session Closed");
                                      session.Dispose();
                                  });
+        }
+
+        private void Trace(string message) {
+            var output = _environment.GetValueOrDefault<TextWriter>(OwinKeys.Host.TraceOutput);
+            if (output != null) {
+                output.WriteLine(message);
+            }
         }
 
         private static readonly IPAddress Localhost = new IPAddress(new byte[] { 0, 0, 0, 0 });

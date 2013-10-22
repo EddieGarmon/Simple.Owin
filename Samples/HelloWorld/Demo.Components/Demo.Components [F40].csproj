@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B804A7FF-4FC6-40B6-BA8D-DE3892FE2041}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{DCBC3C9D-D096-441F-A958-173C055EC4EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.OnNowin</RootNamespace>
-    <AssemblyName>Demo.OnNowin</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Demo.Components</RootNamespace>
+    <AssemblyName>Demo.Components</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,32 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fix">
-      <HintPath>..\..\Build\PackageDependencies\Fix.0.4.2.51412\lib\net40\Fix.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="DumpContext.cs" />
+    <Compile Include="IdentityManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SayHello.cs" />
+    <Compile Include="UserIdentity.cs" />
+    <Compile Include="UserPrincipal.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\Simple.Owin.Servers.Nowin\Full-4.5\Simple.Owin.Servers.Nowin [F45].csproj">
-      <Project>{4344DE58-E4FA-413B-B0B9-D2A339824A1E}</Project>
-      <Name>Simple.Owin.Servers.Nowin [F45]</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Source\Simple.Owin\Full-4.5\Simple.Owin [F45].csproj">
-      <Project>{12CD483C-E70D-45F6-8FA8-9A246E5F9429}</Project>
-      <Name>Simple.Owin [F45]</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Demo.App.HelloWorld\Demo.App.HelloWorld [F40].csproj">
-      <Project>{1A5ABC29-F8B0-4769-AFC3-F0CA76EE5CDD}</Project>
-      <Name>Demo.App.HelloWorld [F40]</Name>
+    <ProjectReference Include="..\..\..\Source\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
+      <Project>{7DAA1ED5-1E87-4110-B3ED-795BEE0BB0E8}</Project>
+      <Name>Simple.Owin [F40]</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

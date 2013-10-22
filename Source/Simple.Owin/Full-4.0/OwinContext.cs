@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 
 using Simple.Owin.Extensions;
@@ -49,16 +48,9 @@ namespace Simple.Owin
             get { return _response; }
         }
 
-        public string DumpEnvironmentAsHtmlTable() {
-            var builder = new StringBuilder();
-            builder.Append("<table><tr><th>Key</th><th>Value</th></tr>");
-            List<string> keys = Environment.Keys.OrderBy(key => key)
-                                           .ToList();
-            foreach (var key in keys) {
-                builder.AppendFormat("<tr><td>{0}</td><td>{1}</td></tr>", key, Environment[key]);
-            }
-            builder.Append("</table>");
-            return builder.ToString();
+        public TextWriter TraceOutput {
+            get { return _environment.GetValueOrDefault<TextWriter>(OwinKeys.Host.TraceOutput); }
+            set { _environment.SetValue(OwinKeys.Host.TraceOutput, value); }
         }
 
         int ICollection<KeyValuePair<string, object>>.Count {
