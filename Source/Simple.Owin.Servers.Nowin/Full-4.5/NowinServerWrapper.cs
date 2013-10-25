@@ -26,8 +26,8 @@ namespace Simple.Owin.Servers.Nowin
             }
         }
 
-        public void Configure(IDictionary<string, object> environment) {
-            _builder.SetOwinCapabilities(environment);
+        public void Configure(OwinHostContext host) {
+            _builder.SetOwinCapabilities(host.Environment);
         }
 
         public void SetAppFunc(Func<IDictionary<string, object>, Task> appFunc) {

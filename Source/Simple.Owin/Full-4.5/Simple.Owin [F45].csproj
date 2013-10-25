@@ -133,6 +133,9 @@
     <Compile Include="..\Full-4.0\IResponseHeaders.cs">
       <Link>IResponseHeaders.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\NaiveSendFile.cs">
+      <Link>NaiveSendFile.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\OwinContext.cs">
       <Link>OwinContext.cs</Link>
     </Compile>

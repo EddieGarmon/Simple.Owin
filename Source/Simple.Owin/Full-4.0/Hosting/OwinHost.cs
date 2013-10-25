@@ -46,7 +46,7 @@ namespace Simple.Owin.Hosting
                 throw new Exception("The server may only be set once.");
             }
             _server = server;
-            _server.Configure(_hostContext.Environment);
+            _server.Configure(_hostContext);
             _state = OwinHostState.ConfigureApp;
         }
     }

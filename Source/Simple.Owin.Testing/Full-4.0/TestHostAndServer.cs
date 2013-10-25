@@ -58,8 +58,8 @@ namespace Simple.Owin.Testing
             return context;
         }
 
-        void IOwinServer.Configure(IDictionary<string, object> environment) {
-            environment.Add(OwinKeys.Owin.Version, "1.0");
+        void IOwinServer.Configure(OwinHostContext host) {
+            host.Environment.Add(OwinKeys.Owin.Version, "1.0");
         }
 
         void IOwinServer.SetAppFunc(Func<IDictionary<string, object>, Task> appFunc) {
