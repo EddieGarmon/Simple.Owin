@@ -40,18 +40,19 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AppPipeline\IPipeline.cs" />
-    <Compile Include="AppPipeline\PipelineExtensions.cs" />
+    <Compile Include="AppPipeline\Usage\Api.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Helpers\IFluentApi.cs" />
     <Compile Include="UsingAliases.cs" />
-    <Compile Include="AppPipeline\ControlComponent.cs" />
-    <Compile Include="AppPipeline\DelegateComponent.cs" />
+    <Compile Include="AppPipeline\ControlMiddleware.cs" />
+    <Compile Include="AppPipeline\DelegateMiddleware.cs" />
     <Compile Include="AppPipeline\IPipelineComponent.cs" />
+    <Compile Include="AppPipeline\Middleware.cs" />
     <Compile Include="AppPipeline\Pipeline.cs" />
     <Compile Include="CacheLevel.cs" />
     <Compile Include="CacheOptions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
-    <Compile Include="FormData.cs" />
     <Compile Include="Hosting\Trace\MultiTextWriter.cs" />
     <Compile Include="Hosting\Trace\ConsoleOutput.cs" />
     <Compile Include="Hosting\Trace\NullTextWriter.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="IRequestHeaders.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="IResponseHeaders.cs" />
-    <Compile Include="NativeMiddleware.cs" />
     <Compile Include="OwinContext.cs" />
     <Compile Include="HttpHeaders.cs" />
     <Compile Include="OwinFactory.cs" />
@@ -88,10 +88,8 @@
     <Compile Include="OwinResponseHeaders.cs" />
     <Compile Include="PathMapping.cs" />
     <Compile Include="QueryString.cs" />
-    <Compile Include="SendFileNaive.cs" />
     <Compile Include="Status.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

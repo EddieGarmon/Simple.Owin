@@ -40,14 +40,23 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\AppPipeline\IPipelineBuilder.cs">
-      <Link>AppPipeline\IPipelineBuilder.cs</Link>
+    <Compile Include="..\Full-4.0\AppPipeline\ControlComponent.cs">
+      <Link>AppPipeline\ControlComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\AppPipeline\DelegateComponent.cs">
+      <Link>AppPipeline\DelegateComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\AppPipeline\IPipeline.cs">
+      <Link>AppPipeline\IPipeline.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\AppPipeline\IPipelineComponent.cs">
+      <Link>AppPipeline\IPipelineComponent.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\AppPipeline\Pipeline.cs">
       <Link>AppPipeline\Pipeline.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\AppPipeline\PipelineBuilder.cs">
-      <Link>AppPipeline\PipelineBuilder.cs</Link>
+    <Compile Include="..\Full-4.0\AppPipeline\PipelineExtensions.cs">
+      <Link>AppPipeline\PipelineExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\CacheLevel.cs">
       <Link>CacheLevel.cs</Link>
@@ -70,6 +79,9 @@
     <Compile Include="..\Full-4.0\Helpers\Disposable.cs">
       <Link>Helpers\Disposable.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\Helpers\IFluentApi.cs">
+      <Link>Helpers\IFluentApi.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Helpers\TaskHelper.cs">
       <Link>Helpers\TaskHelper.cs</Link>
     </Compile>
@@ -85,9 +97,6 @@
     <Compile Include="..\Full-4.0\Hosting\IOwinServer.cs">
       <Link>Hosting\IOwinServer.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\Hosting\MultiTextWriter.cs">
-      <Link>Hosting\MultiTextWriter.cs</Link>
-    </Compile>
     <Compile Include="..\Full-4.0\Hosting\OwinHost.cs">
       <Link>Hosting\OwinHost.cs</Link>
     </Compile>
@@ -97,11 +106,17 @@
     <Compile Include="..\Full-4.0\Hosting\OwinHostState.cs">
       <Link>Hosting\OwinHostState.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\Hosting\TraceOutput\ConsoleOutput.cs">
-      <Link>Hosting\TraceOutput\ConsoleOutput.cs</Link>
+    <Compile Include="..\Full-4.0\Hosting\Trace\ConsoleOutput.cs">
+      <Link>Hosting\Trace\ConsoleOutput.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\Hosting\TraceOutput\StringOutput.cs">
-      <Link>Hosting\TraceOutput\StringOutput.cs</Link>
+    <Compile Include="..\Full-4.0\Hosting\Trace\MultiTextWriter.cs">
+      <Link>Hosting\Trace\MultiTextWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\Trace\NullTextWriter.cs">
+      <Link>Hosting\Trace\NullTextWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\Hosting\Trace\StringOutput.cs">
+      <Link>Hosting\Trace\StringOutput.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\HttpCookie.cs">
       <Link>HttpCookie.cs</Link>

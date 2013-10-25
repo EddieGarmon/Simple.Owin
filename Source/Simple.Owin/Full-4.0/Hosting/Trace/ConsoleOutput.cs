@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Simple.Owin.Hosting.TraceOutput
+namespace Simple.Owin.Hosting.Trace
 {
     public class ConsoleOutput : IOwinHostService
     {

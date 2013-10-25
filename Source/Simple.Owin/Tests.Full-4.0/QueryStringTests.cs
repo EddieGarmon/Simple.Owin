@@ -4,7 +4,7 @@ using Xunit;
 
 using XunitShould;
 
-namespace Simple.Owin.Tests
+namespace Simple.Owin
 {
     public class QueryStringTests
     {

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading.Tasks;
 
-namespace Simple.Owin.AppPipeline
+namespace Simple.Owin.Helpers
 {
-    using AppFunc = Func<IDictionary<string, object>, Task>;
-    using MiddlewareFunc = Func<IDictionary<string, object>, Func<IDictionary<string, object>, Task>, Task>;
-
-    public interface IPipelineBuilder
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IFluentApi
     {
         /// <summary>
         /// Redeclaration that hides the <see cref="object.Equals(object)"/> method from IntelliSense.
@@ -33,9 +29,5 @@ namespace Simple.Owin.AppPipeline
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         string ToString();
-
-        IPipelineBuilder Use(MiddlewareFunc middleware);
-
-        AppFunc Use(AppFunc app);
     }
 }

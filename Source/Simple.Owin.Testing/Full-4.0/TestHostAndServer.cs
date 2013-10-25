@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
+using Simple.Owin.AppPipeline;
 using Simple.Owin.Hosting;
-using Simple.Owin.Hosting.TraceOutput;
+using Simple.Owin.Hosting.Trace;
 
 namespace Simple.Owin.Testing
 {
-    using AppFunc = Func<IDictionary<string, object>, Task>;
-    using MiddlewareFunc = Func<IDictionary<string, object>, Func<IDictionary<string, object>, Task>, Task>;
+    using AppFunc = Func< //
+        IDictionary<string, object>, // owin request environment
+        Task // completion signal
+        >;
+    using MiddlewareFunc = Func< //
+        IDictionary<string, object>, // owin request environment
+        Func<IDictionary<string, object>, Task>, // next AppFunc in pipeline
+        Task // completion signal
+        >;
 
     public class TestHostAndServer : IOwinServer
     {
@@ -17,26 +25,26 @@ namespace Simple.Owin.Testing
         private readonly StringOutput _traceOutput = new StringOutput();
         private Func<IDictionary<string, object>, Task> _appFunc;
 
-        public TestHostAndServer(MiddlewareFunc middlewareFunc, AppFunc next = null, IEnumerable<IOwinHostService> hostServices = null)
-            : this(environment => middlewareFunc(environment, next), hostServices) { }
+        public TestHostAndServer(AppFunc app, IEnumerable<IOwinHostService> hostServices = null) {
+            _host = BuildHost(hostServices);
+            _host.SetApp(app);
+        }
 
-        public TestHostAndServer(AppFunc appFunc, IEnumerable<IOwinHostService> hostServices = null) {
-            _host = new OwinHost();
-            _host.AddHostService(_traceOutput);
-            if (hostServices != null) {
-                foreach (var hostService in hostServices) {
-                    _host.AddHostService(hostService);
-                }
-            }
-            _host.SetServer(this);
-            _host.SetAppFunc(appFunc);
+        public TestHostAndServer(MiddlewareFunc middleware, AppFunc next = null, IEnumerable<IOwinHostService> hostServices = null) {
+            _host = BuildHost(hostServices);
+            _host.SetApp(environment => middleware(environment, next));
+        }
+
+        public TestHostAndServer(Pipeline pipeline, IEnumerable<IOwinHostService> hostServices = null) {
+            _host = BuildHost(hostServices);
+            _host.SetApp(pipeline);
         }
 
         public IDictionary<string, object> HostEnvironment {
             get { return _host.Environment; }
         }
 
-        public string TraceOutput {
+        public string TraceOutputValue {
             get { return _traceOutput.Value; }
         }
 
@@ -57,6 +65,22 @@ namespace Simple.Owin.Testing
                 .Wait();
 
             return context;
+        }
+
+        public IContext ProcessGet(string url) {
+            return Process(TestRequest.Get(url));
+        }
+
+        private OwinHost BuildHost(IEnumerable<IOwinHostService> hostServices = null) {
+            var host = new OwinHost();
+            host.AddHostService(_traceOutput);
+            if (hostServices != null) {
+                foreach (var hostService in hostServices) {
+                    host.AddHostService(hostService);
+                }
+            }
+            host.SetServer(this);
+            return host;
         }
 
         void IOwinServer.Configure(OwinHostContext host) {

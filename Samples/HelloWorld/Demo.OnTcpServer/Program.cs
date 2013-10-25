@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 
 using Demo.Components;
 
+using Simple.Owin;
 using Simple.Owin.AppPipeline;
 using Simple.Owin.Hosting;
-using Simple.Owin.Hosting.TraceOutput;
+using Simple.Owin.Hosting.Trace;
 using Simple.Owin.Servers.TcpServer;
 
 namespace Demo.OnTcpServer
@@ -15,6 +16,15 @@ namespace Demo.OnTcpServer
 
     internal static class Program
     {
+        private static Pipeline BuildPipeline() {
+            var pipeline = new Pipeline();
+            pipeline.Use(NativeMiddleware.PrintExceptions)
+                    .Use(NativeMiddleware.DumpEnvironment)
+                    .Use(IdentityManagement.Middleware)
+                    .Use(SayHello.App);
+            return pipeline;
+        }
+
         private static void Main() {
             Console.WriteLine("Press 1 to use - Explicit Hosting");
             Console.WriteLine("Press 2 to use - SelfHost Helper");
@@ -46,10 +56,7 @@ namespace Demo.OnTcpServer
             // but this in not yet specified, framework specific?
 
             // 5. Build and set the AppFunc
-            AppFunc app = Pipeline.Use(DumpContext.Middleware)
-                                  .Use(IdentityManagement.Middleware)
-                                  .Use(SayHello.App);
-            owinHost.SetAppFunc(app);
+            owinHost.SetApp(BuildPipeline());
 
             // 6. Run the host, consume yourself
             using (owinHost.Run()) {
@@ -59,13 +66,9 @@ namespace Demo.OnTcpServer
         }
 
         private static void UseSelfHost() {
-            AppFunc app = Pipeline.Use(DumpContext.Middleware)
-                                  .Use(IdentityManagement.Middleware)
-                                  .Use(SayHello.App);
-
             var services = new[] { new ConsoleOutput() };
 
-            using (SelfHost.App(app, port: 1337, hostServices: services)) {
+            using (SelfHost.App(BuildPipeline(), port: 1337, hostServices: services)) {
                 Console.WriteLine("Listening on port 1337. Enter to exit.");
                 Console.ReadLine();
             }
