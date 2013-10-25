@@ -80,6 +80,7 @@
     <Compile Include="AppPipeline\PipelineBuilder.cs" />
     <Compile Include="PathMapping.cs" />
     <Compile Include="QueryString.cs" />
+    <Compile Include="NaiveSendFile.cs" />
     <Compile Include="Status.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -45,6 +45,8 @@
     <Compile Include="..\..\Simple.Owin\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="NaiveSendFileTests.cs" />
+    <Compile Include="PathMappingTests.cs" />
     <Compile Include="QueryStringTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\NaiveSendFileData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

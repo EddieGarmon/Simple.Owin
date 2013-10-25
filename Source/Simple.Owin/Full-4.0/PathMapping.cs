@@ -17,7 +17,18 @@ namespace Simple.Owin
         }
 
         private static Func<string, string> BuildDefaultMapper() {
-            return GetSystemWebMapper() ?? GetCodeBaseRelativeMapper();
+            var systemWeb = GetSystemWebMapper();
+            var codeBase = GetCodeBaseRelativeMapper();
+            if (systemWeb == null && codeBase == null) {
+                throw new Exception("A default mapper cannot be created, one must be specified.");
+            }
+            if (systemWeb == null) {
+                return codeBase;
+            }
+            if (codeBase == null) {
+                return systemWeb;
+            }
+            return relative => systemWeb(relative) ?? codeBase(relative);
         }
 
         private static Func<string, string> GetCodeBaseRelativeMapper() {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Simple.Owin.Extensions;
 
@@ -51,6 +52,11 @@ namespace Simple.Owin
         public TextWriter TraceOutput {
             get { return _environment.GetValueOrDefault<TextWriter>(OwinKeys.Host.TraceOutput); }
             set { _environment.SetValue(OwinKeys.Host.TraceOutput, value); }
+        }
+
+        public Task SendFile(string pathAndName, long startAt = 0, long? length = null) {
+            var send = _environment.GetValueOrCreate(OwinKeys.SendFile.Async, () => NaiveSendFile.GetSender(this));
+            return send(pathAndName, startAt, length, CancellationToken);
         }
 
         int ICollection<KeyValuePair<string, object>>.Count {

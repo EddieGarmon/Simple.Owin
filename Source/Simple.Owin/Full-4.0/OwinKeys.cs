@@ -97,6 +97,11 @@
             public const string StatusCode = "owin.ResponseStatusCode";
         }
 
+        public static class SendFile
+        {
+            public const string Async = "sendfile.SendAsync";
+        }
+
         public static class Server
         {
             /// <summary>
