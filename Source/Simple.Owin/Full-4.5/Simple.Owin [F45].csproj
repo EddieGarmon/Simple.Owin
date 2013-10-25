@@ -58,6 +58,9 @@
     <Compile Include="..\Full-4.0\Extensions\DictionaryExtensions.cs">
       <Link>Extensions\DictionaryExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\Extensions\ReflectionExtensions.cs">
+      <Link>Extensions\ReflectionExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Extensions\StreamExtensions.cs">
       <Link>Extensions\StreamExtensions.cs</Link>
     </Compile>
@@ -150,6 +153,9 @@
     </Compile>
     <Compile Include="..\Full-4.0\OwinResponseHeaders.cs">
       <Link>OwinResponseHeaders.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\PathMapping.cs">
+      <Link>PathMapping.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\QueryString.cs">
       <Link>QueryString.cs</Link>
