@@ -153,6 +153,7 @@
         public static class Simple
         {
             public const string Context = "simple.Context";
+            public const string Form = "simple.Form";
             public const string FullUri = "simple.FullUri";
             public const string Status = "simple.Status";
         }

@@ -64,6 +64,9 @@
     <Compile Include="..\Full-4.0\Extensions\StreamExtensions.cs">
       <Link>Extensions\StreamExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\FormData.cs">
+      <Link>FormData.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\Helpers\Disposable.cs">
       <Link>Helpers\Disposable.cs</Link>
     </Compile>
@@ -133,8 +136,8 @@
     <Compile Include="..\Full-4.0\IResponseHeaders.cs">
       <Link>IResponseHeaders.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\NaiveSendFile.cs">
-      <Link>NaiveSendFile.cs</Link>
+    <Compile Include="..\Full-4.0\NativeMiddleware.cs">
+      <Link>NativeMiddleware.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\OwinContext.cs">
       <Link>OwinContext.cs</Link>
@@ -162,6 +165,9 @@
     </Compile>
     <Compile Include="..\Full-4.0\QueryString.cs">
       <Link>QueryString.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\SendFileNaive.cs">
+      <Link>SendFileNaive.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\Status.cs">
       <Link>Status.cs</Link>

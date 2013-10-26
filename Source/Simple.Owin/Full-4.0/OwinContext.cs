@@ -55,7 +55,7 @@ namespace Simple.Owin
         }
 
         public Task SendFile(string pathAndName, long startAt = 0, long? length = null) {
-            var send = _environment.GetValueOrCreate(OwinKeys.SendFile.Async, () => NaiveSendFile.GetSender(this));
+            var send = _environment.GetValueOrCreate(OwinKeys.SendFile.Async, () => SendFileNaive.GetSender(this));
             return send(pathAndName, startAt, length, CancellationToken);
         }
 

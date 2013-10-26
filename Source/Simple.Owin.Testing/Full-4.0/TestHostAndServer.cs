@@ -17,8 +17,8 @@ namespace Simple.Owin.Testing
         private readonly StringOutput _traceOutput = new StringOutput();
         private Func<IDictionary<string, object>, Task> _appFunc;
 
-        public TestHostAndServer(MiddlewareFunc middlewareFunc, IEnumerable<IOwinHostService> hostServices = null)
-            : this(environment => middlewareFunc(environment, null), hostServices) { }
+        public TestHostAndServer(MiddlewareFunc middlewareFunc, AppFunc next = null, IEnumerable<IOwinHostService> hostServices = null)
+            : this(environment => middlewareFunc(environment, next), hostServices) { }
 
         public TestHostAndServer(AppFunc appFunc, IEnumerable<IOwinHostService> hostServices = null) {
             _host = new OwinHost();
@@ -49,6 +49,7 @@ namespace Simple.Owin.Testing
             context.Request.FullUri = request.Url;
             context.Request.Protocol = request.RequestLine.HttpVersion;
             context.Request.Headers.MergeIn(request.Headers);
+            context.Request.Input = request.Body != null ? new MemoryStream(request.Body, false) : Stream.Null;
 
             context.Response.Body = new MemoryStream();
 

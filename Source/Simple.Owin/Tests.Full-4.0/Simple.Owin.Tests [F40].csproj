@@ -45,11 +45,16 @@
     <Compile Include="..\..\Simple.Owin\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="FormDataTests.cs" />
     <Compile Include="NaiveSendFileTests.cs" />
     <Compile Include="PathMappingTests.cs" />
     <Compile Include="QueryStringTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Simple.Owin.Testing\Full-4.0\Simple.Owin.Testing [F40].csproj">
+      <Project>{CD8D694E-7CFB-41F6-B8AE-B07A4559A377}</Project>
+      <Name>Simple.Owin.Testing [F40]</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
       <Project>{7DAA1ED5-1E87-4110-B3ED-795BEE0BB0E8}</Project>
       <Name>Simple.Owin [F40]</Name>

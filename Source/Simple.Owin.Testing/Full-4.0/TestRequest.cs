@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 
 namespace Simple.Owin.Testing
 {
@@ -6,11 +8,15 @@ namespace Simple.Owin.Testing
     {
         private readonly HttpHeaders _headers = new HttpHeaders();
         private readonly HttpRequestLine _requestLine;
+        private byte[] _body;
         private Uri _url;
-        //todo body
 
         private TestRequest(HttpRequestLine requestLine) {
             _requestLine = requestLine;
+        }
+
+        internal byte[] Body {
+            get { return _body; }
         }
 
         internal HttpHeaders Headers {
@@ -23,6 +29,18 @@ namespace Simple.Owin.Testing
 
         internal Uri Url {
             get { return _url ?? (_url = BuildUrl()); }
+        }
+
+        public TestRequest WithContent(string value, Encoding encoding = null) {
+            encoding = encoding ?? Encoding.UTF8;
+            _body = encoding.GetBytes(value);
+            _headers.Add(HttpHeaderKeys.ContentLength, _body.Length.ToString(CultureInfo.InvariantCulture));
+            return this;
+        }
+
+        public TestRequest WithContentType(string value) {
+            _headers.Add(HttpHeaderKeys.ContentType, value);
+            return this;
         }
 
         public TestRequest WithCookie(string name, string value) {
