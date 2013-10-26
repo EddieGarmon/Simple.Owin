@@ -30,8 +30,8 @@ namespace Simple.Owin.Servers.TcpServer
                                                      };
         }
 
-        public void Configure(IDictionary<string, object> environment) {
-            _environment = environment;
+        public void Configure(OwinHostContext host) {
+            _environment = host.Environment;
             // configure server functionality
             _environment.Add(OwinKeys.Owin.Version, "1.0");
             // announce features and configuration that middleware and apps can consume

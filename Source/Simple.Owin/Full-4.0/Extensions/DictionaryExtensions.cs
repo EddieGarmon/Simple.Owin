@@ -48,7 +48,10 @@ namespace Simple.Owin.Extensions
             object value;
             if (!dictionary.TryGetValue(key, out value)) {
                 value = create();
-                dictionary.Add(key, value);
+                if (value != null) {
+                    // todo should we throw if null?
+                    dictionary.Add(key, value);
+                }
             }
             return (T)value;
         }

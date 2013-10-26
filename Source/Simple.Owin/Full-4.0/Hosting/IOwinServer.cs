@@ -6,7 +6,7 @@ namespace Simple.Owin.Hosting
 {
     public interface IOwinServer
     {
-        void Configure(IDictionary<string, object> environment);
+        void Configure(OwinHostContext host);
 
         void SetAppFunc(Func<IDictionary<string, object>, Task> appFunc);
 

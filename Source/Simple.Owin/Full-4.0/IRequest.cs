@@ -50,6 +50,8 @@ namespace Simple.Owin
 
         IPrincipal User { get; set; }
 
+        FormData FormData { get; set; }
+
         IEnumerable<HttpCookie> GetCookies();
     }
 }
