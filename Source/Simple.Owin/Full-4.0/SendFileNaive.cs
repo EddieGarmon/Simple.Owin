@@ -15,7 +15,7 @@ namespace Simple.Owin
         Task // Complete
         >;
 
-    internal static class NaiveSendFile
+    internal static class SendFileNaive
     {
         public static SendFileFunc GetSender(OwinContext context) {
             return (path, offset, count, cancellationToken) => {

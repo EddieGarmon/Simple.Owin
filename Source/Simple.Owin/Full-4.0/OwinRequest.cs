@@ -27,6 +27,11 @@ namespace Simple.Owin
             get { throw new NotImplementedException(); }
         }
 
+        public FormData FormData {
+            get { return _environment.GetValueOrDefault<FormData>(OwinKeys.Simple.Form); }
+            set { _environment.SetValue(OwinKeys.Simple.Form, value); }
+        }
+
         public Uri FullUri {
             get { return _environment.GetValueOrCreate(OwinKeys.Simple.FullUri, MakeUri); }
             set {

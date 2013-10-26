@@ -45,6 +45,7 @@
     <Compile Include="CacheLevel.cs" />
     <Compile Include="CacheOptions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
+    <Compile Include="FormData.cs" />
     <Compile Include="Hosting\MultiTextWriter.cs" />
     <Compile Include="Hosting\TraceOutput\ConsoleOutput.cs" />
     <Compile Include="Hosting\TraceOutput\StringOutput.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="IRequestHeaders.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="IResponseHeaders.cs" />
+    <Compile Include="NativeMiddleware.cs" />
     <Compile Include="OwinContext.cs" />
     <Compile Include="HttpHeaders.cs" />
     <Compile Include="OwinFactory.cs" />
@@ -80,9 +82,10 @@
     <Compile Include="AppPipeline\PipelineBuilder.cs" />
     <Compile Include="PathMapping.cs" />
     <Compile Include="QueryString.cs" />
-    <Compile Include="NaiveSendFile.cs" />
+    <Compile Include="SendFileNaive.cs" />
     <Compile Include="Status.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

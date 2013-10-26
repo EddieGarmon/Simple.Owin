@@ -12,6 +12,12 @@ namespace Simple.Owin.Helpers
 
         private static readonly Task _completed;
 
+        public static Task<T> Completed<T>(T value) {
+            var tcs = new TaskCompletionSource<T>();
+            tcs.SetResult(value);
+            return tcs.Task;
+        }
+
         public static Task Completed() {
             return _completed;
         }
