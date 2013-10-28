@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Simple.Owin;
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Streams;
 using Simple.Owin.Helpers;
 
 namespace Demo.Components

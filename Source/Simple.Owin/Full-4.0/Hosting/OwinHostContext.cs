@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Dictionaries;
 
 namespace Simple.Owin.Hosting
 {

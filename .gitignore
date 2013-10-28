@@ -21,6 +21,7 @@ test*ml
 *.Tests.dll.xml
 
 *ReSharper*
+!ResharperSettings
 *.DotSettings.*
 *.dotCover
 

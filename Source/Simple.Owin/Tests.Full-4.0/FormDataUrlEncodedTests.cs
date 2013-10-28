@@ -1,36 +1,22 @@
 ﻿using System.IO;
 using System.Text;
 
-using Simple.Owin.AppPipeline;
-using Simple.Owin.Testing;
-
 using Xunit;
 
 using XunitShould;
 
-namespace Simple.Owin.Tests
+namespace Simple.Owin
 {
-    public class FormDataTests
+    public class FormDataUrlEncodedTests
     {
-        [Fact]
-        public void ParseFormMiddleware() {
-            var host = new TestHostAndServer(NativeMiddleware.ParseFormData, Pipeline.ReturnDone);
-            var request = TestRequest.Post("/")
-                                     .WithContentType(FormData.FormUrlEncoded)
-                                     .WithContent("Test=Pass");
-            IContext context = host.Process(request);
-            context.Request.FormData.Count.ShouldEqual(1);
-            context.Request.FormData["Test"].ShouldEqual("Pass");
-        }
-
         [Fact]
         public void ParseMultiple() {
             FormData form;
             using (var input = new MemoryStream(Encoding.UTF8.GetBytes("Test=Pass&Failure=None"))) {
-                form = FormData.Parse(input)
+                form = FormData.ParseUrlEncoded(input)
                                .Result;
             }
-            form.Count.ShouldEqual(2);
+            form.Values.Count.ShouldEqual(2);
             form["Test"].ShouldEqual("Pass");
             form["Failure"].ShouldEqual("None");
         }
@@ -39,10 +25,10 @@ namespace Simple.Owin.Tests
         public void ParseMultipleEncoded() {
             FormData form;
             using (var input = new MemoryStream(Encoding.UTF8.GetBytes("Test=Pass&Failure=Not+Today"))) {
-                form = FormData.Parse(input)
+                form = FormData.ParseUrlEncoded(input)
                                .Result;
             }
-            form.Count.ShouldEqual(2);
+            form.Values.Count.ShouldEqual(2);
             form["Test"].ShouldEqual("Pass");
             form["Failure"].ShouldEqual("Not Today");
         }
@@ -51,10 +37,10 @@ namespace Simple.Owin.Tests
         public void ParseSingle() {
             FormData form;
             using (var input = new MemoryStream(Encoding.UTF8.GetBytes("Test=Pass"))) {
-                form = FormData.Parse(input)
+                form = FormData.ParseUrlEncoded(input)
                                .Result;
             }
-            form.Count.ShouldEqual(1);
+            form.Values.Count.ShouldEqual(1);
             form["Test"].ShouldEqual("Pass");
         }
 
@@ -62,10 +48,10 @@ namespace Simple.Owin.Tests
         public void ParseSingleEncoded() {
             FormData form;
             using (var input = new MemoryStream(Encoding.UTF8.GetBytes("Test=Pass%20Encoded"))) {
-                form = FormData.Parse(input)
+                form = FormData.ParseUrlEncoded(input)
                                .Result;
             }
-            form.Count.ShouldEqual(1);
+            form.Values.Count.ShouldEqual(1);
             form["Test"].ShouldEqual("Pass Encoded");
         }
     }
