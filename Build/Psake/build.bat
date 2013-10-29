@@ -1,8 +1,5 @@
 @echo off
-if "%~1"=="" (
-	echo No task specified, defaulting to 'Build'
-	set task=Build
-) else (
-	set task=%1
-)
-powershell.exe -noexit -ExecutionPolicy unrestricted -Command "invoke-psake .\build.ps1 %task%" 
+
+powershell.exe -NoProfile -ExecutionPolicy unrestricted -Command "& {Import-Module .\psake.psm1; Invoke-psake .\build_script.ps1 Build;}" 
+
+Pause
