@@ -130,12 +130,12 @@ Task PackageSources { #-depends Build {
 				@{
 					"SourceDir" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.0\")
 					"Project" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.0\$PackageId [F40].csproj")
-					"StageDir" = [System.IO.Path]::GetFullPath("$sourceStage\content\net40\App_Package\$packageId.$version\")
+					"StageDir" = [System.IO.Path]::GetFullPath("$sourceStage\content\net40\App_Packages\$packageId.$version\")
 				},
 				@{
 					"SourceDir" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.5\")
 					"Project" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.5\$PackageId [F45].csproj")
-					"StageDir" = [System.IO.Path]::GetFullPath("$sourceStage\content\net45\App_Package\$packageId.$version\")
+					"StageDir" = [System.IO.Path]::GetFullPath("$sourceStage\content\net45\App_Packages\$packageId.$version\")
 				}
 			)
 			foreach ($framework in $frameworks) {
