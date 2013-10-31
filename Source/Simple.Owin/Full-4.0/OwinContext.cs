@@ -16,6 +16,16 @@ namespace Simple.Owin
         private readonly OwinRequest _request;
         private readonly OwinResponse _response;
 
+        static OwinContext()
+        {
+            var assemblyName = Assembly.GetExecutingAssembly().GetName();
+            ContextKey = string.Format("{0}.{1}",
+                                       OwinKeys.Simple.Context,
+                                       assemblyName.Name == "Simple.Owin" 
+                                           ? assemblyName.Version.ToString(3)
+                                           : assemblyName.Name);
+        }
+
         private OwinContext(IDictionary<string, object> environment) {
             if (environment == null) {
                 throw new ArgumentNullException("environment");
@@ -132,11 +142,7 @@ namespace Simple.Owin
             return _environment.GetEnumerator();
         }
 
-        private static readonly string ContextKey = string.Format("{0}.{1}",
-                                                                  OwinKeys.Simple.Context,
-                                                                  Assembly.GetExecutingAssembly()
-                                                                          .GetName()
-                                                                          .Version.ToString(3));
+        private static readonly string ContextKey;
 
         public static OwinContext Get(IDictionary<string, object> environment = null) {
             environment = environment ?? OwinFactory.CreateEnvironment();
