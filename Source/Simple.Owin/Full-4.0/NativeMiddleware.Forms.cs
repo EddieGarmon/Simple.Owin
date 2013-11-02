@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace Simple.Owin
 {
-    using AppFunc = Func<IDictionary<string, object>, Task>;
     using MiddlewareFunc = Func<IDictionary<string, object>, Func<IDictionary<string, object>, Task>, Task>;
 
-    public static class NativeMiddleware
+    public static partial class NativeMiddleware
     {
         private static readonly Regex MultipartRegex = new Regex(@"multipart/form-data;\s*boundary=(""?)(\w+)\1\s*$",
                                                                  RegexOptions.Compiled | RegexOptions.IgnoreCase);

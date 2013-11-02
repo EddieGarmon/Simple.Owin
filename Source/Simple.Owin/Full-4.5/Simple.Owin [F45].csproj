@@ -145,8 +145,11 @@
     <Compile Include="..\Full-4.0\IResponseHeaders.cs">
       <Link>IResponseHeaders.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\NativeMiddleware.cs">
-      <Link>NativeMiddleware.cs</Link>
+    <Compile Include="..\Full-4.0\NativeMiddleware.DumpContext.cs">
+      <Link>NativeMiddleware.DumpContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Full-4.0\NativeMiddleware.Forms.cs">
+      <Link>NativeMiddleware.Forms.cs</Link>
     </Compile>
     <Compile Include="..\Full-4.0\OwinContext.cs">
       <Link>OwinContext.cs</Link>

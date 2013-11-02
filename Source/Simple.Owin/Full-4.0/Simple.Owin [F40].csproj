@@ -44,6 +44,7 @@
     <Compile Include="AppPipeline\Pipeline.cs" />
     <Compile Include="CacheLevel.cs" />
     <Compile Include="CacheOptions.cs" />
+    <Compile Include="NativeMiddleware.DumpContext.cs" />
     <Compile Include="Extensions\Dictionaries\HeaderExtensions.cs" />
     <Compile Include="Extensions\Reflection\ReflectionExtensions.cs" />
     <Compile Include="Extensions\Streams\MemoryStreamExtensions.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="IRequestHeaders.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="IResponseHeaders.cs" />
-    <Compile Include="NativeMiddleware.cs" />
+    <Compile Include="NativeMiddleware.Forms.cs" />
     <Compile Include="OwinContext.cs" />
     <Compile Include="HttpHeaders.cs" />
     <Compile Include="OwinFactory.cs" />

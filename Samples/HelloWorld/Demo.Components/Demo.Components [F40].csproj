@@ -34,7 +34,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DumpContext.cs" />
     <Compile Include="IdentityManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SayHello.cs" />
