@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Streams;
 using Simple.Owin.Helpers;
 
 namespace Simple.Owin.Servers.TcpServer

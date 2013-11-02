@@ -7,7 +7,7 @@
     <ProjectGuid>{779C6B00-64F7-4E7B-BFC0-32C56E46D7FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Simple.Owin.Tests</RootNamespace>
+    <RootNamespace>Simple.Owin</RootNamespace>
     <AssemblyName>Simple.Owin.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -45,8 +45,11 @@
     <Compile Include="..\..\Simple.Owin\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="FormDataTests.cs" />
-    <Compile Include="NaiveSendFileTests.cs" />
+    <Compile Include="Extensions\Streams\StreamExtensionTests.cs" />
+    <Compile Include="FormDataMultipartTests.cs" />
+    <Compile Include="FormDataMiddlewareTests.cs" />
+    <Compile Include="FormDataUrlEncodedTests.cs" />
+    <Compile Include="SendFileNaiveTests.cs" />
     <Compile Include="PathMappingTests.cs" />
     <Compile Include="QueryStringTests.cs" />
   </ItemGroup>

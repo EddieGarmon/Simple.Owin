@@ -2,7 +2,7 @@
 
 using XunitShould;
 
-namespace Simple.Owin.Tests
+namespace Simple.Owin
 {
     public class PathMappingTests
     {

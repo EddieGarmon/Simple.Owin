@@ -10,10 +10,7 @@ namespace Simple.Owin
     /// </summary>
     public interface IRequest
     {
-        /// <summary>
-        /// Gets the list of uploaded files.
-        /// </summary>
-        IEnumerable<IPostedFile> Files { get; }
+        FormData FormData { get; set; }
 
         /// <summary>
         /// Gets the URL.
@@ -49,8 +46,6 @@ namespace Simple.Owin
         string Scheme { get; }
 
         IPrincipal User { get; set; }
-
-        FormData FormData { get; set; }
 
         IEnumerable<HttpCookie> GetCookies();
     }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using Demo.Components;
 
+using Simple.Owin;
 using Simple.Owin.AppPipeline;
 using Simple.Owin.Hosting;
 using Simple.Owin.Hosting.TraceOutput;
@@ -46,7 +47,7 @@ namespace Demo.OnTcpServer
             // but this in not yet specified, framework specific?
 
             // 5. Build and set the AppFunc
-            AppFunc app = Pipeline.Use(DumpContext.Middleware)
+            AppFunc app = Pipeline.Use(NativeMiddleware.DumpContext)
                                   .Use(IdentityManagement.Middleware)
                                   .Use(SayHello.App);
             owinHost.SetAppFunc(app);
@@ -59,7 +60,7 @@ namespace Demo.OnTcpServer
         }
 
         private static void UseSelfHost() {
-            AppFunc app = Pipeline.Use(DumpContext.Middleware)
+            AppFunc app = Pipeline.Use(NativeMiddleware.DumpContext)
                                   .Use(IdentityManagement.Middleware)
                                   .Use(SayHello.App);
 

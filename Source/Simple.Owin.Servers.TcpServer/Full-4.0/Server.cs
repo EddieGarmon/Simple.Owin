@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Dictionaries;
 using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
 

@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Simple.Owin;
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Streams;
 using Simple.Owin.Helpers;
 
-namespace Demo.Components
+namespace Simple.Owin
 {
     using MiddlewareFunc = Func<IDictionary<string, object>, Func<IDictionary<string, object>, Task>, Task>;
 
-    public static class DumpContext
+    public static partial class NativeMiddleware
     {
-        public static MiddlewareFunc Middleware {
+        public static MiddlewareFunc DumpContext {
             get {
                 return (environment, next) => {
                            next(environment)
@@ -29,7 +28,7 @@ namespace Demo.Components
 
         private static string BuildHtmlTable(OwinContext context) {
             var builder = new StringBuilder();
-            builder.Append("<table><tr><th>Key</th><th>Value</th></tr>");
+            builder.Append("<table border='1'><tr><th>Key</th><th>Value</th></tr>");
             List<string> keys = context.Environment.Keys.OrderBy(key => key)
                                        .ToList();
             foreach (var key in keys) {
