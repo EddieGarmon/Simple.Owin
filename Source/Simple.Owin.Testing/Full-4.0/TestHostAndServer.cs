@@ -32,7 +32,7 @@ namespace Simple.Owin.Testing
 
         public TestHostAndServer(MiddlewareFunc middleware, AppFunc next = null, IEnumerable<IOwinHostService> hostServices = null) {
             _host = BuildHost(hostServices);
-            _host.SetApp(environment => middleware(environment, next));
+            _host.SetApp(environment => middleware(environment, next ?? Pipeline.ReturnDone));
         }
 
         public TestHostAndServer(Pipeline pipeline, IEnumerable<IOwinHostService> hostServices = null) {

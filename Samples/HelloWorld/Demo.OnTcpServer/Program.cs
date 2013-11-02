@@ -19,7 +19,7 @@ namespace Demo.OnTcpServer
         private static Pipeline BuildPipeline() {
             var pipeline = new Pipeline();
             pipeline.Use(NativeMiddleware.PrintExceptions)
-                    .Use(NativeMiddleware.DumpEnvironment)
+                    .Use(NativeMiddleware.DumpOwinEnvironment)
                     .Use(IdentityManagement.Middleware)
                     .Use(SayHello.App);
             return pipeline;

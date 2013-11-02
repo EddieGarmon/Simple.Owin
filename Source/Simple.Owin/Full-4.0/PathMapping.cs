@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Reflection;
 
 namespace Simple.Owin
 {

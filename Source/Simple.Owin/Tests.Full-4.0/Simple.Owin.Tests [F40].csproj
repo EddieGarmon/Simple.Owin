@@ -46,8 +46,11 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AppPipeline\PipelineTests.cs" />
-    <Compile Include="FormDataTests.cs" />
-    <Compile Include="NaiveSendFileTests.cs" />
+    <Compile Include="Extensions\Streams\StreamExtensionTests.cs" />
+    <Compile Include="FormDataMultipartTests.cs" />
+    <Compile Include="FormDataMiddlewareTests.cs" />
+    <Compile Include="FormDataUrlEncodedTests.cs" />
+    <Compile Include="SendFileNaiveTests.cs" />
     <Compile Include="PathMappingTests.cs" />
     <Compile Include="QueryStringTests.cs" />
   </ItemGroup>
