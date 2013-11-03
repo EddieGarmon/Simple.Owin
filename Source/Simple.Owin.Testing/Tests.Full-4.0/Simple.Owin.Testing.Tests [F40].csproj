@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{779C6B00-64F7-4E7B-BFC0-32C56E46D7FE}</ProjectGuid>
+    <ProjectGuid>{B4FBA094-290E-4CEF-8951-FD4220C33A8D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Simple.Owin</RootNamespace>
-    <AssemblyName>Simple.Owin.Tests</AssemblyName>
+    <RootNamespace>Simple.Owin.Testing</RootNamespace>
+    <AssemblyName>Simple.Owin.Testing.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,46 +32,36 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="xunit, Version=1.9.1.1600, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
       <HintPath>..\..\..\Build\PackageDependencies\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="XunitShould, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="XunitShould">
       <HintPath>..\..\..\Build\PackageDependencies\XunitShould.3.0.0\lib\net35\XunitShould.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Simple.Owin\AssemblyInfo.cs">
+    <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AppPipeline\ControlComponentTests.cs" />
-    <Compile Include="AppPipeline\PipelineTests.cs" />
-    <Compile Include="Extensions\Streams\StreamExtensionTests.cs" />
-    <Compile Include="FormDataMultipartTests.cs" />
-    <Compile Include="FormDataMiddlewareTests.cs" />
-    <Compile Include="FormDataUrlEncodedTests.cs" />
-    <Compile Include="SendFileNaiveTests.cs" />
-    <Compile Include="PathMappingTests.cs" />
-    <Compile Include="QueryStringTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Simple.Owin.Testing\Full-4.0\Simple.Owin.Testing [F40].csproj">
-      <Project>{CD8D694E-7CFB-41F6-B8AE-B07A4559A377}</Project>
-      <Name>Simple.Owin.Testing [F40]</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
-      <Project>{7DAA1ED5-1E87-4110-B3ED-795BEE0BB0E8}</Project>
-      <Name>Simple.Owin [F40]</Name>
-    </ProjectReference>
+    <Compile Include="TestHostAndServerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\NaiveSendFileData.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\..\Simple.Owin\Full-4.0\Simple.Owin [F40].csproj">
+      <Project>{7DAA1ED5-1E87-4110-B3ED-795BEE0BB0E8}</Project>
+      <Name>Simple.Owin [F40]</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Full-4.0\Simple.Owin.Testing [F40].csproj">
+      <Project>{CD8D694E-7CFB-41F6-B8AE-B07A4559A377}</Project>
+      <Name>Simple.Owin.Testing [F40]</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,6 +10,11 @@ namespace Simple.Owin
     /// </summary>
     public interface IRequest
     {
+        /// <summary>
+        /// Gets the input body stream.
+        /// </summary>
+        Stream Body { get; }
+
         FormData FormData { get; set; }
 
         /// <summary>
@@ -21,11 +26,6 @@ namespace Simple.Owin
         /// Gets the request headers.
         /// </summary>
         IRequestHeaders Headers { get; }
-
-        /// <summary>
-        /// Gets the input stream.
-        /// </summary>
-        Stream Input { get; }
 
         /// <summary>
         /// Gets the HTTP method.

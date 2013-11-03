@@ -23,6 +23,11 @@ namespace Simple.Owin
             _headers = new OwinRequestHeaders(headers);
         }
 
+        public Stream Body {
+            get { return _environment.GetValue<Stream>(OwinKeys.Request.Body); }
+            set { _environment.SetValue(OwinKeys.Request.Body, value); }
+        }
+
         public FormData FormData {
             get { return _environment.GetValueOrDefault<FormData>(OwinKeys.Simple.Form); }
             set { _environment.SetValue(OwinKeys.Simple.Form, value); }
@@ -46,11 +51,6 @@ namespace Simple.Owin
 
         public OwinRequestHeaders Headers {
             get { return _headers; }
-        }
-
-        public Stream Input {
-            get { return _environment.GetValue<Stream>(OwinKeys.Request.Body); }
-            set { _environment.SetValue(OwinKeys.Request.Body, value); }
         }
 
         public string Method {

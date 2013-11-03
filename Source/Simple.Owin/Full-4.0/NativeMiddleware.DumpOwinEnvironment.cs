@@ -13,7 +13,7 @@ namespace Simple.Owin
 
     public static partial class NativeMiddleware
     {
-        public static MiddlewareFunc DumpContext {
+        public static MiddlewareFunc DumpOwinEnvironment {
             get {
                 return (environment, next) => {
                            next(environment)

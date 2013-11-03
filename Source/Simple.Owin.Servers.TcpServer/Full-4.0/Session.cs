@@ -110,7 +110,7 @@ namespace Simple.Owin.Servers.TcpServer
 
                 _keepAlive = (_httpVer == "1.0" && _context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Keep-Alive", false)) ||
                              !_context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Close", false);
-                _context.Request.Input = _networkStream;
+                _context.Request.Body = _networkStream;
                 _context.Response.Body = _output;
 
                 // handle 100-continue
