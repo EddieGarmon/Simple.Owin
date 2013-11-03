@@ -45,6 +45,7 @@
     <Compile Include="..\..\Simple.Owin\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AppPipeline\ControlComponentTests.cs" />
     <Compile Include="AppPipeline\PipelineTests.cs" />
     <Compile Include="Extensions\Streams\StreamExtensionTests.cs" />
     <Compile Include="FormDataMultipartTests.cs" />

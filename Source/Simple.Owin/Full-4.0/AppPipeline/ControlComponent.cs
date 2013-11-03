@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Simple.Owin.Helpers;
@@ -38,30 +37,6 @@ namespace Simple.Owin.AppPipeline
             _match = match;
         }
 
-        public void IsGet(string pathRegex, AppFunc appFunc, SetupAction setup = null) {
-            IsGet(pathRegex, new DelegateComponent((env, _) => appFunc(env), setup));
-        }
-
-        public void IsGet(string pathRegex, MiddlewareFunc middlewareFunc, SetupAction setup = null) {
-            IsGet(pathRegex, new DelegateComponent(middlewareFunc, setup));
-        }
-
-        public void IsGet(string pathRegex, IPipeline pipeline) {
-            IsGet(pathRegex, new NestedPipeline(pipeline));
-        }
-
-        public void IsGet(string pathRegex, IPipelineComponent handler) {
-            var pathMatcher = new Regex(pathRegex);
-            _options.Add(new ControlOption(env => {
-                                               var context = OwinContext.Get(env);
-                                               if (context.Request.Method != "GET") {
-                                                   return false;
-                                               }
-                                               return pathMatcher.IsMatch(context.Request.Path);
-                                           },
-                                           handler));
-        }
-
         public void When(Func<Env, bool> shouldHandle, AppFunc appFunc, SetupAction setup = null) {
             When(shouldHandle, new DelegateComponent((env, _) => appFunc(env), setup));
         }
@@ -80,8 +55,10 @@ namespace Simple.Owin.AppPipeline
 
         void IPipelineComponent.Connect(AppFunc next) {
             _next = next;
-            foreach (var option in _options) {
-                option.Handler.Connect(_next);
+            if (_match == Match.First) {
+                foreach (var option in _options) {
+                    option.Handler.Connect(_next);
+                }
             }
         }
 
@@ -94,7 +71,6 @@ namespace Simple.Owin.AppPipeline
                     }
                     return _next(requestEnvironment);
                 case Match.All:
-                    //should do all, then next one time after all options complete
                     var tasks = _options.Where(o => o.ShouldDo(requestEnvironment))
                                         .Select(o => o.Handler.Execute(requestEnvironment))
                                         .ToArray();
@@ -103,23 +79,15 @@ namespace Simple.Owin.AppPipeline
                             Task.WaitAll(tasks,
                                          OwinContext.Get(requestEnvironment)
                                                     .CancellationToken);
-
-                            return TaskHelper.Completed();
                         }
                         catch (Exception ex) {
                             return TaskHelper.Exception(ex);
                         }
                     }
-                    break;
+                    return _next(requestEnvironment);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            //build list op matched option tasks
-            //Task.WaitAll(null, );
-            //return when all
-            // ?set cancel on first error?
-            throw new NotImplementedException();
         }
 
         void IPipelineComponent.Setup(Env hostEnvironment) {

@@ -19,13 +19,13 @@ namespace Simple.Owin
                            //check for POST?
                            var contentType = owinContext.Request.Headers.ContentType;
                            if (contentType == FormData.GetUrlEncodedContentType()) {
-                               owinContext.Request.FormData = FormData.ParseUrlEncoded(owinContext.Request.Input)
+                               owinContext.Request.FormData = FormData.ParseUrlEncoded(owinContext.Request.Body)
                                                                       .Result;
                            }
                            else {
                                var match = MultipartRegex.Match(contentType);
                                if (match.Success) {
-                                   owinContext.Request.FormData = FormData.ParseMultipart(owinContext.Request.Input, match.Groups[2].Value)
+                                   owinContext.Request.FormData = FormData.ParseMultipart(owinContext.Request.Body, match.Groups[2].Value)
                                                                           .Result;
                                }
                            }

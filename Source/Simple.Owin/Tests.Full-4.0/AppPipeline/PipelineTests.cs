@@ -10,12 +10,6 @@ namespace Simple.Owin.AppPipeline
 {
     public class PipelineTests
     {
-        [Fact(Skip = "Not Finished")]
-        public void BuildControlPipeline() {
-            var pipeline = new Pipeline();
-            pipeline.First(c => c.IsGet("/", env => TaskHelper.Completed()));
-        }
-
         [Fact]
         public void BuildsInCorrectOrder() {
             var pipeline = new Pipeline();

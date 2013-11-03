@@ -43,6 +43,9 @@
     <Compile Include="..\Full-4.0\AppPipeline\ControlComponent.cs">
       <Link>AppPipeline\ControlComponent.cs</Link>
     </Compile>
+    <Compile Include="..\Full-4.0\AppPipeline\ControlComponentExtensions.cs">
+      <Link>AppPipeline\ControlComponentExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Full-4.0\AppPipeline\DelegateComponent.cs">
       <Link>AppPipeline\DelegateComponent.cs</Link>
     </Compile>

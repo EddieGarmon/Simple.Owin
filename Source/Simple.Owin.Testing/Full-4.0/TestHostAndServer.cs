@@ -57,7 +57,7 @@ namespace Simple.Owin.Testing
             context.Request.FullUri = request.Url;
             context.Request.Protocol = request.RequestLine.HttpVersion;
             context.Request.Headers.MergeIn(request.Headers);
-            context.Request.Input = request.Body != null ? new MemoryStream(request.Body, false) : Stream.Null;
+            context.Request.Body = request.Body != null ? new MemoryStream(request.Body, false) : Stream.Null;
 
             context.Response.Body = new MemoryStream();
 
