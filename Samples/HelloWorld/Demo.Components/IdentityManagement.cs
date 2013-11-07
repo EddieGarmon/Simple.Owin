@@ -10,7 +10,7 @@ namespace Demo.Components
 {
     using MiddlewareFunc = Func<IDictionary<string, object>, Func<IDictionary<string, object>, Task>, Task>;
 
-    public class IdentityManagement
+    public static class IdentityManagement
     {
         public static MiddlewareFunc Middleware {
             get {

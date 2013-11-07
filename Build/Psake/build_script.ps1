@@ -109,8 +109,11 @@ Task PackageSources { #-depends Build {
 			$metadata = $package.Element("metadata")
 			$packageId = $metadata.Element("id").Value
 			$version = $metadata.Element("version").Value
+			
 			$metadata.Element("id").Value = $packageId + ".Sources"
-			$depends = $metadata.Element("dependencies");
+			$metadata.Element("title").Value += " (Source)"
+			
+			$depends = $metadata.Element("dependencies")
 			if ($depends) {
 				foreach ($dependency in $depends.Elements("dependency")) {
 					$dependencyId = $dependency.Attribute("id")
@@ -142,7 +145,7 @@ Task PackageSources { #-depends Build {
 				if (!(Test-Path $framework.SourceDir)) {
 					continue
 				}
-				$project = [System.Xml.Linq.XElement]::Load($framework.Project);
+				$project = [System.Xml.Linq.XElement]::Load($framework.Project)
 				foreach ($compile in $project.Descendants($compileName)) {
 					$from = $compile.Attribute("Include").Value
 					if ($from.EndsWith("AssemblyInfo.cs")) {

@@ -40,32 +40,36 @@
     <Compile Include="..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AppPipeline\ControlComponentExtensions.cs" />
-    <Compile Include="AppPipeline\IPipeline.cs" />
-    <Compile Include="AppPipeline\PipelineExtensions.cs" />
-    <Compile Include="Helpers\IFluentApi.cs" />
-    <Compile Include="NativeMiddleware.PrintExceptions.cs" />
-    <Compile Include="UsingAliases.cs" />
     <Compile Include="AppPipeline\ControlComponent.cs" />
+    <Compile Include="AppPipeline\ControlComponentExtensions.cs" />
     <Compile Include="AppPipeline\DelegateComponent.cs" />
-    <Compile Include="AppPipeline\IPipelineComponent.cs" />
-    <Compile Include="AppPipeline\Pipeline.cs" />
-    <Compile Include="CacheLevel.cs" />
-    <Compile Include="CacheOptions.cs" />
-    <Compile Include="NativeMiddleware.DumpOwinEnvironment.cs" />
+    <Compile Include="AppPipeline\IPipeline.cs" />
+    <Compile Include="AppPipeline\IPipelineBuilder.cs" />
+    <Compile Include="AppPipeline\PipelineExtensions.cs" />
+    <Compile Include="Extensions\Dictionaries\DictionaryExtensions.cs" />
     <Compile Include="Extensions\Dictionaries\HeaderExtensions.cs" />
     <Compile Include="Extensions\Reflection\ReflectionExtensions.cs" />
     <Compile Include="Extensions\Streams\MemoryStreamExtensions.cs" />
     <Compile Include="Extensions\Streams\StreamExtensions.cs" />
+    <Compile Include="Extensions\Streams\StreamExtensions.F40.cs" />
     <Compile Include="Extensions\Tasks\TaskExtensions.cs" />
     <Compile Include="FormData.cs" />
+    <Compile Include="Helpers\IFluentApi.cs" />
+    <Compile Include="HttpHeaderLine.cs" />
+    <Compile Include="NativeMiddleware.DumpOwinEnvironment.cs" />
+    <Compile Include="NativeMiddleware.Forms.cs" />
+    <Compile Include="NativeMiddleware.PrintExceptions.cs" />
+    <Compile Include="SendFileNaive.cs" />
+    <Compile Include="UsingAliases.cs" />
+    <Compile Include="AppPipeline\IPipelineComponent.cs" />
+    <Compile Include="AppPipeline\Pipeline.cs" />
+    <Compile Include="CacheLevel.cs" />
+    <Compile Include="CacheOptions.cs" />
     <Compile Include="Hosting\Trace\MultiTextWriter.cs" />
     <Compile Include="Hosting\Trace\ConsoleOutput.cs" />
     <Compile Include="Hosting\Trace\NullTextWriter.cs" />
     <Compile Include="Hosting\Trace\StringOutput.cs" />
     <Compile Include="HttpCookie.cs" />
-    <Compile Include="Extensions\Dictionaries\DictionaryExtensions.cs" />
-    <Compile Include="Extensions\Streams\StreamExtensions.F40.cs" />
     <Compile Include="Helpers\Disposable.cs" />
     <Compile Include="Helpers\TaskHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
@@ -75,7 +79,6 @@
     <Compile Include="Hosting\OwinHost.cs" />
     <Compile Include="Hosting\OwinHostState.cs" />
     <Compile Include="HttpHeaderKeys.cs" />
-    <Compile Include="HttpHeaderLine.cs" />
     <Compile Include="HttpRequestLine.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="IHttpHeaders.cs" />
@@ -84,7 +87,6 @@
     <Compile Include="IRequestHeaders.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="IResponseHeaders.cs" />
-    <Compile Include="NativeMiddleware.Forms.cs" />
     <Compile Include="OwinContext.cs" />
     <Compile Include="HttpHeaders.cs" />
     <Compile Include="OwinFactory.cs" />
@@ -96,10 +98,8 @@
     <Compile Include="OwinResponseHeaders.cs" />
     <Compile Include="PathMapping.cs" />
     <Compile Include="QueryString.cs" />
-    <Compile Include="SendFileNaive.cs" />
     <Compile Include="Status.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
