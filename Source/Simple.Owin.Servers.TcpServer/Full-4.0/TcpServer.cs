@@ -10,9 +10,9 @@ using Simple.Owin.Extensions.Dictionaries;
 using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
 
-namespace Simple.Owin.Servers.TcpServer
+namespace Simple.Owin.Servers.Tcp
 {
-    public sealed class Server : IOwinServer
+    public sealed class TcpServer : IOwinServer
     {
         private readonly IPAddress _listenAddress;
         private readonly int _listenPort;
@@ -20,7 +20,7 @@ namespace Simple.Owin.Servers.TcpServer
         private Func<IDictionary<string, object>, Task> _appFunc;
         private IDictionary<string, object> _environment;
 
-        public Server(IPAddress address = null, int? port = null) {
+        public TcpServer(IPAddress address = null, int? port = null) {
             _listenAddress = address ?? Localhost;
             _listenPort = port ?? 80;
             _listener = new TcpListener(_listenAddress, _listenPort);
@@ -62,7 +62,7 @@ namespace Simple.Owin.Servers.TcpServer
                 return;
             }
             _listener.BeginAcceptSocket(AcceptCallback, null);
-            var session = new Session(_environment, _appFunc, socket);
+            var session = new TcpSession(_environment, _appFunc, socket);
             session.ProcessRequest()
                    .ContinueWith(task => {
                                      if (task.IsFaulted) {

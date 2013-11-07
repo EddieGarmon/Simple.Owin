@@ -7,7 +7,7 @@
     <ProjectGuid>{D906E2CC-07B0-45D0-95F0-8ABF7999B787}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Simple.Owin.Servers.TcpServer</RootNamespace>
+    <RootNamespace>Simple.Owin.Servers.Tcp</RootNamespace>
     <AssemblyName>Simple.Owin.Servers.TcpServer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,11 +41,11 @@
     <Compile Include="..\Full-4.0\SelfHost.cs">
       <Link>SelfHost.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\Server.cs">
-      <Link>Server.cs</Link>
+    <Compile Include="..\Full-4.0\TcpServer.cs">
+      <Link>TcpServer.cs</Link>
     </Compile>
-    <Compile Include="..\Full-4.0\Session.cs">
-      <Link>Session.cs</Link>
+    <Compile Include="..\Full-4.0\TcpSession.cs">
+      <Link>TcpSession.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

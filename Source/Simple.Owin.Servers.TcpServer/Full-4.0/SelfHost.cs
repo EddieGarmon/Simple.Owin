@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Simple.Owin.AppPipeline;
 using Simple.Owin.Hosting;
 
-namespace Simple.Owin.Servers.TcpServer
+namespace Simple.Owin.Servers.Tcp
 {
     public static class SelfHost
     {
@@ -35,7 +35,7 @@ namespace Simple.Owin.Servers.TcpServer
                     host.AddHostService(hostService);
                 }
             }
-            host.SetServer(new Server(address, port));
+            host.SetServer(new TcpServer(address, port));
             return host;
         }
     }

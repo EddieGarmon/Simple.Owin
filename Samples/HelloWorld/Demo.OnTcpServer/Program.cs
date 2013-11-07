@@ -8,7 +8,7 @@ using Simple.Owin;
 using Simple.Owin.AppPipeline;
 using Simple.Owin.Hosting;
 using Simple.Owin.Hosting.Trace;
-using Simple.Owin.Servers.TcpServer;
+using Simple.Owin.Servers.Tcp;
 
 namespace Demo.OnTcpServer
 {
@@ -50,15 +50,13 @@ namespace Demo.OnTcpServer
             owinHost.AddHostService(new ConsoleOutput());
 
             // 3. Set the server to use
-            owinHost.SetServer(new Server(port: 1337));
+            owinHost.SetServer(new TcpServer(port: 1337));
 
-            // 4. Pass environment to app setup
-            // but this in not yet specified, framework specific?
-
-            // 5. Build and set the AppFunc
+            // 4. Pass Pipeline or AppFunc to host.
+            // Host will call back into Pipeline to execute setup
             owinHost.SetApp(BuildPipeline());
-
-            // 6. Run the host, consume yourself
+            
+            // 5. Run the host, consume yourself
             using (owinHost.Run()) {
                 Console.WriteLine("Listening on port 1337. Enter to exit.");
                 Console.ReadLine();

@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Simple.Owin.Extensions.Streams;
 using Simple.Owin.Helpers;
 
-namespace Simple.Owin.Servers.TcpServer
+namespace Simple.Owin.Servers.Tcp
 {
-    internal class Session : IDisposable
+    internal class TcpSession : IDisposable
     {
         private readonly Func<IDictionary<string, object>, Task> _appFunc;
         private readonly TaskCompletionSource<int> _sessionCompleted = new TaskCompletionSource<int>();
@@ -27,7 +27,7 @@ namespace Simple.Owin.Servers.TcpServer
         private MemoryStream _output;
         private Socket _socket;
 
-        public Session(IDictionary<string, object> owinEnvironment, Func<IDictionary<string, object>, Task> appFunc, Socket socket) {
+        public TcpSession(IDictionary<string, object> owinEnvironment, Func<IDictionary<string, object>, Task> appFunc, Socket socket) {
             _sessionEnvironment = OwinFactory.CreateScopedEnvironment(owinEnvironment);
             _appFunc = appFunc;
             _socket = socket;
