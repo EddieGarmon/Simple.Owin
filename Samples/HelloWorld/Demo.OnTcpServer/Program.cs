@@ -6,6 +6,7 @@ using Demo.Components;
 
 using Simple.Owin;
 using Simple.Owin.AppPipeline;
+using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
 using Simple.Owin.Hosting.Trace;
 using Simple.Owin.Servers.Tcp;
@@ -21,6 +22,12 @@ namespace Demo.OnTcpServer
             pipeline.Use(NativeMiddleware.PrintExceptions)
                     .Use(NativeMiddleware.DumpOwinEnvironment)
                     .Use(IdentityManagement.Middleware)
+                    .Use((env, next) => {
+                             var context = OwinContext.Get(env);
+                             return context.Request.Path.StartsWith("/throw")
+                                        ? TaskHelper.Exception(new Exception("This is intentional!"))
+                                        : next(env);
+                         })
                     .Use(SayHello.App);
             return pipeline;
         }
@@ -55,7 +62,7 @@ namespace Demo.OnTcpServer
             // 4. Pass Pipeline or AppFunc to host.
             // Host will call back into Pipeline to execute setup
             owinHost.SetApp(BuildPipeline());
-            
+
             // 5. Run the host, consume yourself
             using (owinHost.Run()) {
                 Console.WriteLine("Listening on port 1337. Enter to exit.");
