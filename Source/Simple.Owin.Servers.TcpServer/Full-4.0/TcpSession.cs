@@ -68,6 +68,8 @@ namespace Simple.Owin.Servers.Tcp
                 _context = OwinContext.Get(requestEnvironment);
                 Trace("Session - Process Request");
 
+                //todo: configure OnSendingHeaders aggregator
+
                 // parse request line
                 HttpRequestLine requestLine = HttpRequestLine.Parse(_networkStream.ReadLine());
                 if (!requestLine.IsValid) {
@@ -214,6 +216,8 @@ namespace Simple.Owin.Servers.Tcp
                 ProcessError(status);
                 return;
             }
+
+            //todo: execute OnSendingHeaders
 
             var headerBuilder = new StringBuilder();
             headerBuilder.Append(status.ToHttp11StatusLine());

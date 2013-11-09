@@ -42,7 +42,7 @@ namespace Simple.Owin
                     if (valueDictionary.Count == 0) {
                         continue;
                     }
-                    builder.Append("<tr><td>&nbsp;</td><td><table><tr><th>Key</th><th>Value</th></tr>");
+                    builder.Append("<tr><td>&nbsp;</td><td><table border='1'><tr><th>Key</th><th>Value</th></tr>");
                     List<string> valueKeys = valueDictionary.Keys.OrderBy(key2 => key2)
                                                             .ToList();
                     foreach (var valueKey in valueKeys) {

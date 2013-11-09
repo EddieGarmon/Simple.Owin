@@ -64,12 +64,20 @@ namespace Simple.Owin
             }
         }
 
+        public void OnSendingHeaders(Action<object> callback, object state) {
+            var serverOnSendingHeaders = _environment.GetValueOrDefault<Action<Action<object>, object>>(OwinKeys.Server.OnSendingHeaders);
+            if (serverOnSendingHeaders == null) {
+                throw new NotSupportedException("The server does not support 'OnSendingHeaders'");
+            }
+            serverOnSendingHeaders(callback, state);
+        }
+
         public void RemoveCookie(string cookieName) {
             _headers.Add(HttpHeaderKeys.SetCookie, string.Format("{0}=; Expires=Thu, 01 Jan 1970 00:00:00 GMT", cookieName));
         }
 
         /// <summary>
-        /// Sets the Cache-Control header and optionally the Expires and Vary headers.
+        /// Sets all headers relative to the specified cache options.
         /// </summary>
         /// <param name="cacheOptions">A <see cref="CacheOptions"/> object to specify the cache settings.</param>
         public void SetCacheOptions(CacheOptions cacheOptions) {
@@ -77,7 +85,9 @@ namespace Simple.Owin
                 return;
             }
             if (cacheOptions.Disable) {
-                _headers.CacheControl = "no-cache; no-store";
+                _headers.CacheControl = "no-cache, no-store, must-revalidate";
+                _headers.Pragma = "no-cache";
+                _headers.Expires = "0";
                 return;
             }
             _headers.CacheControl = cacheOptions.ToHeaderString();

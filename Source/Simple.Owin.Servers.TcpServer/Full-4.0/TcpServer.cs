@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-using Simple.Owin.Extensions.Dictionaries;
 using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
 
@@ -18,7 +16,7 @@ namespace Simple.Owin.Servers.Tcp
         private readonly int _listenPort;
         private readonly TcpListener _listener;
         private Func<IDictionary<string, object>, Task> _appFunc;
-        private IDictionary<string, object> _environment;
+        private OwinHostContext _host;
 
         public TcpServer(IPAddress address = null, int? port = null) {
             _listenAddress = address ?? Localhost;
@@ -31,14 +29,14 @@ namespace Simple.Owin.Servers.Tcp
         }
 
         public void Configure(OwinHostContext host) {
-            _environment = host.Environment;
+            _host = host;
             // configure server functionality
-            _environment.Add(OwinKeys.Owin.Version, "1.0");
+            _host.Version = "1.0";
             // announce features and configuration that middleware and apps can consume
-            _environment.Add(OwinKeys.Server.Name, "localhost");
-            _environment.Add(OwinKeys.Server.LocalIpAddress, _listenAddress.ToString());
-            _environment.Add(OwinKeys.Server.LocalPort, _listenPort.ToString(CultureInfo.InvariantCulture));
-            //_environment.Add(OwinKeys.Server.Capabilities, null);
+            _host.ServerName = "localhost";
+            _host.LocalIpAddress = _listenAddress.ToString();
+            _host.LocalPort = _listenPort.ToString(CultureInfo.InvariantCulture);
+            //_host.Environment.Add(OwinKeys.Server.Capabilities, null);
         }
 
         public void SetAppFunc(Func<IDictionary<string, object>, Task> appFunc) {
@@ -62,7 +60,7 @@ namespace Simple.Owin.Servers.Tcp
                 return;
             }
             _listener.BeginAcceptSocket(AcceptCallback, null);
-            var session = new TcpSession(_environment, _appFunc, socket);
+            var session = new TcpSession(_host.Environment, _appFunc, socket);
             session.ProcessRequest()
                    .ContinueWith(task => {
                                      if (task.IsFaulted) {
@@ -74,7 +72,7 @@ namespace Simple.Owin.Servers.Tcp
         }
 
         private void Trace(string message) {
-            var output = _environment.GetValueOrDefault<TextWriter>(OwinKeys.Host.TraceOutput);
+            var output = _host.TraceOutput;
             if (output != null) {
                 output.WriteLine(message);
             }
