@@ -3,11 +3,13 @@
     <metadata>
         <id>Simple.Owin.Servers.TcpServer</id>
         <version>0.0.0-sv</version>
+        <title>Simple.Owin.Servers.TcpServer</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon</copyright>
         <licenseUrl>https://github.com/EddieGarmon/Simple.Owin/blob/master/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
+        <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A simple tcp socket based server for Simple.Owin</description>
         <summary>A simple tcp socket based server for Simple.Owin</summary>

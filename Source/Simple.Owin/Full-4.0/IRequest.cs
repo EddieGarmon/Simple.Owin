@@ -11,9 +11,11 @@ namespace Simple.Owin
     public interface IRequest
     {
         /// <summary>
-        /// Gets the list of uploaded files.
+        /// Gets the input body stream.
         /// </summary>
-        IEnumerable<IPostedFile> Files { get; }
+        Stream Body { get; }
+
+        FormData FormData { get; set; }
 
         /// <summary>
         /// Gets the URL.
@@ -24,11 +26,6 @@ namespace Simple.Owin
         /// Gets the request headers.
         /// </summary>
         IRequestHeaders Headers { get; }
-
-        /// <summary>
-        /// Gets the input stream.
-        /// </summary>
-        Stream Input { get; }
 
         /// <summary>
         /// Gets the HTTP method.
@@ -49,8 +46,6 @@ namespace Simple.Owin
         string Scheme { get; }
 
         IPrincipal User { get; set; }
-
-        FormData FormData { get; set; }
 
         IEnumerable<HttpCookie> GetCookies();
     }

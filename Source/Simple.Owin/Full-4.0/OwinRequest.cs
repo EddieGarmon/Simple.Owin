@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Principal;
 
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Dictionaries;
 
 namespace Simple.Owin
 {
@@ -23,8 +23,9 @@ namespace Simple.Owin
             _headers = new OwinRequestHeaders(headers);
         }
 
-        public IEnumerable<IPostedFile> Files {
-            get { throw new NotImplementedException(); }
+        public Stream Body {
+            get { return _environment.GetValue<Stream>(OwinKeys.Request.Body); }
+            set { _environment.SetValue(OwinKeys.Request.Body, value); }
         }
 
         public FormData FormData {
@@ -50,11 +51,6 @@ namespace Simple.Owin
 
         public OwinRequestHeaders Headers {
             get { return _headers; }
-        }
-
-        public Stream Input {
-            get { return _environment.GetValue<Stream>(OwinKeys.Request.Body); }
-            set { _environment.SetValue(OwinKeys.Request.Body, value); }
         }
 
         public string Method {

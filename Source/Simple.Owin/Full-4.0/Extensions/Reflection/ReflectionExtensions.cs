@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Simple.Owin.Extensions
+namespace Simple.Owin.Extensions.Reflection
 {
     public static class ReflectionExtensions
     {

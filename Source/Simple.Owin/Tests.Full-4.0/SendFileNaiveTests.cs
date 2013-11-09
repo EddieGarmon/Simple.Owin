@@ -1,14 +1,14 @@
 ﻿using System.IO;
 
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Streams;
 
 using Xunit;
 
 using XunitShould;
 
-namespace Simple.Owin.Tests
+namespace Simple.Owin
 {
-    public class NaiveSendFileTests
+    public class SendFileNaiveTests
     {
         [Fact]
         public void GetFileAll() {

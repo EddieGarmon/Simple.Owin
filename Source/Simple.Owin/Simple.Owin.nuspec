@@ -3,11 +3,13 @@
     <metadata>
         <id>Simple.Owin</id>
         <version>0.0.0-sv</version>
+        <title>Simple.Owin</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon, Mark Rendle</copyright>
         <licenseUrl>https://github.com/EddieGarmon/Simple.Owin/blob/master/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
+        <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An OWIN middleware and application framework for .NET 4+</description>
         <summary>An OWIN middleware and application framework for .NET 4+</summary>

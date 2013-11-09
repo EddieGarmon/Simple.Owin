@@ -48,6 +48,14 @@ namespace Simple.Owin.Testing
             return this;
         }
 
+        public TestRequest WithFile(string name, string localPath) {
+            throw new NotImplementedException();
+        }
+
+        public TestRequest WithFormData(string name, string value) {
+            throw new NotImplementedException();
+        }
+
         public TestRequest WithHeader(string name, string value) {
             _headers.Add(name, value);
             return this;

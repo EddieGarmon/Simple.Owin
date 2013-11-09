@@ -2,7 +2,7 @@
 
 namespace Simple.Owin.Helpers
 {
-    public class UrlHelper
+    public static class UrlHelper
     {
         public static string Decode(string value) {
             value = value.Replace("+", " ");

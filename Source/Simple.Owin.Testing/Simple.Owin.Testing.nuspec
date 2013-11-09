@@ -3,11 +3,13 @@
     <metadata>
         <id>Simple.Owin.Testing</id>
         <version>0.0.0-sv</version>
+        <title>Simple.Owin.Testing</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon</copyright>
         <licenseUrl>https://github.com/EddieGarmon/Simple.Owin/blob/master/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
+        <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An OWIN testing framework for .NET 4+</description>
         <summary>An OWIN testing framework for .NET 4+</summary>

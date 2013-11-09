@@ -9,12 +9,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Simple.Owin.Extensions;
+using Simple.Owin.Extensions.Streams;
 using Simple.Owin.Helpers;
 
-namespace Simple.Owin.Servers.TcpServer
+namespace Simple.Owin.Servers.Tcp
 {
-    internal class Session : IDisposable
+    internal class TcpSession : IDisposable
     {
         private readonly Func<IDictionary<string, object>, Task> _appFunc;
         private readonly TaskCompletionSource<int> _sessionCompleted = new TaskCompletionSource<int>();
@@ -27,7 +27,7 @@ namespace Simple.Owin.Servers.TcpServer
         private MemoryStream _output;
         private Socket _socket;
 
-        public Session(IDictionary<string, object> owinEnvironment, Func<IDictionary<string, object>, Task> appFunc, Socket socket) {
+        public TcpSession(IDictionary<string, object> owinEnvironment, Func<IDictionary<string, object>, Task> appFunc, Socket socket) {
             _sessionEnvironment = OwinFactory.CreateScopedEnvironment(owinEnvironment);
             _appFunc = appFunc;
             _socket = socket;
@@ -67,6 +67,8 @@ namespace Simple.Owin.Servers.TcpServer
                 var requestEnvironment = OwinFactory.CreateScopedEnvironment(_sessionEnvironment);
                 _context = OwinContext.Get(requestEnvironment);
                 Trace("Session - Process Request");
+
+                //todo: configure OnSendingHeaders aggregator
 
                 // parse request line
                 HttpRequestLine requestLine = HttpRequestLine.Parse(_networkStream.ReadLine());
@@ -110,7 +112,7 @@ namespace Simple.Owin.Servers.TcpServer
 
                 _keepAlive = (_httpVer == "1.0" && _context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Keep-Alive", false)) ||
                              !_context.Request.Headers.ValueIs(HttpHeaderKeys.Connection, "Close", false);
-                _context.Request.Input = _networkStream;
+                _context.Request.Body = _networkStream;
                 _context.Response.Body = _output;
 
                 // handle 100-continue
@@ -214,6 +216,8 @@ namespace Simple.Owin.Servers.TcpServer
                 ProcessError(status);
                 return;
             }
+
+            //todo: execute OnSendingHeaders
 
             var headerBuilder = new StringBuilder();
             headerBuilder.Append(status.ToHttp11StatusLine());

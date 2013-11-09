@@ -65,6 +65,11 @@ namespace Simple.Owin
             set { SetValue(HttpHeaderKeys.Location, value); }
         }
 
+        public string Pragma {
+            get { return GetValue(HttpHeaderKeys.Pragma); }
+            set { SetValue(HttpHeaderKeys.Pragma, value); }
+        }
+
         public string ProxyAuthenticate {
             get { return GetValue(HttpHeaderKeys.ProxyAuthenticate); }
             set { SetValue(HttpHeaderKeys.ProxyAuthenticate, value); }

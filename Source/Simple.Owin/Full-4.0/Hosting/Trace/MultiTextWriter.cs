@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Simple.Owin.Hosting
+namespace Simple.Owin.Hosting.Trace
 {
     public class MultiTextWriter : TextWriter
     {
