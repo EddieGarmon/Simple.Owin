@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCED9231-8374-4DBF-9A2A-4D6B00134656}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace />
+    <AssemblyName>Framework.Full-40</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>obj\Debug\Full-40\</IntermediateOutputPath>
+    <OutputPath>bin\Debug\Full-40\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>obj\Release\Full-40\</IntermediateOutputPath>
+    <OutputPath>bin\Release\Full-40\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\ControlComponent.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\ControlComponentExtensions.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\DelegateComponent.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\IPipeline.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\IPipelineBuilder.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\IPipelineComponent.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\Pipeline.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\PipelineExtensions.cs" />
+    <Compile Include="Simple.Owin.Caching\CacheLevel.cs" />
+    <Compile Include="Simple.Owin.Caching\CacheOptions.cs" />
+    <Compile Include="Simple.Owin.Caching\ResponseExtensions.cs" />
+    <Compile Include="Simple.Owin.Cookies\HttpCookie.cs" />
+    <Compile Include="Simple.Owin.Cookies\ResponseExtensions.cs" />
+    <Compile Include="Simple.Owin.Dump.Context\DumpEnvironmentMiddleware.cs" />
+    <Compile Include="Simple.Owin.Dump.Exceptions\DumpExceptionsMiddleware.cs" />
+    <Compile Include="Simple.Owin.Forms\FormData.cs" />
+    <Compile Include="Simple.Owin.Hosting\IOwinHost.cs" />
+    <Compile Include="Simple.Owin.Hosting\IOwinHostService.cs" />
+    <Compile Include="Simple.Owin.Hosting\IOwinServer.cs" />
+    <Compile Include="Simple.Owin.Hosting\OwinHost.cs" />
+    <Compile Include="Simple.Owin.Hosting\OwinHostContext.cs" />
+    <Compile Include="Simple.Owin.Hosting\OwinHostState.cs" />
+    <Compile Include="Simple.Owin.Hosting\Trace\ConsoleOutput.cs" />
+    <Compile Include="Simple.Owin.Hosting\Trace\MultiTextWriter.cs" />
+    <Compile Include="Simple.Owin.Hosting\Trace\NullTextWriter.cs" />
+    <Compile Include="Simple.Owin.Hosting\Trace\StringOutput.cs" />
+    <Compile Include="Simple.Owin.SendFiles\ContextExtensions.cs" />
+    <Compile Include="Simple.Owin.Testing\TestHostAndServer.cs" />
+    <Compile Include="Simple.Owin.Testing\TestRequest.cs" />
+    <Compile Include="Simple.Owin\IFormData.cs" />
+    <Compile Include="Simple.Owin.Forms\FormsMiddleware.cs" />
+    <Compile Include="Simple.Owin.SendFiles\SendFileNaive.cs" />
+    <Compile Include="Simple.Owin\Helpers\DictionaryExtensions.cs" />
+    <Compile Include="Simple.Owin\Helpers\HeaderExtensions.cs" />
+    <Compile Include="Simple.Owin\Helpers\MemoryStreamExtensions.cs" />
+    <Compile Include="Simple.Owin\Helpers\ReflectionExtensions.cs" />
+    <Compile Include="Simple.Owin\Helpers\StreamExtensions.cs" />
+    <Compile Include="Simple.Owin\Helpers\StreamExtensions.F40.cs" />
+    <Compile Include="Simple.Owin\Helpers\TaskExtensions.cs" />
+    <Compile Include="Simple.Owin\Helpers\Disposable.cs" />
+    <Compile Include="Simple.Owin\Helpers\IFluentApi.cs" />
+    <Compile Include="Simple.Owin\Helpers\TaskHelper.cs" />
+    <Compile Include="Simple.Owin\Helpers\UrlHelper.cs" />
+    <Compile Include="Simple.Owin\HttpHeaderKeys.cs" />
+    <Compile Include="Simple.Owin\HttpHeaderLine.cs" />
+    <Compile Include="Simple.Owin\HttpHeaders.cs" />
+    <Compile Include="Simple.Owin\HttpRequestLine.cs" />
+    <Compile Include="Simple.Owin\IContext.cs" />
+    <Compile Include="Simple.Owin\IHttpHeaders.cs" />
+    <Compile Include="Simple.Owin\IPostedFile.cs" />
+    <Compile Include="Simple.Owin\IRequest.cs" />
+    <Compile Include="Simple.Owin\IRequestHeaders.cs" />
+    <Compile Include="Simple.Owin\IResponse.cs" />
+    <Compile Include="Simple.Owin\IResponseHeaders.cs" />
+    <Compile Include="Simple.Owin\OwinContext.cs" />
+    <Compile Include="Simple.Owin\OwinFactory.cs" />
+    <Compile Include="Simple.Owin\OwinKeys.cs" />
+    <Compile Include="Simple.Owin\OwinRequest.cs" />
+    <Compile Include="Simple.Owin\OwinRequestHeaders.cs" />
+    <Compile Include="Simple.Owin\OwinResponse.cs" />
+    <Compile Include="Simple.Owin\OwinResponseHeaders.cs" />
+    <Compile Include="Simple.Owin\PathMapping.cs" />
+    <Compile Include="Simple.Owin\QueryString.cs" />
+    <Compile Include="Simple.Owin\Status.cs" />
+    <Compile Include="UsingAliases.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

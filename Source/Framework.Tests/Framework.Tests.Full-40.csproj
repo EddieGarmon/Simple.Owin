@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{50D779E5-341D-473F-A054-0606F2D931B4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace />
+    <AssemblyName>Framework.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="xunit">
+      <HintPath>..\..\Build\PackageDependencies\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertContainment.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertEmpty.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertEquality.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertFalse.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertRange.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertReference.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertThrows.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertTrue.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\AssertType.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\Sdk\EnumerableEqualException.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\Sdk\ExceptionComparer.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\Sdk\InRangeException.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\Sdk\NotInRangeException.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\Sdk\RangeException.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\Sdk\XunitException.cs" />
+    <Compile Include="App_Packages\XunitShould.4.0.0\StringComparisonExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\ControlComponentTests.cs" />
+    <Compile Include="Simple.Owin.AppPipeline\PipelineTests.cs" />
+    <Compile Include="Simple.Owin.Forms\FormsMiddlewareTests.cs" />
+    <Compile Include="Simple.Owin.Forms\FormDataMultipartTests.cs" />
+    <Compile Include="Simple.Owin.Forms\FormDataUrlEncodedTests.cs" />
+    <Compile Include="Simple.Owin.SendFiles\SendFileNaiveTests.cs" />
+    <Compile Include="Simple.Owin.Testing\TestHostAndServerTests.cs" />
+    <Compile Include="Simple.Owin\Helpers\StreamExtensionTests.cs" />
+    <Compile Include="Simple.Owin\PathMappingTests.cs" />
+    <Compile Include="Simple.Owin\QueryStringTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.Full-40.csproj">
+      <Project>{DCED9231-8374-4DBF-9A2A-4D6B00134656}</Project>
+      <Name>Framework.Full-40</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Simple.Owin.SendFiles\TestData.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
