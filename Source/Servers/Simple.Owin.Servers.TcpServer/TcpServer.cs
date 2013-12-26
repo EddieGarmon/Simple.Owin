@@ -10,7 +10,7 @@ using Simple.Owin.Hosting;
 
 namespace Simple.Owin.Servers.Tcp
 {
-    public sealed class TcpServer : IOwinServer
+    internal sealed class TcpServer : IOwinServer
     {
         private readonly IPAddress _listenAddress;
         private readonly int _listenPort;

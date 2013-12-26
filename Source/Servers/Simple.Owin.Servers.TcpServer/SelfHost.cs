@@ -8,7 +8,7 @@ using Simple.Owin.Hosting;
 
 namespace Simple.Owin.Servers.Tcp
 {
-    public static class SelfHost
+    internal static class SelfHost
     {
         public static IDisposable App(Func<IDictionary<string, object>, Task> appFunc,
                                       IPAddress address = null,

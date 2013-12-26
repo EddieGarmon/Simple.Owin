@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Simple.Owin;
-using Simple.Owin.Extensions.Streams;
+using Simple.Owin.Caching;
 using Simple.Owin.Helpers;
 
 namespace Demo.Components

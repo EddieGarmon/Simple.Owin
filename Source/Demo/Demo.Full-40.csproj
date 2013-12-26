@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4344DE58-E4FA-413B-B0B9-D2A339824A1E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{B3E55904-83E6-4203-B82B-10DF4EDDE8A1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Simple.Owin.Servers.Nowin</RootNamespace>
-    <AssemblyName>Simple.Owin.Servers.Nowin</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Demo</RootNamespace>
+    <AssemblyName>Demo</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,35 +23,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Simple.Owin.Servers.Nowin.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nowin">
-      <HintPath>..\..\..\Build\PackageDependencies\Nowin.0.10.1.0\lib\net45\Nowin.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyInfo.cs">
-      <Link>Properties\AssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="NowinServerWrapper.cs" />
+    <Compile Include="Components\IdentityManagement.cs" />
+    <Compile Include="Components\SayHello.cs" />
+    <Compile Include="Components\UserIdentity.cs" />
+    <Compile Include="Components\UserPrincipal.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Simple.Owin\Full-4.5\Simple.Owin [F45].csproj">
-      <Project>{12CD483C-E70D-45F6-8FA8-9A246E5F9429}</Project>
-      <Name>Simple.Owin [F45]</Name>
+    <ProjectReference Include="..\Framework\Framework.Full-40.csproj">
+      <Project>{DCED9231-8374-4DBF-9A2A-4D6B00134656}</Project>
+      <Name>Framework.Full-40</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Servers\Simple.Owin.Servers.TcpServer\Simple.Owin.Servers.TcpServer.Full-40.csproj">
+      <Project>{73186FFF-FE44-4F5E-890E-932BF7C88EA0}</Project>
+      <Name>Simple.Owin.Servers.TcpServer.Full-40</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

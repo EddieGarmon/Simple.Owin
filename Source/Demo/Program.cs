@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Demo.Components;
-
 using Simple.Owin;
 using Simple.Owin.AppPipeline;
+using Simple.Owin.Dump;
 using Simple.Owin.Helpers;
 using Simple.Owin.Hosting;
 using Simple.Owin.Hosting.Trace;
 using Simple.Owin.Servers.Tcp;
 
-namespace Demo.OnTcpServer
+namespace Demo
 {
     using AppFunc = Func<IDictionary<string, object>, Task>;
 
@@ -19,8 +18,8 @@ namespace Demo.OnTcpServer
     {
         private static Pipeline BuildPipeline() {
             var pipeline = new Pipeline();
-            pipeline.Use(NativeMiddleware.PrintExceptions)
-                    .Use(NativeMiddleware.DumpOwinEnvironment)
+            pipeline.Use(DumpExceptionsMiddleware.PrintExceptions)
+                    .Use(DumpEnvironmentMiddleware.DumpOwinEnvironment)
                     .Use(IdentityManagement.Middleware)
                     .Use((env, next) => {
                              var context = OwinContext.Get(env);

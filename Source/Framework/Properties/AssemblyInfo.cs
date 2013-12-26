@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Simple.Owin")]
+[assembly: AssemblyTitle("Simple.Owin.Framework")]
 [assembly: AssemblyDescription("An OWIN framework.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -14,4 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0.0.0.0")]
 [assembly: AssemblyInformationalVersion("0.0.0-sv")]
-[assembly: InternalsVisibleTo("Framework.Tests")]
+[assembly: InternalsVisibleTo("Simple.Owin.Framework.Tests")]
+[assembly: InternalsVisibleTo("Simple.Owin.Features")]
+[assembly: InternalsVisibleTo("Simple.Owin.Servers.TcpServer")]
+[assembly: InternalsVisibleTo("Simple.Owin.Servers.Nowin")]
+[assembly: InternalsVisibleTo("Demo")]

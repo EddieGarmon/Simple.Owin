@@ -10,7 +10,7 @@ using Simple.Owin.Hosting;
 
 namespace Simple.Owin.Servers.Nowin
 {
-    public class NowinServerWrapper : IOwinServer
+    internal class NowinServerWrapper : IOwinServer
     {
         private readonly ServerBuilder _builder = new ServerBuilder();
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading.Tasks;
-
 using Simple.Owin;
 using Simple.Owin.Helpers;
 
