@@ -3,7 +3,7 @@
     <metadata>
         <id>Simple.Owin</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin</title>
+        <title>Simple.Owin (Core Abstractions)</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon, Mark Rendle</copyright>
@@ -15,8 +15,4 @@
         <summary>An OWIN middleware and application framework for .NET 4+</summary>
         <tags>simple owin framework middleware</tags>
     </metadata>
-    <files>
-        <file src="**\*.cs" target="lib\net40" />
-        <file src="**\*.cs" target="lib\net45" />
-    </files>
 </package>

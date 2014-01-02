@@ -106,6 +106,14 @@
     <Compile Include="UsingAliases.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Simple.Owin.AppPipeline\Simple.Owin.AppPipeline.nuspec" />
+    <None Include="Simple.Owin.Caching\Simple.Owin.Caching.nuspec" />
+    <None Include="Simple.Owin.Cookies\Simple.Owin.Cookies.nuspec" />
+    <None Include="Simple.Owin.Dump.Context\Simple.Owin.Dump.Context.nuspec" />
+    <None Include="Simple.Owin.Dump.Exceptions\Simple.Owin.Dump.Exceptions.nuspec" />
+    <None Include="Simple.Owin.Forms\Simple.Owin.Forms.nuspec" />
+    <None Include="Simple.Owin.Hosting\Simple.Owin.Hosting.nuspec" />
+    <None Include="Simple.Owin.SendFiles\Simple.Owin.SendFiles.nuspec" />
     <None Include="Simple.Owin.Testing\Simple.Owin.Testing.nuspec" />
     <None Include="Simple.Owin\Simple.Owin.nuspec" />
   </ItemGroup>

@@ -1,4 +1,6 @@
-﻿namespace Simple.Owin.Caching
+﻿//using Simple.Owin;
+
+namespace Simple.Owin.Caching
 {
     internal static class ResponseExtensions
     {

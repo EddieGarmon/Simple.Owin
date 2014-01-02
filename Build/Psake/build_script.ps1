@@ -2,20 +2,36 @@
 
 FormatTaskName "-------- {0} --------"
 Framework 4.0x86
-Properties {	
-	$script:sourcePath = $psake.build_script_dir + "\..\..\Source\"
+
+Properties {
+	# tools
 	$script:nuget = $psake.build_script_dir + "\..\NuGet\NuGet.exe"
 	$script:xunit = $psake.build_script_dir + "\..\XUnit\xunit.console.clr4.exe"
 	$script:xunit_x86 = $psake.build_script_dir + "\..\XUnit\xunit.console.clr4.x86.exe"
-	$script:test_x86 = (!($(gwmi win32_processor | select description) -match "x86"))
-	$script:packageStage = $psake.build_script_dir + '\..\Artifacts\Stage'
-	$script:newPackagesPath = $psake.build_script_dir + '\..\Artifacts\Packages'
+	$script:should_test_x86_also = (!($(gwmi win32_processor | select description) -match "x86"))
+	# inputs/outputs
+	$script:sourcePath = $psake.build_script_dir + "\..\..\Source\"
+	$script:packageStage = $psake.build_script_dir + "\..\Artifacts\Stage"
+	$script:packageOutput = $psake.build_script_dir + "\..\Artifacts\Packages"
+	# variables
+	$script:namespaceToPackageMap = @{
+		"Simple.Owin.Helpers" = "Simple.Owin";
+		"Simple.Owin.Hosting.Trace" = "Simple.Owin.Hosting";
+	}
 }
 
 Task default -depends ?
 
-Task ? -description "Helper to display task info" {
-	'Supported tasks are: PackageRestore, Clean, Build, Rebuild, Test, Package, and Release'
+Task ? -description "Helper to display task list (and should be automated)" {
+	'Supported tasks are: '
+	'  PackageRestore - Fetch missing NuGet packages.'
+	'  Clean          - Remove all intermediate and final compiler outputs.'
+	'  Build          - Runs all compilers.'
+	'  Rebuild        - Cleans, then Builds.'
+	'  Test           - Builds, then executes all discoverable xUnit tests.'
+	'  Package        - Cleans then sets the stage, Creates NuGet packages.'
+	'  Release        - Cleans, Propogates version number, Builds, Tests, Packages'
+	''
 }
 
 Task Clean {
@@ -68,38 +84,21 @@ Task Test -depends Build {
 		ForEach-Object { 
 			Write-Host "Test " $_.FullName
 			Exec { & $xunit $_.FullName /silent }
-			if ($test_x86) {
+			if ($should_test_x86_also) {
 				Exec { & $xunit_x86 $_.FullName /silent }
 			}
 		}
 }
 
-Task PackageBinaries -depends Build {
-	if (!(Test-Path $newPackagesPath)) { 
-		mkdir $newPackagesPath | Out-Null
-	}
-	Get-ChildItem ($sourcePath) -Recurse | 
-		Where-Object { (!$_.PsIsContainer) } |
-		Where-Object { ($_.Name -like "*.nuspec") } | 
-		ForEach-Object { 
-			Write-Host "Package Binary: " $_.FullName
-			Exec { & $nuget pack ($_.FullName) -OutputDirectory $newPackagesPath -Verbosity detailed -NonInteractive }
-			Write-Host ""
-		}
-}
-
-Task PackageSources { #-depends Build {
-	[System.Reflection.Assembly]::LoadWithPartialName("System.Xml.Linq") | Out-Null
-	if (!(Test-Path $newPackagesPath)) { 
-		mkdir $newPackagesPath | Out-Null
-	}
+Task StagePackages {
 	if (Test-Path $packageStage) {
 		Remove-Item -Recurse -Force $packageStage | Out-Null
 	}
 	mkdir $packageStage | Out-Null
-				
-	$compileName = [System.Xml.Linq.XName]::Get("Compile", "http://schemas.microsoft.com/developer/msbuild/2003")
 	
+	[Reflection.Assembly]::LoadWithPartialName("System.Xml.Linq")
+	$compileName = [System.Xml.Linq.XName]::Get("Compile", "http://schemas.microsoft.com/developer/msbuild/2003")
+
 	Get-ChildItem ($sourcePath) -Recurse | 
 		Where-Object { (!$_.PsIsContainer) } |
 		Where-Object { ($_.Name -like "*.nuspec") } | 
@@ -109,38 +108,119 @@ Task PackageSources { #-depends Build {
 			$metadata = $package.Element("metadata")
 			$packageId = $metadata.Element("id").Value
 			$version = $metadata.Element("version").Value
-			
-			$metadata.Element("id").Value = $packageId + ".Sources"
-			$metadata.Element("title").Value += " (Source)"
-			
-			$depends = $metadata.Element("dependencies")
-			if ($depends) {
-				foreach ($dependency in $depends.Elements("dependency")) {
-					$dependencyId = $dependency.Attribute("id")
-					if ($dependencyId.Value.StartsWith("Simple.Owin")) {
-						$dependencyId.Value += ".Sources"
-					}
-				}
-			}
-			$files = $package.Element("files")
-			if ($files) {
-				$files.Remove()
-			}
+
 			$sourceStage = $packageStage + "\" + $packageId
 			mkdir $sourceStage | Out-Null
-			
-			$frameworks = @(
-				@{
-					"SourceDir" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.0\")
-					"Project" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.0\$PackageId [F40].csproj")
-					"StageDir" = [System.IO.Path]::GetFullPath("$sourceStage\content\net40\App_Packages\$packageId.$version\")
-				},
-				@{
-					"SourceDir" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.5\")
-					"Project" = [System.IO.Path]::GetFullPath("$sourcePath$packageId\Full-4.5\$PackageId [F45].csproj")
-					"StageDir" = [System.IO.Path]::GetFullPath("$sourceStage\content\net45\App_Packages\$packageId.$version\")
+
+			$files = $package.Element("files")
+			if ($files) {
+				#stage files as explicitly defined
+			}
+			else {
+				#Dynamic Staging from project files
+				$targetPlatforms = @(
+					@{ 
+						"SearchPattern" = "*.Full-40.csproj"; 
+						"ProfilePath" = "net40" 
+					},
+					@{ 
+						"SearchPattern" = "*.Full-45.csproj";
+						"ProfilePath" = "net45" 
+					}
+				)
+				# Note: nuspec file's name specifies folder path filter for project file contents to include
+				$packageName = [System.IO.Path]::GetFileNameWithoutExtension($_.FullName)
+				# get the path to the proj folder
+				$componentDir = [System.IO.Path]::GetDirectoryName($_.FullName)
+				$projectDir = [System.IO.Path]::GetDirectoryName($componentDir)
+				# ensure trailing slash on folder paths above
+				$componentDir += "\"
+				$projectDir += "\"
+				
+				foreach ($targetPlatform in $targetPlatforms) {
+					$files = [System.IO.Directory]::GetFiles($projectDir, $targetPlatform.SearchPattern)
+					# need exactly one file (or none) here!!!
+					if ($files.Length -eq 0) {
+						continue
+					}
+					if ($files.Length -gt 1) {
+						throw "Ambigious projects found."
+					}
+					$platform = $targetPlatform.ProfilePath
+					$stageToHere = [System.IO.Path]::GetFullPath("$sourceStage\content\$platform\App_Packages\$packageId.$version\")
+
+					# we are interested in the intersection of
+					#	the files on disk in the same folder as the nuspec file, including child folders
+					#	and the files listed in the project file
+					$project = [System.Xml.Linq.XElement]::Load($files[0])					
+					foreach ($compile in $project.Descendants($compileName)) {
+						$itemProjectRelativePath = $compile.Attribute("Include").Value
+						if ($itemProjectRelativePath.StartsWith("$packageName\")) {
+							$from = "$projectDir$itemProjectRelativePath"
+							$to = $stageToHere + $itemProjectRelativePath.Substring($packageName.Length + 1)
+							if (![System.IO.File]::Exists($from)) {
+								throw "Missing file: $from"
+							}
+							$toDir = [System.IO.Path]::GetDirectoryName($to)
+							[System.IO.Directory]::CreateDirectory($toDir)
+							copy $from $to | Out-Null
+							# here we need to look at each file to check using statements for any dependencies to add
+							$content = [System.IO.File]::ReadAllLines($from, [System.Text.Encoding]::ASCII)
+							foreach ($line in $content) {
+								if ($line -match "using\W+([\w.]+);") {
+									$namespace = $matches[1]
+									Write-Host "Found Using:" $namespace
+									if ($namespace.StartsWith("System")) {
+										continue
+									}
+									if ($namespace -eq $packageName) {
+										continue
+									}
+									# todo update dependency map here
+									# pull out part of the loop below to be more efficient
+									$mapped = $namespaceToPackageMap[$namespace]
+									if ($mapped -eq $packageName) {
+										continue
+									}
+									# ensure mapping here (todo: by target framework?)
+									if ($mapped -eq $null) {
+										$mapped = $namespace
+									}
+									$dependencies = $metadata.Element("dependencies")
+									if ($dependencies -eq $null) {
+										$dependencies = [System.Xml.Linq.XElement]::Parse("<dependencies />")
+										$metadata.Add($dependencies)
+									}
+									$found = $false
+									foreach ($dependency in $dependencies.Descendants("dependency")) {
+										if ($dependency.Attribute("id").Value -eq $mapped) {
+											$found = $true;
+											break;
+										}									
+									}
+									if (!$found) {
+										$dependency = [System.Xml.Linq.XElement]::Parse("<dependency id='$mapped' version='[$version]' />")
+										$dependencies.Add($dependency)
+									}
+								}
+							}
+						}
+					}
+					
 				}
-			)
+				
+				$nuspec = $sourceStage + "\source.nuspec"
+				[System.IO.File]::WriteAllText($nuspec, $package)
+				Write-Host "Staged: " $nuspec
+			}
+		}
+}
+Task PackageSources {
+	Get-ChildItem ($sourcePath) -Recurse | 
+		Where-Object { (!$_.PsIsContainer) } |
+		Where-Object { ($_.Name -like "*.nuspec") } | 
+		ForEach-Object { 
+			
 			foreach ($framework in $frameworks) {
 				if (!(Test-Path $framework.SourceDir)) {
 					continue
@@ -174,12 +254,26 @@ Task PackageSources { #-depends Build {
 			$nuspec = $sourceStage + "\source.nuspec"
 			[System.IO.File]::WriteAllText($nuspec, $package)
 			Write-Host "Staged: " $nuspec
-			Exec { & $nuget pack ($nuspec) -OutputDirectory $newPackagesPath -Verbosity detailed -NonInteractive }
+			Exec { & $nuget pack ($nuspec) -OutputDirectory $packageOutput -Verbosity detailed -NonInteractive }
 			Write-Host ""
 		}
 }
 
-Task Package -depends PackageBinaries, PackageSources 
+Task BuildPackages {
+	if (!(Test-Path $packageOutput)) { 
+		mkdir $packageOutput | Out-Null
+	}
+	Get-ChildItem ($packageStage) -Recurse | 
+		Where-Object { (!$_.PsIsContainer) } |
+		Where-Object { ($_.Name -like "*.nuspec") } | 
+		ForEach-Object { 
+			Write-Host "Create Package: " $_.FullName
+			Exec { & $nuget pack ($_.FullName) -OutputDirectory $packageOutput -Verbosity detailed -NonInteractive }
+			Write-Host ""
+		}
+}
+
+Task Package -depends StagePackages, BuildPackages
 
 Task SetVersion {
 	$semVerPath = $psake.build_script_dir + "\semver.txt"

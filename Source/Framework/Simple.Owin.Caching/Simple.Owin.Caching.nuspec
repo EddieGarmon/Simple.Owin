@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>Simple.Owin.Testing</id>
+        <id>Simple.Owin.Caching</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin (Testing Abstractions)</title>
+        <title>Simple.Owin (Caching Abstractions)</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
-        <copyright>Eddie Garmon</copyright>
+        <copyright>Eddie Garmon, Mark Rendle</copyright>
         <licenseUrl>https://github.com/EddieGarmon/Simple.Owin/blob/master/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
         <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>An OWIN testing framework for .NET 4+</description>
-        <summary>An OWIN testing framework for .NET 4+</summary>
-        <tags>simple owin framework middleware testing</tags>
-        <dependencies>
-            <dependency id="Simple.Owin" version="0.0.0-sv" />
-        </dependencies>
+        <description>An OWIN middleware and application framework for .NET 4+</description>
+        <summary>An OWIN middleware and application framework for .NET 4+</summary>
+        <tags>simple owin framework middleware cache</tags>
     </metadata>
 </package>
