@@ -16,12 +16,12 @@
         <tags>simple owin nowin server</tags>
         <dependencies>
             <dependency id="Simple.Owin" version="0.0.0-sv" />
+            <dependency id="Simple.Owin.AppPipeline" version="0.0.0-sv" />
+            <dependency id="Simple.Owin.Hosting" version="0.0.0-sv" />
             <dependency id="Nowin" version="0.10.1.0" />
         </dependencies>
     </metadata>
     <files>
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.dll" target="lib\net45" />
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.*db" target="lib\net45" />
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.Nowin.xml" target="lib\net45" />
+        <file src="NowinServerWrapper.cs" target="content\net45" />
     </files>
 </package>

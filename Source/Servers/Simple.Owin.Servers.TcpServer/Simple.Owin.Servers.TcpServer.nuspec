@@ -16,14 +16,17 @@
         <tags>simple owin tcp server</tags>
         <dependencies>
             <dependency id="Simple.Owin" version="0.0.0-sv" />
+            <dependency id="Simple.Owin.AppPipeline" version="0.0.0-sv" />
+            <dependency id="Simple.Owin.Hosting" version="0.0.0-sv" />
         </dependencies>
     </metadata>
     <files>
-        <file src="Full-4.0\bin\Release\Simple.Owin.Servers.TcpServer.dll" target="lib\net40" />
-        <file src="Full-4.0\bin\Release\Simple.Owin.Servers.TcpServer.*db" target="lib\net40" />
-        <file src="Full-4.0\bin\Release\Simple.Owin.Servers.TcpServer.xml" target="lib\net40" />
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.TcpServer.dll" target="lib\net45" />
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.TcpServer.*db" target="lib\net45" />
-        <file src="Full-4.5\bin\Release\Simple.Owin.Servers.TcpServer.xml" target="lib\net45" />
+        <file src="SelfHost.cs" target="content\net40" />
+        <file src="TcpServer.cs" target="content\net40" />
+        <file src="TcpSession.cs" target="content\net40" />
+
+        <file src="SelfHost.cs" target="content\net45" />
+        <file src="TcpServer.cs" target="content\net45" />
+        <file src="TcpSession.cs" target="content\net45" />
     </files>
 </package>

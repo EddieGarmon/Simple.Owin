@@ -112,9 +112,31 @@ Task StagePackages {
 			$sourceStage = $packageStage + "\" + $packageId
 			mkdir $sourceStage | Out-Null
 
+			# Note: nuspec file's name specifies folder path filter for project file contents to include
+			$packageName = [System.IO.Path]::GetFileNameWithoutExtension($_.FullName)
+			# get the path to the proj folder, then add trailing slashes
+			$componentDir = [System.IO.Path]::GetDirectoryName($_.FullName)
+			$projectDir = [System.IO.Path]::GetDirectoryName($componentDir)
+			$componentDir += "\"
+			$projectDir += "\"
+			
 			$files = $package.Element("files")
 			if ($files) {
+				$stageToDir = [System.IO.Path]::GetFullPath("$sourceStage")
 				#stage files as explicitly defined
+				foreach ($file in $files.Elements("file")) {
+					$src = $file.Attribute("src").Value;
+					$target = $file.Attribute("target").Value;
+					$from = "$componentDir$src"
+					$to = "$stageToDir\\$target\App_Packages\$packageId.$version\$src"
+
+					$toDir = [System.IO.Path]::GetDirectoryName($to)
+					[System.IO.Directory]::CreateDirectory($toDir)
+					copy $from $to | Out-Null
+				}
+				
+				#nuke the files element
+				$files.Remove();
 			}
 			else {
 				#Dynamic Staging from project files
@@ -128,14 +150,6 @@ Task StagePackages {
 						"ProfilePath" = "net45" 
 					}
 				)
-				# Note: nuspec file's name specifies folder path filter for project file contents to include
-				$packageName = [System.IO.Path]::GetFileNameWithoutExtension($_.FullName)
-				# get the path to the proj folder
-				$componentDir = [System.IO.Path]::GetDirectoryName($_.FullName)
-				$projectDir = [System.IO.Path]::GetDirectoryName($componentDir)
-				# ensure trailing slash on folder paths above
-				$componentDir += "\"
-				$projectDir += "\"
 				
 				foreach ($targetPlatform in $targetPlatforms) {
 					$files = [System.IO.Directory]::GetFiles($projectDir, $targetPlatform.SearchPattern)
@@ -206,13 +220,12 @@ Task StagePackages {
 							}
 						}
 					}
-					
 				}
-				
-				$nuspec = $sourceStage + "\source.nuspec"
-				[System.IO.File]::WriteAllText($nuspec, $package)
-				Write-Host "Staged: " $nuspec
 			}
+			
+			$nuspec = $sourceStage + "\source.nuspec"
+			[System.IO.File]::WriteAllText($nuspec, $package)
+			Write-Host "Staged: " $nuspec
 		}
 }
 Task PackageSources {
