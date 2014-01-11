@@ -32,6 +32,8 @@ Task ? -description "Helper to display task list (and should be automated)" {
 	'  Package        - Cleans then sets the stage, Creates NuGet packages.'
 	'  Release        - Cleans, Propogates version number, Builds, Tests, Packages'
 	''
+	'  Upload - *Push Simple.Owin packages to NuGet.org.'
+	''
 }
 
 Task Clean {
@@ -341,3 +343,14 @@ Task ClearVersion {
 }
 
 Task Release -depends Clean, SetVersion, Test, Package, ClearVersion
+
+Task Upload {
+	Get-ChildItem ($packageOutput) -Recurse | 
+		Where-Object { (!$_.PsIsContainer) } |
+		Where-Object { ($_.Name -like "Simple.Owin*.nupkg") } | 
+		ForEach-Object { 
+			$path = $_.FullName
+			Write-Host "Uploading: " $path
+			exec { & $nuget push $_.FullName -Verbosity detailed -NonInteractive }
+		}
+}
