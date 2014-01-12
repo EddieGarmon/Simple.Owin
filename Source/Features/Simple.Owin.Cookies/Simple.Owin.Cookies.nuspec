@@ -3,7 +3,7 @@
     <metadata>
         <id>Simple.Owin.Cookies</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin (Http Cookies Abstractions)</title>
+        <title>Simple.Owin: Http Cookies Abstractions</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon, Mark Rendle</copyright>
@@ -11,8 +11,8 @@
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
         <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>An OWIN middleware and application framework for .NET 4+</description>
-        <summary>An OWIN middleware and application framework for .NET 4+</summary>
+        <description>A Simple.Owin extension that provides http cookie APIs and abstractions</description>
+        <summary>A Simple.Owin extension that provides http cookie APIs and abstractions</summary>
         <tags>simple owin framework middleware cookies</tags>
     </metadata>
 </package>

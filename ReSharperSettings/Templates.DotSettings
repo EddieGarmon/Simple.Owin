@@ -1,4 +1,24 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Description/@EntryValue">Owin Delegates</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Shortcut/@EntryValue">usingOWIN</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7524371E5132794CA89E5E963BF82355/Text/@EntryValue">    using Env = IDictionary&lt;string, object&gt;;&#xD;
+    using AppFunc = Func&lt; //&#xD;
+        IDictionary&lt;string, object&gt;, // owin context&#xD;
+        Task // completion signal&#xD;
+        &gt;;&#xD;
+    using MiddlewareFunc = Func&lt; //&#xD;
+        IDictionary&lt;string, object&gt;, // owin context&#xD;
+        Func&lt;IDictionary&lt;string, object&gt;, Task&gt;, // next AppFunc in pipeline&#xD;
+        Task // completion signal&#xD;
+        &gt;;&#xD;
+</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F4D531C1E1286F449920D3A8DAFD9229/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F4D531C1E1286F449920D3A8DAFD9229/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F4D531C1E1286F449920D3A8DAFD9229/Description/@EntryValue">NotNull Validation</s:String>

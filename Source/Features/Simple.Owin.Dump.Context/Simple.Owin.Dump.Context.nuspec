@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>Simple.Owin.Dump.Exceptions</id>
+        <id>Simple.Owin.Dump.Context</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin (Exception Inspection Middleware)</title>
+        <title>Simple.Owin: Context Inspection Middleware</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon</copyright>
@@ -11,8 +11,8 @@
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
         <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>An OWIN middleware and application framework for .NET 4+</description>
-        <summary>An OWIN middleware and application framework for .NET 4+</summary>
-        <tags>simple owin framework middleware</tags>
+        <description>A Simple.Owin based middleware that provides for dumping the state of the owin context</description>
+        <summary>A Simple.Owin based middleware that provides for dumping the state of the owin context</summary>
+        <tags>simple owin middleware</tags>
     </metadata>
 </package>

@@ -3,7 +3,7 @@
     <metadata>
         <id>Simple.Owin.Testing</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin (Testing Abstractions)</title>
+        <title>Simple.Owin: Testing Abstractions</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon</copyright>
@@ -11,11 +11,8 @@
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
         <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>An OWIN testing framework for .NET 4+</description>
-        <summary>An OWIN testing framework for .NET 4+</summary>
-        <tags>simple owin framework middleware testing</tags>
-        <dependencies>
-            <dependency id="Simple.Owin" version="0.0.0-sv" />
-        </dependencies>
+        <description>A Simple.Owin extension that provides testing helper APIs and abstractions</description>
+        <summary>A Simple.Owin extension that provides testing helper APIs and abstractions</summary>
+        <tags>simple owin framework testing</tags>
     </metadata>
 </package>

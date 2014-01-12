@@ -42,6 +42,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simple.Owin.Caching\CacheLevel.cs" />
+    <Compile Include="Simple.Owin.Caching\CacheOptions.cs" />
+    <Compile Include="Simple.Owin.Caching\ResponseExtensions.cs" />
+    <Compile Include="Simple.Owin.Cookies\HttpCookie.cs" />
+    <Compile Include="Simple.Owin.Cookies\ResponseExtensions.cs" />
+    <Compile Include="Simple.Owin.Dump.Context\DumpEnvironmentMiddleware.cs" />
+    <Compile Include="Simple.Owin.Dump.Exceptions\DumpExceptionsMiddleware.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Simple.Owin.Caching\Simple.Owin.Caching.nuspec" />
+    <None Include="Simple.Owin.Cookies\Simple.Owin.Cookies.nuspec" />
+    <None Include="Simple.Owin.Dump.Context\Simple.Owin.Dump.Context.nuspec" />
+    <None Include="Simple.Owin.Dump.Exceptions\Simple.Owin.Dump.Exceptions.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.Full-40.csproj">
+      <Project>{dced9231-8374-4dbf-9a2a-4d6b00134656}</Project>
+      <Name>Framework.Full-40</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

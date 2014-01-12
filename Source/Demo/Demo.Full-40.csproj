@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Features\Features.Full-40.csproj">
+      <Project>{df4ebc65-bb65-44ce-a36b-abd40e3d0bb4}</Project>
+      <Name>Features.Full-40</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework\Framework.Full-40.csproj">
       <Project>{DCED9231-8374-4DBF-9A2A-4D6B00134656}</Project>
       <Name>Framework.Full-40</Name>

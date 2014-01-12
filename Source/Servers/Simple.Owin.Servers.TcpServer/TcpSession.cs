@@ -8,7 +8,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Simple.Owin.Helpers;
 
 namespace Simple.Owin.Servers.Tcp

@@ -3,7 +3,7 @@
     <metadata>
         <id>Simple.Owin.Servers.TcpServer</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin.Servers.TcpServer</title>
+        <title>Simple.Owin.Servers: TcpServer</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon</copyright>
@@ -15,9 +15,9 @@
         <summary>A simple tcp socket based server for Simple.Owin</summary>
         <tags>simple owin tcp server</tags>
         <dependencies>
-            <dependency id="Simple.Owin" version="0.0.0-sv" />
-            <dependency id="Simple.Owin.AppPipeline" version="0.0.0-sv" />
-            <dependency id="Simple.Owin.Hosting" version="0.0.0-sv" />
+            <dependency id="Simple.Owin" version="[0.0.0-sv]" />
+            <dependency id="Simple.Owin.AppPipeline" version="[0.0.0-sv]" />
+            <dependency id="Simple.Owin.Hosting" version="[0.0.0-sv]" />
         </dependencies>
     </metadata>
     <files>

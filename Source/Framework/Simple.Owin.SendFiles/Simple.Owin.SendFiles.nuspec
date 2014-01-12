@@ -3,7 +3,7 @@
     <metadata>
         <id>Simple.Owin.SendFiles</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin (SendFiles Abstractions)</title>
+        <title>Simple.Owin: SendFiles Abstractions</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon</copyright>
@@ -11,8 +11,8 @@
         <projectUrl>https://github.com/EddieGarmon/Simple.Owin</projectUrl>
         <iconUrl>http://eddiegarmon.github.io/MyLogo.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>An OWIN middleware and application framework for .NET 4+</description>
-        <summary>An OWIN middleware and application framework for .NET 4+</summary>
-        <tags>simple owin framework middleware</tags>
+        <description>A Simple.Owin extension that provides SendFiles APIs and abstractions</description>
+        <summary>A Simple.Owin extension that provides SendFiles APIs and abstractions</summary>
+        <tags>simple owin sendfiles</tags>
     </metadata>
 </package>

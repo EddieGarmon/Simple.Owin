@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-
 using Simple.Owin.AppPipeline;
 using Simple.Owin.Hosting;
 

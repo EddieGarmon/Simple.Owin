@@ -3,7 +3,7 @@
     <metadata>
         <id>Simple.Owin.Servers.Nowin</id>
         <version>0.0.0-sv</version>
-        <title>Simple.Owin.Servers.Nowin</title>
+        <title>Simple.Owin.Servers: Nowin</title>
         <authors>Eddie Garmon</authors>
         <owners>Eddie Garmon</owners>
         <copyright>Eddie Garmon</copyright>
@@ -15,9 +15,9 @@
         <summary>A Nowin server wrapper for Simple.Owin</summary>
         <tags>simple owin nowin server</tags>
         <dependencies>
-            <dependency id="Simple.Owin" version="0.0.0-sv" />
-            <dependency id="Simple.Owin.AppPipeline" version="0.0.0-sv" />
-            <dependency id="Simple.Owin.Hosting" version="0.0.0-sv" />
+            <dependency id="Simple.Owin" version="[0.0.0-sv]" />
+            <dependency id="Simple.Owin.AppPipeline" version="[0.0.0-sv]" />
+            <dependency id="Simple.Owin.Hosting" version="[0.0.0-sv]" />
             <dependency id="Nowin" version="0.10.1.0" />
         </dependencies>
     </metadata>

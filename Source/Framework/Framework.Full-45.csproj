@@ -45,13 +45,6 @@
     <Compile Include="Simple.Owin.AppPipeline\IPipelineComponent.cs" />
     <Compile Include="Simple.Owin.AppPipeline\Pipeline.cs" />
     <Compile Include="Simple.Owin.AppPipeline\PipelineExtensions.cs" />
-    <Compile Include="Simple.Owin.Caching\CacheLevel.cs" />
-    <Compile Include="Simple.Owin.Caching\CacheOptions.cs" />
-    <Compile Include="Simple.Owin.Caching\ResponseExtensions.cs" />
-    <Compile Include="Simple.Owin.Cookies\HttpCookie.cs" />
-    <Compile Include="Simple.Owin.Cookies\ResponseExtensions.cs" />
-    <Compile Include="Simple.Owin.Dump.Context\DumpEnvironmentMiddleware.cs" />
-    <Compile Include="Simple.Owin.Dump.Exceptions\DumpExceptionsMiddleware.cs" />
     <Compile Include="Simple.Owin.Forms\FormData.cs" />
     <Compile Include="Simple.Owin.Forms\FormsMiddleware.cs" />
     <Compile Include="Simple.Owin.Hosting\IOwinHost.cs" />
@@ -107,10 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Simple.Owin.AppPipeline\Simple.Owin.AppPipeline.nuspec" />
-    <None Include="Simple.Owin.Caching\Simple.Owin.Caching.nuspec" />
-    <None Include="Simple.Owin.Cookies\Simple.Owin.Cookies.nuspec" />
-    <None Include="Simple.Owin.Dump.Context\Simple.Owin.Dump.Context.nuspec" />
-    <None Include="Simple.Owin.Dump.Exceptions\Simple.Owin.Dump.Exceptions.nuspec" />
     <None Include="Simple.Owin.Forms\Simple.Owin.Forms.nuspec" />
     <None Include="Simple.Owin.Hosting\Simple.Owin.Hosting.nuspec" />
     <None Include="Simple.Owin.SendFiles\Simple.Owin.SendFiles.nuspec" />
