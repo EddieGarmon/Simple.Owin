@@ -16,39 +16,46 @@ namespace Demo
 
     internal static class Program
     {
-        private static Pipeline BuildPipeline() {
+        private static Pipeline BuildPipeline()
+        {
             var pipeline = new Pipeline();
             pipeline.Use(DumpExceptionsMiddleware.PrintExceptions)
-                    .Use(DumpEnvironmentMiddleware.DumpOwinEnvironment)
-                    .Use(IdentityManagement.Middleware)
-                    .Use((env, next) => {
-                             var context = OwinContext.Get(env);
-                             return context.Request.Path.StartsWith("/throw")
-                                        ? TaskHelper.Exception(new Exception("This is intentional!"))
-                                        : next(env);
-                         })
-                    .Use(SayHello.App);
+                .Use(DumpEnvironmentMiddleware.DumpOwinEnvironment)
+                .Use(IdentityManagement.Middleware)
+                .Use((env, next) =>
+                {
+                    OwinContext context = OwinContext.Get(env);
+                    return context.Request.Path.StartsWith("/throw")
+                        ? TaskHelper.Exception(new Exception("This is intentional!"))
+                        : next(env);
+                })
+                .Use(SayHello.App);
             return pipeline;
         }
 
-        private static void Main() {
+        private static void Main()
+        {
             Console.WriteLine("Press 1 to use - Explicit Hosting");
             Console.WriteLine("Press 2 to use - SelfHost Helper");
             char input = ' ';
-            while (input != '1' && input != '2') {
+            while (input != '1' && input != '2')
+            {
                 input = Console.ReadKey()
-                               .KeyChar;
+                    .KeyChar;
             }
             Console.WriteLine();
-            if (input == '1') {
+            if (input == '1')
+            {
                 UseExplicitHosting();
             }
-            else {
-                UseSelfHost();
+            else
+            {
+                UseTcpSelfHost();
             }
         }
 
-        private static void UseExplicitHosting() {
+        private static void UseExplicitHosting()
+        {
             // 1. Create the owin host
             var owinHost = new OwinHost();
 
@@ -63,16 +70,19 @@ namespace Demo
             owinHost.SetApp(BuildPipeline());
 
             // 5. Run the host, consume yourself
-            using (owinHost.Run()) {
+            using (owinHost.Run())
+            {
                 Console.WriteLine("Listening on port 1337. Enter to exit.");
                 Console.ReadLine();
             }
         }
 
-        private static void UseSelfHost() {
-            var services = new[] { new ConsoleOutput() };
+        private static void UseTcpSelfHost()
+        {
+            var services = new[] {new ConsoleOutput()};
 
-            using (SelfHost.App(BuildPipeline(), port: 1337, hostServices: services)) {
+            using (TcpSelfHost.App(BuildPipeline(), port: 1337, hostServices: services))
+            {
                 Console.WriteLine("Listening on port 1337. Enter to exit.");
                 Console.ReadLine();
             }

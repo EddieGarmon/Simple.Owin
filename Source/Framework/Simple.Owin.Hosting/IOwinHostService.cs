@@ -2,6 +2,6 @@
 {
     internal interface IOwinHostService
     {
-        void Configure(OwinHostContext context);
+        void Configure(IOwinHostContext context);
     }
 }

@@ -15,4 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("0.0.0.0")]
 [assembly: AssemblyInformationalVersion("0.0.0-sv")]
 [assembly: InternalsVisibleTo("Simple.Owin.Features.Tests")]
-[assembly: InternalsVisibleTo("Demo")]
+[assembly: InternalsVisibleTo("Demo.Hello")]

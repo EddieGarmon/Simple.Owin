@@ -14,6 +14,7 @@
         <description>A Nowin server wrapper for Simple.Owin</description>
         <summary>A Nowin server wrapper for Simple.Owin</summary>
         <tags>simple owin nowin server</tags>
+        <developmentDependency>true</developmentDependency>
         <dependencies>
             <dependency id="Simple.Owin" version="[0.0.0-sv]" />
             <dependency id="Simple.Owin.AppPipeline" version="[0.0.0-sv]" />

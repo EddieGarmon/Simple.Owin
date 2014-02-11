@@ -5,7 +5,7 @@ using Simple.Owin.Hosting.Trace;
 
 namespace Simple.Owin.Hosting
 {
-    internal class OwinHostContext
+    internal class OwinHostContext : IOwinHostContext
     {
         private readonly IDictionary<string, object> _environment;
 

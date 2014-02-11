@@ -14,6 +14,7 @@
         <description>A simple tcp socket based server for Simple.Owin</description>
         <summary>A simple tcp socket based server for Simple.Owin</summary>
         <tags>simple owin tcp server</tags>
+        <developmentDependency>true</developmentDependency>
         <dependencies>
             <dependency id="Simple.Owin" version="[0.0.0-sv]" />
             <dependency id="Simple.Owin.AppPipeline" version="[0.0.0-sv]" />

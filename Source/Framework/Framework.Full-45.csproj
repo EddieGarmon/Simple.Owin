@@ -48,14 +48,13 @@
     <Compile Include="Simple.Owin.Forms\FormData.cs" />
     <Compile Include="Simple.Owin.Forms\FormsMiddleware.cs" />
     <Compile Include="Simple.Owin.Hosting\IOwinHost.cs" />
+    <Compile Include="Simple.Owin.Hosting\IOwinHostContext.cs" />
     <Compile Include="Simple.Owin.Hosting\IOwinHostService.cs" />
     <Compile Include="Simple.Owin.Hosting\IOwinServer.cs" />
     <Compile Include="Simple.Owin.Hosting\OwinHost.cs" />
     <Compile Include="Simple.Owin.Hosting\OwinHostContext.cs" />
     <Compile Include="Simple.Owin.Hosting\OwinHostState.cs" />
-    <Compile Include="Simple.Owin.Hosting\Trace\ConsoleOutput.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Simple.Owin.Hosting\Trace\ConsoleOutput.cs" />
     <Compile Include="Simple.Owin.Hosting\Trace\MultiTextWriter.cs" />
     <Compile Include="Simple.Owin.Hosting\Trace\NullTextWriter.cs" />
     <Compile Include="Simple.Owin.Hosting\Trace\StringOutput.cs" />

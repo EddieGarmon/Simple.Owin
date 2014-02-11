@@ -14,5 +14,6 @@
         <description>A Simple.Owin extension that provides testing helper APIs and abstractions</description>
         <summary>A Simple.Owin extension that provides testing helper APIs and abstractions</summary>
         <tags>simple owin framework testing</tags>
+        <developmentDependency>true</developmentDependency>
     </metadata>
 </package>

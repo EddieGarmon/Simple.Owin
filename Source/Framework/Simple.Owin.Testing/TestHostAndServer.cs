@@ -20,7 +20,7 @@ namespace Simple.Owin.Testing
 
     internal class TestHostAndServer : IOwinServer
     {
-        private readonly OwinHost _host;
+        private readonly IOwinHost _host;
         private readonly StringOutput _traceOutput = new StringOutput();
         private Func<IDictionary<string, object>, Task> _appFunc;
 
@@ -70,8 +70,8 @@ namespace Simple.Owin.Testing
             return Process(TestRequest.Get(url));
         }
 
-        private OwinHost BuildHost(IEnumerable<IOwinHostService> hostServices = null) {
-            var host = new OwinHost();
+        private IOwinHost BuildHost(IEnumerable<IOwinHostService> hostServices = null) {
+            IOwinHost host = new OwinHost();
             host.AddHostService(_traceOutput);
             if (hostServices != null) {
                 foreach (var hostService in hostServices) {
@@ -82,7 +82,7 @@ namespace Simple.Owin.Testing
             return host;
         }
 
-        void IOwinServer.Configure(OwinHostContext host) {
+        void IOwinServer.Configure(IOwinHostContext host) {
             host.Environment.Add(OwinKeys.Owin.Version, "1.0");
         }
 

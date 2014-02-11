@@ -14,5 +14,6 @@
         <description>A Simple.Owin based middleware that provides for dumping the state of the owin context</description>
         <summary>A Simple.Owin based middleware that provides for dumping the state of the owin context</summary>
         <tags>simple owin middleware</tags>
+        <developmentDependency>true</developmentDependency>
     </metadata>
 </package>

@@ -14,5 +14,6 @@
         <description>A Simple.Owin extension that provides http cookie APIs and abstractions</description>
         <summary>A Simple.Owin extension that provides http cookie APIs and abstractions</summary>
         <tags>simple owin framework middleware cookies</tags>
+        <developmentDependency>true</developmentDependency>
     </metadata>
 </package>

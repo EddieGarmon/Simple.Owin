@@ -14,5 +14,6 @@
         <description>An OWIN middleware and application framework for .NET 4+</description>
         <summary>An OWIN middleware and application framework for .NET 4+</summary>
         <tags>simple owin framework middleware</tags>
+        <developmentDependency>true</developmentDependency>
     </metadata>
 </package>

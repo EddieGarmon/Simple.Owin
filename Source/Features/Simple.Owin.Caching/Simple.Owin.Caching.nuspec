@@ -14,5 +14,6 @@
         <description>A Simple.Owin extension that provides caching APIs and abstractions</description>
         <summary>An OWIN middleware and application framework for .NET 4+</summary>
         <tags>simple owin framework middleware cache</tags>
+        <developmentDependency>true</developmentDependency>
     </metadata>
 </package>

@@ -14,5 +14,6 @@
         <description>A Simple.Owin extension and middleware that provides http form APIs and abstractions</description>
         <summary>A Simple.Owin extension and middleware that provides http form APIs and abstractions</summary>
         <tags>simple owin framework middleware forms</tags>
+        <developmentDependency>true</developmentDependency>
     </metadata>
 </package>

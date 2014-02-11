@@ -24,7 +24,7 @@ namespace Simple.Owin.Servers.Nowin
             }
         }
 
-        public void Configure(OwinHostContext host) {
+        public void Configure(IOwinHostContext host) {
             _builder.SetOwinCapabilities(host.Environment);
         }
 

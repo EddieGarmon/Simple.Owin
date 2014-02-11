@@ -14,5 +14,6 @@
         <description>A Simple.Owin extension that provides SendFiles APIs and abstractions</description>
         <summary>A Simple.Owin extension that provides SendFiles APIs and abstractions</summary>
         <tags>simple owin sendfiles</tags>
+        <developmentDependency>true</developmentDependency>
     </metadata>
 </package>

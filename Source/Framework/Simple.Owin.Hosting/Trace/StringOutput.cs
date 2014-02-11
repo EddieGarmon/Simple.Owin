@@ -10,7 +10,7 @@ namespace Simple.Owin.Hosting.Trace
             get { return _writer.ToString(); }
         }
 
-        public void Configure(OwinHostContext context) {
+        public void Configure(IOwinHostContext context) {
             context.AddTraceOutput(_writer);
         }
     }

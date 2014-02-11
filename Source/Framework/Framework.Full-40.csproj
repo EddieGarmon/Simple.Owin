@@ -47,6 +47,7 @@
     <Compile Include="Simple.Owin.AppPipeline\PipelineExtensions.cs" />
     <Compile Include="Simple.Owin.Forms\FormData.cs" />
     <Compile Include="Simple.Owin.Hosting\IOwinHost.cs" />
+    <Compile Include="Simple.Owin.Hosting\IOwinHostContext.cs" />
     <Compile Include="Simple.Owin.Hosting\IOwinHostService.cs" />
     <Compile Include="Simple.Owin.Hosting\IOwinServer.cs" />
     <Compile Include="Simple.Owin.Hosting\OwinHost.cs" />

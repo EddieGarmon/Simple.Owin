@@ -4,7 +4,7 @@ namespace Simple.Owin.Hosting.Trace
 {
     internal class ConsoleOutput : IOwinHostService
     {
-        public void Configure(OwinHostContext context) {
+        public void Configure(IOwinHostContext context) {
             context.AddTraceOutput(Console.Out);
         }
     }

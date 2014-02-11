@@ -15,7 +15,7 @@ namespace Simple.Owin.Servers.Tcp
         private readonly int _listenPort;
         private readonly TcpListener _listener;
         private Func<IDictionary<string, object>, Task> _appFunc;
-        private OwinHostContext _host;
+        private IOwinHostContext _host;
 
         public TcpServer(IPAddress address = null, int? port = null) {
             _listenAddress = address ?? Localhost;
@@ -27,7 +27,7 @@ namespace Simple.Owin.Servers.Tcp
                                                      };
         }
 
-        public void Configure(OwinHostContext host) {
+        public void Configure(IOwinHostContext host) {
             _host = host;
             // configure server functionality
             _host.Version = "1.0";
