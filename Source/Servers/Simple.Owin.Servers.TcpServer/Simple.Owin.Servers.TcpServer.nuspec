@@ -22,11 +22,11 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="SelfHost.cs" target="content\net40" />
+        <file src="TcpSelfHost.cs" target="content\net40" />
         <file src="TcpServer.cs" target="content\net40" />
         <file src="TcpSession.cs" target="content\net40" />
 
-        <file src="SelfHost.cs" target="content\net45" />
+        <file src="TcpSelfHost.cs" target="content\net45" />
         <file src="TcpServer.cs" target="content\net45" />
         <file src="TcpSession.cs" target="content\net45" />
     </files>
